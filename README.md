@@ -490,16 +490,16 @@ Ace for your commander
 Author: Acacia Malaccensis <acacia.malaccensis@gmail.com>
 
 Options:
-  -v, --version     Show the current version
-  -h, --help        display help for command
+  -v, --version            Show the current version
+  -h, --help               display help for command
 
 Commands:
-  db:seed           Run database seeders
-  migrate:fresh     Rollback all migrations and re-run migrations
-  migrate:latest    Run latest migration
-  migrate:rollback  Rollback the latest migrations
-  migrate:status    List migrations status
-  help [command]    display help for command
+  db:seed                  Run database seeders
+  migrate:fresh [options]  Rollback all migrations and re-run migrations
+  migrate:latest           Run latest migration
+  migrate:rollback         Rollback the latest migrations
+  migrate:status           List migrations status
+  help [command]           display help for command
 
 Examples:
   $ bun ace --help

@@ -7,8 +7,8 @@ import KnexConfig from "@/config/database";
 import {version} from "@/package.json";
 import Chalk from "@/utils/Chalk";
 import Str from "@/utils/Str";
+import {ask, isNotEmpty} from "@/utils/utils";
 import "@/bootstrap";
-import {ask} from "@/utils/utils";
 
 const commandExec = "ace";
 const knex = Knex(KnexConfig);
@@ -46,8 +46,12 @@ program
 program
     .command("migrate:fresh")
     .description("Rollback all migrations and re-run migrations")
-    .action(async () => {
-        const confirm = await ask(
+    .option("-f, --force", "Skip command confirmation.")
+    .action(async (options) => {
+        const bypass = isNotEmpty(options.force);
+
+        let confirm = "Y";
+        if (!bypass) confirm = await ask(
             new Chalk()
                 .setValue("This will DROP ALL tables and re-run ALL migrations. Are you want to continue? (Y/N): ")
                 .inline()
@@ -56,7 +60,7 @@ program
         );
 
         if (confirm.toUpperCase() === "Y") {
-            console.log();
+            if (!bypass) console.log();
 
             const spinner = ora(
                 new Chalk()
