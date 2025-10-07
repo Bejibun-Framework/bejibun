@@ -509,6 +509,15 @@ Examples:
 ## Usage
 
 ### Installation
+If you don't have bun installed :
+
+```bash
+# Linux / Mac OS
+curl -fsSL https://bun.sh/install | bash
+
+# Windows
+powershell -c "irm bun.sh/install.ps1 | iex"
+```
 Install project dependencies.
 
 ```bash
@@ -609,18 +618,13 @@ Example :
 ```
 
 ### Run the Project
-
-#### Run on Development
 To run the project, run :
 
 ```bash
+# Development Mode
 bun dev
-```
 
-#### Run on Production
-To run on production mode, run :
-
-```bash
+# Production Mode
 bun start
 ```
 
