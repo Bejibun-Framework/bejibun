@@ -25,7 +25,7 @@ const exists = async (value: unknown, options: Options, field: FieldContext): Pr
 
 const existsRule = vine.createRule(exists, {async: true});
 
-const registerUniqueMacro = (Type: any): void => {
+const registerExistsMacro = (Type: any): void => {
     Type.macro("exists", function (tableOrOptions: typeof BaseModel | Options, column?: string, withTrashed?: boolean) {
         const isModel = typeof tableOrOptions === "function" && Object.prototype.isPrototypeOf.call(BaseModel, tableOrOptions);
 
@@ -37,5 +37,5 @@ const registerUniqueMacro = (Type: any): void => {
     });
 };
 
-registerUniqueMacro(VineString);
-registerUniqueMacro(VineNumber);
+registerExistsMacro(VineString);
+registerExistsMacro(VineNumber);
