@@ -3,14 +3,22 @@ import os from "os";
 
 export default class Chalk {
     protected value: string;
+    protected isNewLine: boolean;
     protected clk: any;
 
     public constructor() {
         this.value = "";
+        this.isNewLine = true;
     }
 
     public setValue(value: string): Chalk {
-        this.value = `${value}${os.EOL}`;
+        this.value = value;
+
+        return this;
+    }
+
+    public inline(): Chalk {
+        this.isNewLine = false;
 
         return this;
     }
@@ -18,6 +26,13 @@ export default class Chalk {
     public bold(): Chalk {
         if (this.clk) this.clk = this.clk.bold;
         else this.clk = chalk.bold;
+
+        return this;
+    }
+
+    public danger(): Chalk {
+        if (this.clk) this.clk = this.clk.red;
+        else this.clk = chalk.red;
 
         return this;
     }
@@ -34,6 +49,12 @@ export default class Chalk {
     }
 
     public show(): string {
-        return this.clk(this.value);
+        return this.clk(this._value);
+    }
+
+    private get _value(): string {
+        if (this.isNewLine) return `${this.value}${os.EOL}`;
+
+        return this.value;
     }
 }

@@ -1,3 +1,5 @@
+import readline from "readline";
+
 export const isEmpty = (value: any): boolean => {
 	return (
 		value === undefined ||
@@ -19,4 +21,19 @@ export const defineValue = (value: any, defaultValue: any = null): any => {
 	if (isNotEmpty(value)) return value;
 
 	return defaultValue;
+};
+
+export const ask = (question: string): Promise<string> => {
+	const rl = readline.createInterface({
+		input: process.stdin,
+		output: process.stdout
+	});
+
+	return new Promise((resolve, reject) => {
+		return rl.question(question, (answer: string) => {
+			rl.close();
+
+			resolve(answer.trim());
+		});
+	});
 };

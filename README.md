@@ -546,6 +546,8 @@ bun ace migrate:fresh
 Example :
 
 ```bash
+This will DROP ALL tables and re-run ALL migrations. Are you want to continue? (Y/N): Y
+
 ✔ Rolled back all migrations
 ✔ Batch 1 finished
 ✔ 20250929_000001_tests.ts
@@ -588,7 +590,6 @@ Example :
 ```bash
 ✔ Completed Migrations :
 ✔ No migrations were completed.
-
 
 ✔ Pending Migrations :
 ✔ 20250929_000001_tests.ts

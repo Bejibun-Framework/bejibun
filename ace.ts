@@ -8,6 +8,7 @@ import {version} from "@/package.json";
 import Chalk from "@/utils/Chalk";
 import Str from "@/utils/Str";
 import "@/bootstrap";
+import {ask} from "@/utils/utils";
 
 const commandExec = "ace";
 const knex = Knex(KnexConfig);
@@ -46,21 +47,38 @@ program
     .command("migrate:fresh")
     .description("Rollback all migrations and re-run migrations")
     .action(async () => {
-        const spinner = ora(new Chalk().setValue("Rollback...").info().show()).start();
-        try {
-            await knex.migrate.rollback({}, true);
-            spinner.succeed("Rolled back all migrations");
+        const confirm = await ask(
+            new Chalk()
+                .setValue("This will DROP ALL tables and re-run ALL migrations. Are you want to continue? (Y/N): ")
+                .inline()
+                .danger()
+                .show()
+        );
 
-            const [batchNo, logs] = await knex.migrate.latest();
-            spinner.succeed(`Batch ${batchNo} finished`);
+        if (confirm.toUpperCase() === "Y") {
+            console.log();
 
-            if (logs.length > 0) logs.forEach((migration: string) => spinner.succeed(migration));
-            else spinner.succeed("No migrations were run.");
-        } catch (e) {
-            spinner.fail(`Migration failed : ${e.message}`);
-        } finally {
-            await knex.destroy();
-            spinner.stop();
+            const spinner = ora(
+                new Chalk()
+                    .setValue("Rollback...")
+                    .info()
+                    .show()
+            ).start();
+            try {
+                await knex.migrate.rollback({}, true);
+                spinner.succeed("Rolled back all migrations");
+
+                const [batchNo, logs] = await knex.migrate.latest();
+                spinner.succeed(`Batch ${batchNo} finished`);
+
+                if (logs.length > 0) logs.forEach((migration: string) => spinner.succeed(migration));
+                else spinner.succeed("No migrations were run.");
+            } catch (e) {
+                spinner.fail(`Migration failed : ${e.message}`);
+            } finally {
+                await knex.destroy();
+                spinner.stop();
+            }
         }
     });
 
@@ -68,7 +86,12 @@ program
     .command("migrate:latest")
     .description("Run latest migration")
     .action(async () => {
-        const spinner = ora(new Chalk().setValue("Migrating...").info().show()).start();
+        const spinner = ora(
+            new Chalk()
+                .setValue("Migrating...")
+                .info()
+                .show()
+        ).start();
         try {
             const [batchNo, logs] = await knex.migrate.latest();
             spinner.succeed(`Batch ${batchNo} finished`);
@@ -87,7 +110,12 @@ program
     .command("migrate:rollback")
     .description("Rollback the latest migrations")
     .action(async () => {
-        const spinner = ora(new Chalk().setValue("Rollback...").info().show()).start();
+        const spinner = ora(
+            new Chalk()
+                .setValue("Rollback...")
+                .info()
+                .show()
+        ).start();
         try {
             const [batchNo, logs] = await knex.migrate.rollback();
             spinner.succeed(`Batch ${batchNo} finished`);
@@ -106,7 +134,12 @@ program
     .command("migrate:status")
     .description("List migrations status")
     .action(async () => {
-        const spinner = ora(new Chalk().setValue("Fetching...").info().show()).start();
+        const spinner = ora(
+            new Chalk()
+                .setValue("Fetching...")
+                .info()
+                .show()
+        ).start();
         try {
             const [completed, pending] = await knex.migrate.list();
 
@@ -114,7 +147,7 @@ program
             if (completed.length > 0) completed.forEach((migration: {name: string}) => spinner.succeed(migration.name));
             else spinner.succeed("No migrations were completed.");
 
-            console.log(os.EOL);
+            console.log();
 
             spinner.succeed("Pending Migrations :");
             if (pending.length > 0) pending.forEach((migration: {file: string, directory: string}) => spinner.succeed(migration.file));
