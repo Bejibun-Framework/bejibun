@@ -1,5 +1,7 @@
+import ModelNotFoundException from "@/app/exceptions/ModelNotFoundException";
+
 declare global {
-    const ModelNotFoundException: typeof import("@/app/exceptions/ModelNotFoundException").default;
+    var ModelNotFoundException: typeof ModelNotFoundException;
 }
 
 export {};
