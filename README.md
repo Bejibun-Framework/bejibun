@@ -9,7 +9,7 @@
 </div>
 
 # Framework for Bun
-A javascript framework using Bun runtime. Designed for backend purposes.
+A typescript framework using Bun runtime. Designed for backend purposes.
 
 ## Tech Stacks
 - [Bun](https://bun.com) - Runtime
