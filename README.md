@@ -428,6 +428,7 @@ export function up(knex: Knex): void {
         table.bigIncrements("id");
         table.string("name");
         table.timestamps(true, true);
+        table.timestamp("deleted_at");
     });
 }
 
