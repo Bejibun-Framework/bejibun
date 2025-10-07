@@ -625,12 +625,12 @@ bun start
 ```
 
 ## Upcoming Features
-- [ ] Pending
-  
-## Backlog
-- [ ] Job Dispatch / Background Tasks
+- [ ] Authentication
 - [ ] Unit Tests
 - [ ] Mail Service
+- [ ] Job Dispatch / Background Tasks
+  
+## Backlog
 - [ ] Import Excel
 - [ ] Export Excel
 - [ ] Export PDF
