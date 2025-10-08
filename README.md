@@ -1,10 +1,10 @@
 <div align="center">
 
-![GitHub top language](https://img.shields.io/github/languages/top/ghulje/bejibun)
-![GitHub all releases](https://img.shields.io/github/downloads/ghulje/bejibun/total)
-![GitHub issues](https://img.shields.io/github/issues/ghulje/bejibun)
-![GitHub](https://img.shields.io/github/license/ghulje/bejibun)
-![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/ghulje/bejibun?display_name=tag&include_prereleases)
+![GitHub top language](https://img.shields.io/github/languages/top/crenata/bejibun)
+![GitHub all releases](https://img.shields.io/github/downloads/crenata/bejibun/total)
+![GitHub issues](https://img.shields.io/github/issues/crenata/bejibun)
+![GitHub](https://img.shields.io/github/license/crenata/bejibun)
+![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/crenata/bejibun?display_name=tag&include_prereleases)
 
 </div>
 
