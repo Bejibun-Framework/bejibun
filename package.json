@@ -1,30 +1,36 @@
 {
-  "name": "bun-react-template",
-  "version": "0.1.1",
-  "private": true,
-  "type": "module",
-  "main": "server.ts",
-  "module": "server.ts",
-  "scripts": {
-    "dev": "bun --hot server.ts",
-    "start": "NODE_ENV=production bun server.ts"
-  },
-  "dependencies": {
-    "@vinejs/vine": "^3.0.1",
-    "knex": "^3.1.0",
-    "luxon": "^3.7.2",
-    "objection": "^3.1.5",
-    "pg": "^8.16.3",
-    "react": "^19",
-    "react-dom": "^19"
-  },
-  "devDependencies": {
-    "@types/bun": "latest",
-    "@types/luxon": "^3.7.1",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "chalk": "^5.6.2",
-    "commander": "^14.0.1",
-    "ora": "^9.0.0"
-  }
+    "name": "bejibun",
+    "version": "0.1.1",
+    "private": true,
+    "description": "A typescript framework using Bun runtime. Designed for backend purposes.",
+    "keywords": [
+        "bun",
+        "bun framework",
+        "typescript"
+    ],
+    "type": "module",
+    "main": "server.ts",
+    "module": "server.ts",
+    "scripts": {
+        "dev": "bun --hot server.ts",
+        "start": "NODE_ENV=production bun server.ts"
+    },
+    "dependencies": {
+        "@vinejs/vine": "^3.0.1",
+        "knex": "^3.1.0",
+        "luxon": "^3.7.2",
+        "objection": "^3.1.5",
+        "pg": "^8.16.3",
+        "react": "^19",
+        "react-dom": "^19"
+    },
+    "devDependencies": {
+        "@types/bun": "latest",
+        "@types/luxon": "^3.7.1",
+        "@types/react": "^19",
+        "@types/react-dom": "^19",
+        "chalk": "^5.6.2",
+        "commander": "^14.0.1",
+        "ora": "^9.0.0"
+    }
 }
