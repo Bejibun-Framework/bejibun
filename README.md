@@ -632,6 +632,7 @@ bun start
 - [ ] Authentication
 - [ ] Unit Tests
 - [ ] Mail Service
+- [ ] Maintenance Mode (Up and Down)
 - [ ] Job Dispatch / Background Tasks
   
 ## Backlog

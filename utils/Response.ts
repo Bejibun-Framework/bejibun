@@ -1,3 +1,5 @@
+import {cors} from "@/utils/utils";
+
 export default class Response {
     protected data: any;
     protected message: string;
@@ -33,6 +35,9 @@ export default class Response {
             message: this.message,
             status: this.status
         }, {
+            headers: {
+                ...cors()
+            },
             status: this.status
         });
     }
@@ -40,6 +45,9 @@ export default class Response {
     public stream(options: ResponseInit = {}): globalThis.Response {
         return new globalThis.Response(Bun.file(this.data), {
             ...options,
+            headers: {
+                ...cors()
+            },
             status: this.status
         });
     }
