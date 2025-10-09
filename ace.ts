@@ -47,7 +47,7 @@ program
     .command("migrate:fresh")
     .description("Rollback all migrations and re-run migrations")
     .option("-f, --force", "Skip command confirmation.")
-    .action(async (options) => {
+    .action(async (options: any) => {
         const bypass = isNotEmpty(options.force);
 
         let confirm = "Y";
@@ -113,24 +113,40 @@ program
 program
     .command("migrate:rollback")
     .description("Rollback the latest migrations")
-    .action(async () => {
-        const spinner = ora(
-            new Chalk()
-                .setValue("Rollback...")
-                .info()
-                .show()
-        ).start();
-        try {
-            const [batchNo, logs] = await knex.migrate.rollback();
-            spinner.succeed(`Batch ${batchNo} finished`);
+    .option("-f, --force", "Skip command confirmation.")
+    .action(async (options: any) => {
+        const bypass = isNotEmpty(options.force);
 
-            if (logs.length > 0) logs.forEach((migration: string) => spinner.succeed(migration));
-            else spinner.succeed("No migrations were rolled back.");
-        } catch (e) {
-            spinner.fail(`Rollback failed : ${e.message}`);
-        } finally {
-            await knex.destroy();
-            spinner.stop();
+        let confirm = "Y";
+        if (!bypass) confirm = await ask(
+            new Chalk()
+                .setValue("This will ROLLBACK latest migrations. Are you want to continue? (Y/N): ")
+                .inline()
+                .danger()
+                .show()
+        );
+
+        if (confirm.toUpperCase() === "Y") {
+            if (!bypass) console.log();
+
+            const spinner = ora(
+                new Chalk()
+                    .setValue("Rollback...")
+                    .info()
+                    .show()
+            ).start();
+            try {
+                const [batchNo, logs] = await knex.migrate.rollback();
+                spinner.succeed(`Batch ${batchNo} finished`);
+
+                if (logs.length > 0) logs.forEach((migration: string) => spinner.succeed(migration));
+                else spinner.succeed("No migrations were rolled back.");
+            } catch (e) {
+                spinner.fail(`Rollback failed : ${e.message}`);
+            } finally {
+                await knex.destroy();
+                spinner.stop();
+            }
         }
     });
 

@@ -1,9 +1,9 @@
-import vine, {SchemaTypes, VineValidator} from "@vinejs/vine";
+import vine from "@vinejs/vine";
 import TestModel from "@/app/models/TestModel";
-import BaseValidator from "@/app/validators/BaseValidator";
+import BaseValidator, {BaseValidatorType} from "@/app/validators/BaseValidator";
 
 export default class TestValidator extends BaseValidator {
-    public static get detail(): VineValidator<SchemaTypes, Record<string, any> | undefined> {
+    public static get detail(): BaseValidatorType {
         return vine.compile(
             vine.object({
                 id: vine.number().min(1).exists(TestModel, "id")
@@ -11,7 +11,7 @@ export default class TestValidator extends BaseValidator {
         );
     }
 
-    public static get add(): VineValidator<SchemaTypes, Record<string, any> | undefined> {
+    public static get add(): BaseValidatorType {
         return vine.compile(
             vine.object({
                 name: vine.string()
@@ -19,7 +19,7 @@ export default class TestValidator extends BaseValidator {
         );
     }
 
-    public static get edit(): VineValidator<SchemaTypes, Record<string, any> | undefined> {
+    public static get edit(): BaseValidatorType {
         return vine.compile(
             vine.object({
                 id: vine.number().min(1).exists(TestModel, "id"),
@@ -28,7 +28,7 @@ export default class TestValidator extends BaseValidator {
         );
     }
 
-    public static get delete(): VineValidator<SchemaTypes, Record<string, any> | undefined> {
+    public static get delete(): BaseValidatorType {
         return vine.compile(
             vine.object({
                 id: vine.number().min(1).exists(TestModel, "id")
@@ -36,7 +36,7 @@ export default class TestValidator extends BaseValidator {
         );
     }
 
-    public static get restore(): VineValidator<SchemaTypes, Record<string, any> | undefined> {
+    public static get restore(): BaseValidatorType {
         return vine.compile(
             vine.object({
                 id: vine.number().min(1).exists(TestModel, "id", true)
