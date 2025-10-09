@@ -1,6 +1,7 @@
 import {errors} from "@vinejs/vine";
-import {ErrorLike} from "bun";
+import {BunRequest, ErrorLike} from "bun";
 import {ValidationError} from "objection";
+import CorsMethodEnum from "@/app/enums/CorsMethodEnum";
 import Response from "@/utils/Response";
 import {defineValue} from "@/utils/utils";
 
@@ -24,6 +25,18 @@ export default class ExceptionHandler {
         return new Response()
             .setMessage(defineValue(error.message, "Internal server error."))
             .setStatus(500)
+            .send();
+    }
+
+    public route(request: BunRequest): globalThis.Response {
+        if (request.method === CorsMethodEnum.Options) return new Response()
+            .setMessage("What are you looking for doesn't exists.")
+            .setStatus(204)
+            .send();
+
+        new Response()
+            .setMessage("What are you looking for doesn't exists.")
+            .setStatus(404)
             .send();
     }
 }

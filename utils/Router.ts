@@ -1,7 +1,3 @@
-import {BunRequest} from "bun";
-import CorsMethodEnum from "@/app/enums/CorsMethodEnum";
-import Response from "@/utils/Response";
-
 export default class Router {
     private basePath: string = "";
     private middlewares: Middleware[] = [];
@@ -34,18 +30,6 @@ export default class Router {
                 }
 
                 wrappedHandlers[method] = handler;
-            }
-
-            if (!(CorsMethodEnum.Options in routeHandlers)) {
-                let handler: HandlerType = async (request: BunRequest): Promise<globalThis.Response> => {
-                    return new Response().setStatus(204).send();
-                };
-
-                for (const middleware of this.middlewares) {
-                    handler = middleware.handle(handler);
-                }
-
-                wrappedHandlers[CorsMethodEnum.Options] = handler;
             }
 
             newRoutes[fullPath] = wrappedHandlers;
