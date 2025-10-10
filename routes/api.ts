@@ -6,7 +6,7 @@ import ExceptionHandler from "@/app/exceptions/handler";
 export default {
     "/*": new ExceptionHandler().route,
 
-    ...new Router().prefix("api").group({
+    ...Router.prefix("api").group({
         ...hello,
         ...test
     })

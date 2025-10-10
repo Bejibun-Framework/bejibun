@@ -1,54 +1,15 @@
-import {cors} from "@/utils/utils";
+import ResponseBuilder from "@/builders/ResponseBuilder";
 
 export default class Response {
-    protected data: any;
-    protected message: string;
-    protected status: number;
-
-    public constructor() {
-        this.data = null;
-        this.message = "Success";
-        this.status = 200;
+    public static setData(data: any): ResponseBuilder {
+        return new ResponseBuilder().setData(data);
     }
 
-    public setData(data: any): Response {
-        this.data = data;
-
-        return this;
+    public static setMessage(message: string): ResponseBuilder {
+        return new ResponseBuilder().setMessage(message);
     }
 
-    public setMessage(message: string): Response {
-        this.message = message;
-
-        return this;
-    }
-
-    public setStatus(status: number): Response {
-        this.status = status;
-
-        return this;
-    }
-
-    public send(): globalThis.Response {
-        return globalThis.Response.json({
-            data: this.data,
-            message: this.message,
-            status: this.status
-        }, {
-            headers: {
-                ...cors()
-            },
-            status: this.status
-        });
-    }
-
-    public stream(options: ResponseInit = {}): globalThis.Response {
-        return new globalThis.Response(Bun.file(this.data), {
-            ...options,
-            headers: {
-                ...cors()
-            },
-            status: this.status
-        });
+    public static setStatus(status: number): ResponseBuilder {
+        return new ResponseBuilder().setStatus(status);
     }
 }

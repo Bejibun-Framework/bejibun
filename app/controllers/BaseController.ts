@@ -48,8 +48,8 @@ export default class BaseController {
         return formData;
     }
 
-    public get response(): Response {
-        return new Response();
+    public get response(): typeof Response {
+        return Response;
     }
 
     public async validate(validator: VineValidator<SchemaTypes, Record<string, any> | undefined>, body: FormData): Promise<Infer<SchemaTypes>> {

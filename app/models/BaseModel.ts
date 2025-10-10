@@ -16,9 +16,9 @@ import Str from "@/utils/Str";
 
 export interface BaseColumns {
     id: bigint | number;
-    created_at: Date | string;
-    updated_at: Date | string;
-    deleted_at: Date | string | null;
+    created_at: DateTime | string;
+    updated_at: DateTime | string;
+    deleted_at: DateTime | string | null;
 }
 
 class BunQueryBuilder<M extends Model, R = M[]> extends SoftDeletes<M, R> {
@@ -35,12 +35,17 @@ class BunQueryBuilder<M extends Model, R = M[]> extends SoftDeletes<M, R> {
     }
 }
 
-export default class BaseModel extends Model {
+export default class BaseModel extends Model implements BaseColumns {
     public static tableName: string;
     public static idColumn: string;
     public static deletedColumn: string = "deleted_at";
 
     public static QueryBuilder = BunQueryBuilder;
+
+    declare id: number | bigint;
+    declare created_at: DateTime | string;
+    declare updated_at: DateTime | string;
+    declare deleted_at: DateTime | string | null;
 
     public static get namespace(): string {
         const filePath = fileURLToPath(import.meta.url);
@@ -51,7 +56,7 @@ export default class BaseModel extends Model {
         namespaces.pop();
         namespaces.push(this.name);
 
-        return namespaces.map(part => new Str().setValue(part).toPascalCase()).join("/");
+        return namespaces.map(part => Str.toPascalCase(part)).join("/");
     }
 
     $beforeInsert(queryContext: QueryContext): Promise<any> | void {

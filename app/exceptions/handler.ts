@@ -6,35 +6,40 @@ import Response from "@/utils/Response";
 import {defineValue} from "@/utils/utils";
 
 export default class ExceptionHandler {
-    public handle(error: ErrorLike): globalThis.Response {
-        if (error instanceof ModelNotFoundException) return new Response()
+    public handle(
+        error: ErrorLike |
+            typeof ModelNotFoundException |
+            errors.E_VALIDATION_ERROR |
+            ValidationError
+    ): globalThis.Response {
+        if (error instanceof ModelNotFoundException) return Response
             .setMessage(error.message)
-            .setStatus(404)
+            .setStatus(error.code)
             .send();
 
-        if (error instanceof errors.E_VALIDATION_ERROR) return new Response()
+        if (error instanceof errors.E_VALIDATION_ERROR) return Response
             .setMessage(error.messages[0].message)
             .setStatus(422)
             .send();
 
-        if (error instanceof ValidationError) return new Response()
+        if (error instanceof ValidationError) return Response
             .setMessage(error.message)
-            .setStatus(422)
+            .setStatus(error.statusCode)
             .send();
 
-        return new Response()
+        return Response
             .setMessage(defineValue(error.message, "Internal server error."))
             .setStatus(500)
             .send();
     }
 
     public route(request: BunRequest): globalThis.Response {
-        if (request.method === CorsMethodEnum.Options) return new Response()
+        if (request.method === CorsMethodEnum.Options) return Response
             .setMessage("What are you looking for doesn't exists.")
             .setStatus(204)
             .send();
 
-        new Response()
+        return Response
             .setMessage("What are you looking for doesn't exists.")
             .setStatus(404)
             .send();

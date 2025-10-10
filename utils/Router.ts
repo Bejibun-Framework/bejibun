@@ -1,47 +1,18 @@
+import RouterBuilder, {ResourceOptions} from "@/builders/RouterBuilder";
+
 export default class Router {
-    private basePath: string = "";
-    private middlewares: Middleware[] = [];
-
-    public prefix(basePath: string): Router {
-        this.basePath = basePath;
-
-        return this;
+    public static prefix(basePath: string): RouterBuilder {
+        return new RouterBuilder().prefix(basePath);
     }
 
-    public middleware(...middlewares: Middleware[]): Router {
-        this.middlewares.push(...middlewares);
-
-        return this;
+    public static middleware(...middlewares: Middleware[]): RouterBuilder {
+        return new RouterBuilder().middleware(...middlewares);
     }
 
-    public group(routes: Record<string, Record<string, HandlerType>>): Record<string, Record<string, HandlerType>> {
-        const newRoutes: Record<string, Record<string, HandlerType>> = {};
-
-        for (const path in routes) {
-            const fullPath = this.joinPaths(this.basePath, path);
-            const routeHandlers = routes[path];
-            const wrappedHandlers: Record<string, HandlerType> = {};
-
-            for (const method in routeHandlers) {
-                let handler = routeHandlers[method];
-
-                for (const middleware of this.middlewares) {
-                    handler = middleware.handle(handler);
-                }
-
-                wrappedHandlers[method] = handler;
-            }
-
-            newRoutes[fullPath] = wrappedHandlers;
-        }
-
-        return newRoutes;
-    }
-
-    private joinPaths(base: string, path: string): string {
-        base = base.replace(/\/+$/, "");
-        path = path.replace(/^\/+/, "");
-
-        return "/" + [base, path].filter(Boolean).join("/");
+    public static resources(
+        controller: Record<string, HandlerType>,
+        options?: ResourceOptions
+    ): Record<string, Record<string, HandlerType>> {
+        return new RouterBuilder().resources(controller, options);
     }
 }

@@ -3,7 +3,7 @@ import TestMiddleware from "@/app/middlewares/TestMiddleware";
 import LoggerMiddleware from "@/app/middlewares/LoggerMiddleware";
 import Router from "@/utils/Router";
 
-export default new Router().prefix("test")
+export default Router.prefix("test")
     .middleware(
         new TestMiddleware(),
         new LoggerMiddleware()

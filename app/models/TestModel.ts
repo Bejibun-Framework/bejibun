@@ -1,3 +1,4 @@
+import {DateTime} from "luxon";
 import BaseModel, {BaseColumns} from "@/app/models/BaseModel";
 
 export interface TestColumns extends BaseColumns {
@@ -10,7 +11,7 @@ export default class TestModel extends BaseModel implements TestColumns {
 
     declare id: bigint;
     declare name: string;
-    declare created_at: Date | string;
-    declare updated_at: Date | string;
-    declare deleted_at: Date | string | null;
+    declare created_at: DateTime | string;
+    declare updated_at: DateTime | string;
+    declare deleted_at: DateTime | string | null;
 }

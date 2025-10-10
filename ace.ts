@@ -16,7 +16,7 @@ const knex = Knex(KnexConfig);
 program
     .name(commandExec)
     .version(version, "-v, --version", "Show the current version")
-    .description(`${new Str().setValue(commandExec).toPascalCase()} for your commander${os.EOL}Author: Acacia Malaccensis <acacia.malaccensis@gmail.com>`)
+    .description(`${Str.toPascalCase(commandExec)} for your commander${os.EOL}Author: Acacia Malaccensis <acacia.malaccensis@gmail.com>`)
     .addHelpText("after", [
         `${os.EOL}Examples:`,
         `$ bun ${commandExec} --help`,
@@ -28,7 +28,11 @@ program
     .command("db:seed")
     .description("Run database seeders")
     .action(async () => {
-        const spinner = ora(new Chalk().setValue("Seeding...").info().show()).start();
+        const spinner = ora(
+            Chalk.setValue("Seeding...")
+                .info()
+                .show()
+        ).start();
         try {
             const logs = (await knex.seed.run()).flat();
             spinner.succeed("Seeding finished");
@@ -52,8 +56,7 @@ program
 
         let confirm = "Y";
         if (!bypass) confirm = await ask(
-            new Chalk()
-                .setValue("This will DROP ALL tables and re-run ALL migrations. Are you want to continue? (Y/N): ")
+            Chalk.setValue("This will DROP ALL tables and re-run ALL migrations. Are you want to continue? (Y/N): ")
                 .inline()
                 .danger()
                 .show()
@@ -63,8 +66,7 @@ program
             if (!bypass) console.log();
 
             const spinner = ora(
-                new Chalk()
-                    .setValue("Rollback...")
+                Chalk.setValue("Rollback...")
                     .info()
                     .show()
             ).start();
@@ -91,8 +93,7 @@ program
     .description("Run latest migration")
     .action(async () => {
         const spinner = ora(
-            new Chalk()
-                .setValue("Migrating...")
+            Chalk.setValue("Migrating...")
                 .info()
                 .show()
         ).start();
@@ -119,8 +120,7 @@ program
 
         let confirm = "Y";
         if (!bypass) confirm = await ask(
-            new Chalk()
-                .setValue("This will ROLLBACK latest migrations. Are you want to continue? (Y/N): ")
+            Chalk.setValue("This will ROLLBACK latest migrations. Are you want to continue? (Y/N): ")
                 .inline()
                 .danger()
                 .show()
@@ -130,8 +130,7 @@ program
             if (!bypass) console.log();
 
             const spinner = ora(
-                new Chalk()
-                    .setValue("Rollback...")
+                Chalk.setValue("Rollback...")
                     .info()
                     .show()
             ).start();
@@ -155,8 +154,7 @@ program
     .description("List migrations status")
     .action(async () => {
         const spinner = ora(
-            new Chalk()
-                .setValue("Fetching...")
+            Chalk.setValue("Fetching...")
                 .info()
                 .show()
         ).start();
