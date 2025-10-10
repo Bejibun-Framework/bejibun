@@ -47,10 +47,10 @@ export const cors = (): Record<string, string> => {
         "Access-Control-Allow-Origin": corsConfig.origin,
         "Access-Control-Allow-Headers": Array.isArray(corsConfig.allowedHeaders)
             ? corsConfig.allowedHeaders.join(", ")
-            : new Enum(CorsHeaderEnum).toArray().map(value => value.value).join(", "),
+            : Enum.setEnums(CorsHeaderEnum).toArray().map(value => value.value).join(", "),
         "Access-Control-Allow-Methods": Array.isArray(corsConfig.methods)
             ? corsConfig.methods.join(", ")
-            : new Enum(CorsMethodEnum).toArray().map(value => value.value).join(", ")
+            : Enum.setEnums(CorsMethodEnum).toArray().map(value => value.value).join(", ")
     };
 
     if (corsConfig.exposedHeaders.length > 0) headers["Access-Control-Expose-Headers"] = corsConfig.exposedHeaders.join(", ");
