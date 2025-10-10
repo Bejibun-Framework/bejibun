@@ -655,12 +655,13 @@ bun start
 - [ ] Mail Service
 - [ ] Maintenance Mode (Up and Down)
 - [ ] Job Dispatch / Background Tasks
+- [ ] Rate Limiter
   
 ## Backlog
 - [ ] Import Excel
 - [ ] Export Excel
 - [ ] Export PDF
-- [ ] CSRF Protection
+- [ ] CSRF/XSS Protection
 
 ## Contributors
 - [Acacia Malaccensis](mailto:acacia.malaccensis@gmail.com)
