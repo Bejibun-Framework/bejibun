@@ -13,7 +13,7 @@ Refactors :
 - Change some utils from new instance based to static calls
 
 ### ❤️Contributors
-- Havea Crenata ([@crenata](https://github.com/crenata))
+- Ghulje ([@ghulje](https://github.com/ghulje))
 
 **Full Changelog**: https://github.com/crenata/bejibun/blob/master/CHANGELOG.md
 
