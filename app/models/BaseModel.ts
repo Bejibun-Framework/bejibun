@@ -96,7 +96,7 @@ export default class BaseModel extends Model implements BaseColumns {
     public static async findOrFail<T extends Model>(this: T, id: bigint | number | string): Promise<T> {
         const result = await this.find(id);
 
-        if (isEmpty(result)) throw new ModelNotFoundException(`No query results for model [${this.namespace}] [${id}].`);
+        if (isEmpty(result)) throw new ModelNotFoundException(`[ModelNotFoundException]: No query results for model [${this.namespace}] [${id}].`);
 
         return result;
     }

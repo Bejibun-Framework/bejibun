@@ -49,7 +49,7 @@ Example :
 import {errors} from "@vinejs/vine";
 import {BunRequest, ErrorLike} from "bun";
 import {ValidationError} from "objection";
-import CorsMethodEnum from "@/app/enums/CorsMethodEnum";
+import HttpMethodEnum from "@/app/enums/HttpMethodEnum";
 import Response from "@/utils/Response";
 import {defineValue} from "@/utils/utils";
 
@@ -82,7 +82,7 @@ export default class ExceptionHandler {
     }
 
     public route(request: BunRequest): globalThis.Response {
-        if (request.method === CorsMethodEnum.Options) return Response
+        if (request.method === HttpMethodEnum.Options) return Response
             .setMessage("What are you looking for doesn't exists.")
             .setStatus(204)
             .send();
@@ -121,7 +121,6 @@ export default class TestMiddleware {
 Usage :
 
 ```ts
-import TestController from "@/app/controllers/TestController";
 import TestMiddleware from "@/app/middlewares/TestMiddleware";
 import LoggerMiddleware from "@/app/middlewares/LoggerMiddleware";
 import Router from "@/utils/Router";
@@ -131,26 +130,14 @@ export default Router.prefix("test")
         new TestMiddleware(),
         new LoggerMiddleware()
     )
-    .group({
-        "get": {
-            GET: new TestController().get
-        },
-        "detail/:id": {
-            GET: new TestController().detail
-        },
-        "add": {
-            POST: new TestController().add
-        },
-        "edit": {
-            POST: new TestController().edit
-        },
-        "delete/:id": {
-            DELETE: new TestController().delete
-        },
-        "restore/:id": {
-            GET: new TestController().restore
-        }
-    });
+    .group([
+        Router.get("get", "TestController@get"),
+        Router.get("detail/:id", "TestController@detail"),
+        Router.post("add", "TestController@add"),
+        Router.post("edit", "TestController@edit"),
+        Router.delete("delete/:id", "TestController@delete"),
+        Router.get("restore/:id", "TestController@restore")
+    ]);
 ```
 
 ### Validators
@@ -161,10 +148,10 @@ Example :
 ```ts
 import vine from "@vinejs/vine";
 import TestModel from "@/app/models/TestModel";
-import BaseValidator, {BaseValidatorType} from "@/app/validators/BaseValidator";
+import BaseValidator from "@/app/validators/BaseValidator";
 
 export default class TestValidator extends BaseValidator {
-    public static get detail(): BaseValidatorType {
+    public static get detail(): ValidatorType {
         return vine.compile(
             vine.object({
                 id: vine.number().min(1).exists(TestModel, "id")
@@ -172,7 +159,7 @@ export default class TestValidator extends BaseValidator {
         );
     }
 
-    public static get add(): BaseValidatorType {
+    public static get add(): ValidatorType {
         return vine.compile(
             vine.object({
                 name: vine.string()
@@ -180,7 +167,7 @@ export default class TestValidator extends BaseValidator {
         );
     }
 
-    public static get edit(): BaseValidatorType {
+    public static get edit(): ValidatorType {
         return vine.compile(
             vine.object({
                 id: vine.number().min(1).exists(TestModel, "id"),
@@ -189,7 +176,7 @@ export default class TestValidator extends BaseValidator {
         );
     }
 
-    public static get delete(): BaseValidatorType {
+    public static get delete(): ValidatorType {
         return vine.compile(
             vine.object({
                 id: vine.number().min(1).exists(TestModel, "id")
@@ -197,7 +184,7 @@ export default class TestValidator extends BaseValidator {
         );
     }
 
-    public static get restore(): BaseValidatorType {
+    public static get restore(): ValidatorType {
         return vine.compile(
             vine.object({
                 id: vine.number().min(1).exists(TestModel, "id", true)
@@ -491,9 +478,11 @@ Example :
 import knex from "knex";
 import {Model} from "objection";
 import ModelNotFoundException from "@/app/exceptions/ModelNotFoundException";
+import RouterInvalidException from "@/app/exceptions/RouterInvalidException";
 import KnexConfig from "@/config/database";
 
 global.ModelNotFoundException = ModelNotFoundException;
+global.RouterInvalidException = RouterInvalidException;
 
 Model.knex(knex(KnexConfig));
 ```
@@ -656,6 +645,7 @@ bun start
 - [ ] Maintenance Mode (Up and Down)
 - [ ] Job Dispatch / Background Tasks
 - [ ] Rate Limiter
+- [ ] Redis
   
 ## Backlog
 - [ ] Import Excel

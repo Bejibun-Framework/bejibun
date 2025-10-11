@@ -14,4 +14,4 @@ RUN bun install --production --frozen-lockfile
 EXPOSE 3000
 
 # Run the server when the container launches
-CMD ["bun", "dev"]
+CMD ["bun", "start"]

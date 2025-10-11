@@ -1,7 +1,7 @@
 import {errors} from "@vinejs/vine";
 import {BunRequest, ErrorLike} from "bun";
 import {ValidationError} from "objection";
-import CorsMethodEnum from "@/app/enums/CorsMethodEnum";
+import HttpMethodEnum from "@/app/enums/HttpMethodEnum";
 import Response from "@/utils/Response";
 import {defineValue} from "@/utils/utils";
 
@@ -34,7 +34,7 @@ export default class ExceptionHandler {
     }
 
     public route(request: BunRequest): globalThis.Response {
-        if (request.method === CorsMethodEnum.Options) return Response
+        if (request.method === HttpMethodEnum.Options) return Response
             .setMessage("What are you looking for doesn't exists.")
             .setStatus(204)
             .send();

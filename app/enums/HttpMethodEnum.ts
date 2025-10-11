@@ -1,4 +1,4 @@
-enum CorsMethodEnum {
+enum HttpMethodEnum {
     Connect = "CONNECT",
     Delete = "DELETE",
     Get = "GET",
@@ -10,4 +10,4 @@ enum CorsMethodEnum {
     Trace = "TRACE"
 }
 
-export default CorsMethodEnum;
+export default HttpMethodEnum;

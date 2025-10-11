@@ -1,9 +1,9 @@
 import vine from "@vinejs/vine";
 import TestModel from "@/app/models/TestModel";
-import BaseValidator, {BaseValidatorType} from "@/app/validators/BaseValidator";
+import BaseValidator from "@/app/validators/BaseValidator";
 
 export default class TestValidator extends BaseValidator {
-    public static get detail(): BaseValidatorType {
+    public static get detail(): ValidatorType {
         return vine.compile(
             vine.object({
                 id: vine.number().min(1).exists(TestModel, "id")
@@ -11,7 +11,7 @@ export default class TestValidator extends BaseValidator {
         );
     }
 
-    public static get add(): BaseValidatorType {
+    public static get add(): ValidatorType {
         return vine.compile(
             vine.object({
                 name: vine.string()
@@ -19,7 +19,7 @@ export default class TestValidator extends BaseValidator {
         );
     }
 
-    public static get edit(): BaseValidatorType {
+    public static get edit(): ValidatorType {
         return vine.compile(
             vine.object({
                 id: vine.number().min(1).exists(TestModel, "id"),
@@ -28,7 +28,7 @@ export default class TestValidator extends BaseValidator {
         );
     }
 
-    public static get delete(): BaseValidatorType {
+    public static get delete(): ValidatorType {
         return vine.compile(
             vine.object({
                 id: vine.number().min(1).exists(TestModel, "id")
@@ -36,7 +36,7 @@ export default class TestValidator extends BaseValidator {
         );
     }
 
-    public static get restore(): BaseValidatorType {
+    public static get restore(): ValidatorType {
         return vine.compile(
             vine.object({
                 id: vine.number().min(1).exists(TestModel, "id", true)

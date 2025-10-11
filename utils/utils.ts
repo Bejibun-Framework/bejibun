@@ -1,6 +1,6 @@
 import readline from "readline";
 import CorsHeaderEnum from "@/app/enums/CorsHeaderEnum";
-import CorsMethodEnum from "@/app/enums/CorsMethodEnum";
+import HttpMethodEnum from "@/app/enums/HttpMethodEnum";
 import corsConfig from "@/config/cors";
 import Enum from "@/utils/Enum";
 
@@ -50,7 +50,7 @@ export const cors = (): Record<string, string> => {
             : Enum.setEnums(CorsHeaderEnum).toArray().map(value => value.value).join(", "),
         "Access-Control-Allow-Methods": Array.isArray(corsConfig.methods)
             ? corsConfig.methods.join(", ")
-            : Enum.setEnums(CorsMethodEnum).toArray().map(value => value.value).join(", ")
+            : Enum.setEnums(HttpMethodEnum).toArray().map(value => value.value).join(", ")
     };
 
     if (corsConfig.exposedHeaders.length > 0) headers["Access-Control-Expose-Headers"] = corsConfig.exposedHeaders.join(", ");

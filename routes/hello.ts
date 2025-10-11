@@ -1,13 +1,11 @@
-import HelloController from "@/app/controllers/HelloController";
 import Router from "@/utils/Router";
+import HttpMethodEnum from "@/app/enums/HttpMethodEnum";
 
-export default Router.prefix("hello").group({
-    "/": {
-        GET: new HelloController().hello,
-        PUT: new HelloController().hello
-    },
+export default Router.prefix("hello").group([
+    Router.match([
+        HttpMethodEnum.Get,
+        HttpMethodEnum.Put
+    ], "/", "HelloController@hello"),
 
-    ":name": {
-        GET: new HelloController().helloName
-    }
-});
+    Router.get(":name", "HelloController@helloName")
+]);
