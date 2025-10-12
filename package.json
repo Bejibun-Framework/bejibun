@@ -1,6 +1,6 @@
 {
     "name": "bejibun",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "private": true,
     "description": "A typescript framework using Bun runtime. Designed for backend purposes.",
     "keywords": [
