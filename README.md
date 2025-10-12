@@ -682,7 +682,7 @@ bun start
 - [ ] Maintenance Mode (Up and Down)
 - [ ] Job Dispatch / Background Tasks
 - [ ] Rate Limiter
-- [ ] Redis
+- [ ] Cache (Redis)
   
 ## Backlog
 - [ ] Import Excel
