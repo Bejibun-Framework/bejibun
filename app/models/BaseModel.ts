@@ -1,3 +1,5 @@
+import {defineValue, isEmpty} from "@bejibun/core";
+import Str from "@bejibun/core/str";
 import {DateTime} from "luxon";
 import {
     Constructor,
@@ -10,9 +12,7 @@ import {
 } from "objection";
 import {relative, sep} from "path";
 import {fileURLToPath} from "url";
-import {defineValue, isEmpty} from "@/utils/utils";
 import SoftDeletes from "@/utils/SoftDeletes";
-import Str from "@/utils/Str";
 
 export interface BaseColumns {
     id: bigint | number;

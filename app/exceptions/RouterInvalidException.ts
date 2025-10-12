@@ -1,4 +1,4 @@
-import {defineValue} from "@/utils/utils";
+import {defineValue} from "@bejibun/core";
 
 export default class RouterInvalidException extends Error {
     public code: number;

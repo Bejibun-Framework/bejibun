@@ -1,7 +1,7 @@
+import {defineValue, isNotEmpty} from "@bejibun/core";
 import {Infer, SchemaTypes, VineValidator} from "@vinejs/vine";
 import {BunRequest} from "bun";
 import Response from "@/utils/Response";
-import {defineValue, isNotEmpty} from "@/utils/utils";
 
 export default class BaseController {
     public async parse(request: BunRequest): Promise<FormData> {

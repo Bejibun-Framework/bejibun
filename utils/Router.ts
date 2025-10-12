@@ -1,7 +1,7 @@
+import {isEmpty} from "@bejibun/core";
+import Enum from "@bejibun/core/enum";
 import RouterBuilder, {ResourceOptions} from "@/builders/RouterBuilder";
 import HttpMethodEnum from "@/app/enums/HttpMethodEnum";
-import Enum from "@/utils/Enum";
-import {isEmpty} from "@/utils/utils";
 
 export default class Router {
     public static prefix(basePath: string): RouterBuilder {

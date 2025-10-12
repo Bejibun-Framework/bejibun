@@ -1,9 +1,9 @@
+import {defineValue} from "@bejibun/core";
 import {errors} from "@vinejs/vine";
 import {BunRequest, ErrorLike} from "bun";
 import {ValidationError} from "objection";
 import HttpMethodEnum from "@/app/enums/HttpMethodEnum";
 import Response from "@/utils/Response";
-import {defineValue} from "@/utils/utils";
 
 export default class ExceptionHandler {
     public handle(

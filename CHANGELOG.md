@@ -3,6 +3,22 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [v0.1.41](https://github.com/crenata/bejibun/compare/v0.1.4...v0.1.41) - 2025-10-12
+
+### 🩹 Fixes
+
+### 📖 Changes
+- Move redis into `@bejibun/redis` package
+- Move enum, str, and some utils to `@bejibun/core` package
+
+### ❤️Contributors
+- Havea Crenata ([@crenata](https://github.com/crenata))
+- Ghulje ([@ghulje](https://github.com/ghulje))
+
+**Full Changelog**: https://github.com/crenata/bejibun/blob/master/CHANGELOG.md
+
+---
+
 ## [v0.1.4](https://github.com/crenata/bejibun/compare/v0.1.3...v0.1.4) - 2025-10-12
 
 ### 🩹 Fixes

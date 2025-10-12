@@ -46,12 +46,12 @@ Handle any incoming errors
 Example :
 
 ```ts
+import {defineValue} from "@bejibun/core";
 import {errors} from "@vinejs/vine";
 import {BunRequest, ErrorLike} from "bun";
 import {ValidationError} from "objection";
 import HttpMethodEnum from "@/app/enums/HttpMethodEnum";
 import Response from "@/utils/Response";
-import {defineValue} from "@/utils/utils";
 
 export default class ExceptionHandler {
     public handle(
@@ -691,4 +691,4 @@ bun start
 - [ ] CSRF/XSS Protection
 
 ## Contributors
-- [Acacia Malaccensis](mailto:acacia.malaccensis@gmail.com)
+- [Havea Crenata](mailto:havea.crenata@gmail.com)

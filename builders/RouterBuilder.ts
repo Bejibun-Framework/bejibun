@@ -1,5 +1,5 @@
+import {isEmpty} from "@bejibun/core";
 import HttpMethodEnum from "@/app/enums/HttpMethodEnum";
-import {isEmpty} from "@/utils/utils";
 
 export interface ResourceOptions {
     only?: Array<ResourceAction>;
