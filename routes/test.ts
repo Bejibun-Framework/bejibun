@@ -8,6 +8,7 @@ export default Router.prefix("test")
         new LoggerMiddleware()
     )
     .group([
+        Router.get("redis", "TestController@redis"),
         Router.get("get", "TestController@get"),
         Router.get("detail/:id", "TestController@detail"),
         Router.post("add", "TestController@add"),

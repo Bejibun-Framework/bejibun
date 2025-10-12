@@ -2,8 +2,32 @@ import {BunRequest} from "bun";
 import BaseController from "@/app/controllers/BaseController";
 import TestModel from "@/app/models/TestModel";
 import TestValidator from "@/app/validators/TestValidator";
+import Redis from "@/utils/Redis";
 
 export default class TestController extends BaseController {
+    public async redis(request: BunRequest): Promise<Response> {
+        await Redis.set("redis", {hello: "world"});
+        const redis = await Redis.get("redis");
+
+        const pipeline = await Redis.pipeline((pipe: RedisPipeline) => {
+            pipe.set("redis-pipeline-1", "This is redis pipeline 1");
+            pipe.set("redis-pipeline-2", "This is redis pipeline 2");
+
+            pipe.get("redis-pipeline-1");
+            pipe.get("redis-pipeline-2");
+        });
+
+        const subscriber = await Redis.subscribe("redis-subscribe", (message: string, channel: string) => {
+            console.log(`[${channel}]: ${message}`);
+        });
+        await Redis.publish("redis-subscribe", "Hai redis subscriber!");
+        setTimeout(async () => {
+            await subscriber.unsubscribe();
+        }, 500);
+
+        return super.response.setData({redis, pipeline}).send();
+    }
+
     public async get(request: BunRequest): Promise<Response> {
         const tests = await TestModel.all();
 

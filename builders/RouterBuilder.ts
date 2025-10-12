@@ -116,7 +116,7 @@ export default class RouterBuilder {
         const [controllerName, methodName] = definition.split("@");
 
         if (isEmpty(controllerName) || isEmpty(methodName)) {
-            throw new RouterInvalidException(`[RouterInvalidException]: Invalid router controller definition: ${definition}`);
+            throw new RouterInvalidException(`[RouterInvalidException]: Invalid router controller definition: ${definition}.`);
         }
 
         let ControllerClass: any;
@@ -130,7 +130,7 @@ export default class RouterBuilder {
                 const instance = new ESMController();
 
                 if (typeof instance[methodName] !== "function") {
-                    throw new RouterInvalidException(`[RouterInvalidException]: Method "${methodName}" not found in ${controllerName}`);
+                    throw new RouterInvalidException(`[RouterInvalidException]: Method "${methodName}" not found in ${controllerName}.`);
                 }
 
                 return instance[methodName](...args);
@@ -138,13 +138,13 @@ export default class RouterBuilder {
         }
 
         if (isEmpty(ControllerClass)) {
-            throw new RouterInvalidException(`[RouterInvalidException]: Controller not found: ${controllerName}`);
+            throw new RouterInvalidException(`[RouterInvalidException]: Controller not found: ${controllerName}.`);
         }
 
         const instance = new ControllerClass();
 
         if (typeof instance[methodName] !== "function") {
-            throw new RouterInvalidException(`[RouterInvalidException]: Method "${methodName}" not found in ${controllerName}`);
+            throw new RouterInvalidException(`[RouterInvalidException]: Method "${methodName}" not found in ${controllerName}.`);
         }
 
         return instance[methodName].bind(instance);

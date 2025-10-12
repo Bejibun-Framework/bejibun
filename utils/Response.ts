@@ -1,7 +1,7 @@
 import ResponseBuilder from "@/builders/ResponseBuilder";
 
 export default class Response {
-    public static setData(data: any): ResponseBuilder {
+    public static setData(data?: any): ResponseBuilder {
         return new ResponseBuilder().setData(data);
     }
 

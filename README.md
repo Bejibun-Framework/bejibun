@@ -131,6 +131,7 @@ export default Router.prefix("test")
         new LoggerMiddleware()
     )
     .group([
+        Router.get("redis", "TestController@redis"),
         Router.get("get", "TestController@get"),
         Router.get("detail/:id", "TestController@detail"),
         Router.post("add", "TestController@add"),
@@ -478,13 +479,49 @@ Example :
 import knex from "knex";
 import {Model} from "objection";
 import ModelNotFoundException from "@/app/exceptions/ModelNotFoundException";
+import RedisException from "@/app/exceptions/RedisException";
 import RouterInvalidException from "@/app/exceptions/RouterInvalidException";
 import KnexConfig from "@/config/database";
 
 global.ModelNotFoundException = ModelNotFoundException;
+global.RedisException = RedisException;
 global.RouterInvalidException = RouterInvalidException;
 
 Model.knex(knex(KnexConfig));
+```
+
+### Redis
+Example :
+
+```ts
+import {BunRequest} from "bun";
+import BaseController from "@/app/controllers/BaseController";
+import Redis from "@/utils/Redis";
+
+export default class TestController extends BaseController {
+    public async redis(request: BunRequest): Promise<Response> {
+        await Redis.set("redis", {hello: "world"});
+        const redis = await Redis.get("redis");
+
+        const pipeline = await Redis.pipeline((pipe: RedisPipeline) => {
+            pipe.set("redis-pipeline-1", "This is redis pipeline 1");
+            pipe.set("redis-pipeline-2", "This is redis pipeline 2");
+
+            pipe.get("redis-pipeline-1");
+            pipe.get("redis-pipeline-2");
+        });
+
+        const subscriber = await Redis.subscribe("redis-subscribe", (message: string, channel: string) => {
+            console.log(`[${channel}]: ${message}`);
+        });
+        await Redis.publish("redis-subscribe", "Hai redis subscriber!");
+        setTimeout(async () => {
+            await subscriber.unsubscribe();
+        }, 500);
+
+        return super.response.setData({redis, pipeline}).send();
+    }
+}
 ```
 
 ### Ace

@@ -1,7 +1,7 @@
 import {cors} from "@/utils/utils";
 
 export default class ResponseBuilder {
-    protected data: any;
+    protected data?: any;
     protected message: string;
     protected status: number;
 
@@ -11,7 +11,7 @@ export default class ResponseBuilder {
         this.status = 200;
     }
 
-    public setData(data: any): ResponseBuilder {
+    public setData(data?: any): ResponseBuilder {
         this.data = data;
 
         return this;
