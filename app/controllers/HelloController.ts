@@ -1,5 +1,5 @@
 import {BunRequest} from "bun";
-import BaseController from "@/app/controllers/BaseController";
+import BaseController from "@bejibun/core/bases/BaseController";
 
 export default class HelloController extends BaseController {
     public async hello(request: BunRequest): Promise<Response> {

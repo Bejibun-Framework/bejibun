@@ -1,6 +1,6 @@
+import Router from "@bejibun/core/facades/Router";
 import hello from "@/routes/hello";
 import test from "@/routes/test";
-import Router from "@/utils/Router";
 import ExceptionHandler from "@/app/exceptions/handler";
 
 export default {

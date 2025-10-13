@@ -1,5 +1,5 @@
+import BaseModel, {BaseColumns} from "@bejibun/core/bases/BaseModel";
 import {DateTime} from "luxon";
-import BaseModel, {BaseColumns} from "@/app/models/BaseModel";
 
 export interface TestColumns extends BaseColumns {
     name: string;

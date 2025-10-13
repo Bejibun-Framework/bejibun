@@ -1,3 +1,4 @@
+import type {HandlerType} from "@bejibun/core/types";
 import {BunRequest} from "bun";
 import {DateTime} from "luxon";
 

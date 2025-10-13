@@ -1,6 +1,7 @@
+import type {ValidatorType} from "@bejibun/core/types/ValidatorType";
+import BaseValidator from "@bejibun/core/bases/BaseValidator";
 import vine from "@vinejs/vine";
 import TestModel from "@/app/models/TestModel";
-import BaseValidator from "@/app/validators/BaseValidator";
 
 export default class TestValidator extends BaseValidator {
     public static get detail(): ValidatorType {

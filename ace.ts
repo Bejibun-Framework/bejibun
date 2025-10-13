@@ -1,5 +1,6 @@
 import {ask, isNotEmpty} from "@bejibun/core";
-import Str from "@bejibun/core/str";
+import Chalk from "@bejibun/core/facades/Chalk";
+import Str from "@bejibun/core/facades/Str";
 import {program} from "commander";
 import Knex from "knex";
 import ora from "ora";
@@ -7,7 +8,6 @@ import os from "os";
 import path from "path";
 import KnexConfig from "@/config/database";
 import {version} from "@/package.json";
-import Chalk from "@/utils/Chalk";
 import "@/bootstrap";
 
 const commandExec = "ace";

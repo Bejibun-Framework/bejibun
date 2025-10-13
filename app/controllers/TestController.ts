@@ -1,6 +1,6 @@
+import BaseController from "@bejibun/core/bases/BaseController";
 import Redis from "@bejibun/redis";
 import {BunRequest} from "bun";
-import BaseController from "@/app/controllers/BaseController";
 import TestModel from "@/app/models/TestModel";
 import TestValidator from "@/app/validators/TestValidator";
 

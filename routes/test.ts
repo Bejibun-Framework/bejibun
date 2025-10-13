@@ -1,6 +1,6 @@
+import Router from "@bejibun/core/facades/Router";
 import TestMiddleware from "@/app/middlewares/TestMiddleware";
 import LoggerMiddleware from "@/app/middlewares/LoggerMiddleware";
-import Router from "@/utils/Router";
 
 export default Router.prefix("test")
     .middleware(

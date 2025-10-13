@@ -12,11 +12,12 @@ const config: Knex.Config = {
     migrations: {
         extension: "ts",
         directory: "./database/migrations",
+        schemaName: "public",
         tableName: "migrations"
     },
     pool: {
         min: 0,
-        max: 1
+        max: 10
     },
     seeds: {
         extension: "ts",
