@@ -13,7 +13,7 @@ export default class HelloController extends BaseController {
         const body = await super.parse(request);
 
         return super.response.setData({
-            message: `Hello, ${body.get("name")}!`,
+            message: `Hello, ${body.name}!`,
         }).send();
     }
 }

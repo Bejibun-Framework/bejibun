@@ -49,8 +49,8 @@ Example :
 import {defineValue} from "@bejibun/core";
 import HttpMethodEnum from "@bejibun/core/enums/HttpMethodEnum";
 import ModelNotFoundException from "@bejibun/core/exceptions/ModelNotFoundException";
+import ValidatorException from "@bejibun/core/exceptions/ValidatorException";
 import Response from "@bejibun/core/facades/Response";
-import {errors} from "@vinejs/vine";
 import {BunRequest, ErrorLike} from "bun";
 import {ValidationError} from "objection";
 
@@ -58,17 +58,15 @@ export default class ExceptionHandler {
     public handle(
         error: ErrorLike |
             typeof ModelNotFoundException |
-            errors.E_VALIDATION_ERROR |
+            typeof ValidatorException |
             ValidationError
     ): globalThis.Response {
-        if (error instanceof ModelNotFoundException) return Response
+        if (
+            error instanceof ModelNotFoundException ||
+            error instanceof ValidatorException
+        ) return Response
             .setMessage(error.message)
             .setStatus(error.code)
-            .send();
-
-        if (error instanceof errors.E_VALIDATION_ERROR) return Response
-            .setMessage(error.messages[0].message)
-            .setStatus(422)
             .send();
 
         if (error instanceof ValidationError) return Response
@@ -123,9 +121,9 @@ export default class TestMiddleware {
 Usage :
 
 ```ts
+import Router from "@bejibun/core/facades/Router";
 import TestMiddleware from "@/app/middlewares/TestMiddleware";
 import LoggerMiddleware from "@/app/middlewares/LoggerMiddleware";
-import Router from "@/utils/Router";
 
 export default Router.prefix("test")
     .middleware(
@@ -149,48 +147,48 @@ Validate any incoming requests
 Example :
 
 ```ts
-import vine from "@vinejs/vine";
+import type {ValidatorType} from "@bejibun/core/types/ValidatorType";
+import BaseValidator from "@bejibun/core/bases/BaseValidator";
 import TestModel from "@/app/models/TestModel";
-import BaseValidator from "@/app/validators/BaseValidator";
 
 export default class TestValidator extends BaseValidator {
     public static get detail(): ValidatorType {
-        return vine.compile(
-            vine.object({
-                id: vine.number().min(1).exists(TestModel, "id")
+        return super.validator.compile(
+            super.validator.object({
+                id: super.validator.number().min(1).exists(TestModel, "id")
             })
         );
     }
 
     public static get add(): ValidatorType {
-        return vine.compile(
-            vine.object({
-                name: vine.string()
+        return super.validator.compile(
+            super.validator.object({
+                name: super.validator.string()
             })
         );
     }
 
     public static get edit(): ValidatorType {
-        return vine.compile(
-            vine.object({
-                id: vine.number().min(1).exists(TestModel, "id"),
-                name: vine.string()
+        return super.validator.compile(
+            super.validator.object({
+                id: super.validator.number().min(1).exists(TestModel, "id"),
+                name: super.validator.string()
             })
         );
     }
 
     public static get delete(): ValidatorType {
-        return vine.compile(
-            vine.object({
-                id: vine.number().min(1).exists(TestModel, "id")
+        return super.validator.compile(
+            super.validator.object({
+                id: super.validator.number().min(1).exists(TestModel, "id")
             })
         );
     }
 
     public static get restore(): ValidatorType {
-        return vine.compile(
-            vine.object({
-                id: vine.number().min(1).exists(TestModel, "id", true)
+        return super.validator.compile(
+            super.validator.object({
+                id: super.validator.number().min(1).exists(TestModel, "id", true)
             })
         );
     }
@@ -210,7 +208,7 @@ export default class TestController extends BaseController {
         const body = await super.parse(request);
         await super.validate(TestValidator.detail, body);
 
-        const test = await TestModel.findOrFail(body.get("id") as number | string);
+        const test = await TestModel.findOrFail(body.id as number | string);
 
         return super.response.setData(test).send();
     }
@@ -273,7 +271,7 @@ export default class TestController extends BaseController {
         const body = await super.parse(request);
         await super.validate(TestValidator.detail, body);
 
-        const test = await TestModel.findOrFail(body.get("id") as number | string);
+        const test = await TestModel.findOrFail(body.id as number | string);
 
         return super.response.setData(test).send();
     }
@@ -295,7 +293,7 @@ export default class TestController extends BaseController {
         await super.validate(TestValidator.add, body);
 
         const tests = await TestModel.create({
-            name: body.get("name") as string
+            name: body.name as string
         });
 
         return super.response.setData(tests).send();
@@ -317,9 +315,9 @@ export default class TestController extends BaseController {
         const body = await super.parse(request);
         await super.validate(TestValidator.edit, body);
 
-        const tests = await TestModel.find(body.get("id") as number | string)
+        const tests = await TestModel.find(body.id as number | string)
             .update({
-                name: body.get("name") as string
+                name: body.name as string
             });
 
         return super.response.setData(tests).send();
@@ -341,7 +339,7 @@ export default class TestController extends BaseController {
         const body = await super.parse(request);
         await super.validate(TestValidator.delete, body);
 
-        const tests = await TestModel.find(body.get("id") as number | string).delete();
+        const tests = await TestModel.find(body.id as number | string).delete();
 
         return super.response.setData(tests).send();
     }
@@ -362,7 +360,7 @@ export default class TestController extends BaseController {
         const body = await super.parse(request);
         await super.validate(TestValidator.delete, body);
 
-        const tests = await TestModel.find(body.get("id") as number | string).forceDelete();
+        const tests = await TestModel.find(body.id as number | string).forceDelete();
 
         return super.response.setData(tests).send();
     }
@@ -416,7 +414,7 @@ export default class TestController extends BaseController {
         const body = await super.parse(request);
         await super.validate(TestValidator.restore, body);
 
-        const tests = await TestModel.find(body.get("id") as number | string).restore();
+        const tests = await TestModel.find(body.id as number | string).restore();
 
         return super.response.setData(tests).send();
     }

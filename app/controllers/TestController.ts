@@ -38,7 +38,7 @@ export default class TestController extends BaseController {
         const body = await super.parse(request);
         await super.validate(TestValidator.detail, body);
 
-        const test = await TestModel.findOrFail(body.get("id") as number | string);
+        const test = await TestModel.findOrFail(body.id as number | string);
 
         return super.response.setData(test).send();
     }
@@ -48,7 +48,7 @@ export default class TestController extends BaseController {
         await super.validate(TestValidator.add, body);
 
         const tests = await TestModel.create({
-            name: body.get("name") as string
+            name: body.name as string
         });
 
         return super.response.setData(tests).send();
@@ -58,9 +58,9 @@ export default class TestController extends BaseController {
         const body = await super.parse(request);
         await super.validate(TestValidator.edit, body);
 
-        const tests = await TestModel.find(body.get("id") as number | string)
+        const tests = await TestModel.find(body.id as number | string)
             .update({
-                name: body.get("name") as string
+                name: body.name as string
             });
 
         return super.response.setData(tests).send();
@@ -70,7 +70,7 @@ export default class TestController extends BaseController {
         const body = await super.parse(request);
         await super.validate(TestValidator.delete, body);
 
-        const tests = await TestModel.find(body.get("id") as number | string).delete();
+        const tests = await TestModel.find(body.id as number | string).delete();
 
         return super.response.setData(tests).send();
     }
@@ -79,7 +79,7 @@ export default class TestController extends BaseController {
         const body = await super.parse(request);
         await super.validate(TestValidator.restore, body);
 
-        const tests = await TestModel.find(body.get("id") as number | string).restore();
+        const tests = await TestModel.find(body.id as number | string).restore();
 
         return super.response.setData(tests).send();
     }

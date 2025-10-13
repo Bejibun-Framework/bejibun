@@ -1,46 +1,45 @@
 import type {ValidatorType} from "@bejibun/core/types/ValidatorType";
 import BaseValidator from "@bejibun/core/bases/BaseValidator";
-import vine from "@vinejs/vine";
 import TestModel from "@/app/models/TestModel";
 
 export default class TestValidator extends BaseValidator {
     public static get detail(): ValidatorType {
-        return vine.compile(
-            vine.object({
-                id: vine.number().min(1).exists(TestModel, "id")
+        return super.validator.compile(
+            super.validator.object({
+                id: super.validator.number().min(1).exists(TestModel, "id")
             })
         );
     }
 
     public static get add(): ValidatorType {
-        return vine.compile(
-            vine.object({
-                name: vine.string()
+        return super.validator.compile(
+            super.validator.object({
+                name: super.validator.string()
             })
         );
     }
 
     public static get edit(): ValidatorType {
-        return vine.compile(
-            vine.object({
-                id: vine.number().min(1).exists(TestModel, "id"),
-                name: vine.string()
+        return super.validator.compile(
+            super.validator.object({
+                id: super.validator.number().min(1).exists(TestModel, "id"),
+                name: super.validator.string()
             })
         );
     }
 
     public static get delete(): ValidatorType {
-        return vine.compile(
-            vine.object({
-                id: vine.number().min(1).exists(TestModel, "id")
+        return super.validator.compile(
+            super.validator.object({
+                id: super.validator.number().min(1).exists(TestModel, "id")
             })
         );
     }
 
     public static get restore(): ValidatorType {
-        return vine.compile(
-            vine.object({
-                id: vine.number().min(1).exists(TestModel, "id", true)
+        return super.validator.compile(
+            super.validator.object({
+                id: super.validator.number().min(1).exists(TestModel, "id", true)
             })
         );
     }
