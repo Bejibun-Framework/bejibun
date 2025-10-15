@@ -1,3 +1,4 @@
+import type {RedisPipeline} from "@bejibun/redis/types";
 import BaseController from "@bejibun/core/bases/BaseController";
 import Redis from "@bejibun/redis";
 import {BunRequest} from "bun";
