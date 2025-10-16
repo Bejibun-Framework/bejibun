@@ -27,8 +27,8 @@ Logical processes
 Example :
 
 ```ts
+import BaseController from "@bejibun/core/bases/BaseController";
 import {BunRequest} from "bun";
-import BaseController from "@/app/controllers/BaseController";
 
 export default class HelloController extends BaseController {
     public async hello(request: BunRequest): Promise<Response> {
@@ -81,14 +81,9 @@ export default class ExceptionHandler {
     }
 
     public route(request: BunRequest): globalThis.Response {
-        if (request.method === HttpMethodEnum.Options) return Response
-            .setMessage("What are you looking for doesn't exists.")
-            .setStatus(204)
-            .send();
-
         return Response
             .setMessage("What are you looking for doesn't exists.")
-            .setStatus(404)
+            .setStatus(request.method === HttpMethodEnum.Options ? 204 : 404)
             .send();
     }
 }
@@ -198,8 +193,8 @@ export default class TestValidator extends BaseValidator {
 Usage :
 
 ```ts
+import BaseController from "@bejibun/core/bases/BaseController";
 import {BunRequest} from "bun";
-import BaseController from "@/app/controllers/BaseController";
 import TestModel from "@/app/models/TestModel";
 import TestValidator from "@/app/validators/TestValidator";
 
@@ -221,8 +216,8 @@ Database table model
 Example :
 
 ```ts
+import BaseModel, {BaseColumns} from "@bejibun/core/bases/BaseModel";
 import {DateTime} from "luxon";
-import BaseModel, {BaseColumns} from "@/app/models/BaseModel";
 
 export interface TestColumns extends BaseColumns {
     name: string;
@@ -244,8 +239,8 @@ export default class TestModel extends BaseModel implements TestColumns {
 Example :
 
 ```ts
+import BaseController from "@bejibun/core/bases/BaseController";
 import {BunRequest} from "bun";
-import BaseController from "@/app/controllers/BaseController";
 import TestModel from "@/app/models/TestModel";
 
 export default class TestController extends BaseController {
@@ -261,8 +256,8 @@ export default class TestController extends BaseController {
 Example :
 
 ```ts
+import BaseController from "@bejibun/core/bases/BaseController";
 import {BunRequest} from "bun";
-import BaseController from "@/app/controllers/BaseController";
 import TestModel from "@/app/models/TestModel";
 import TestValidator from "@/app/validators/TestValidator";
 
@@ -282,8 +277,8 @@ export default class TestController extends BaseController {
 Example :
 
 ```ts
+import BaseController from "@bejibun/core/bases/BaseController";
 import {BunRequest} from "bun";
-import BaseController from "@/app/controllers/BaseController";
 import TestModel from "@/app/models/TestModel";
 import TestValidator from "@/app/validators/TestValidator";
 
@@ -305,8 +300,8 @@ export default class TestController extends BaseController {
 Example :
 
 ```ts
+import BaseController from "@bejibun/core/bases/BaseController";
 import {BunRequest} from "bun";
-import BaseController from "@/app/controllers/BaseController";
 import TestModel from "@/app/models/TestModel";
 import TestValidator from "@/app/validators/TestValidator";
 
@@ -329,8 +324,8 @@ export default class TestController extends BaseController {
 Example :
 
 ```ts
+import BaseController from "@bejibun/core/bases/BaseController";
 import {BunRequest} from "bun";
-import BaseController from "@/app/controllers/BaseController";
 import TestModel from "@/app/models/TestModel";
 import TestValidator from "@/app/validators/TestValidator";
 
@@ -350,8 +345,8 @@ export default class TestController extends BaseController {
 Example :
 
 ```ts
+import BaseController from "@bejibun/core/bases/BaseController";
 import {BunRequest} from "bun";
-import BaseController from "@/app/controllers/BaseController";
 import TestModel from "@/app/models/TestModel";
 import TestValidator from "@/app/validators/TestValidator";
 
@@ -371,8 +366,8 @@ export default class TestController extends BaseController {
 Example :
 
 ```ts
+import BaseController from "@bejibun/core/bases/BaseController";
 import {BunRequest} from "bun";
-import BaseController from "@/app/controllers/BaseController";
 import TestModel from "@/app/models/TestModel";
 
 export default class TestController extends BaseController {
@@ -388,8 +383,8 @@ export default class TestController extends BaseController {
 Example :
 
 ```ts
+import BaseController from "@bejibun/core/bases/BaseController";
 import {BunRequest} from "bun";
-import BaseController from "@/app/controllers/BaseController";
 import TestModel from "@/app/models/TestModel";
 
 export default class TestController extends BaseController {
@@ -405,8 +400,8 @@ export default class TestController extends BaseController {
 Example :
 
 ```ts
+import BaseController from "@bejibun/core/bases/BaseController";
 import {BunRequest} from "bun";
-import BaseController from "@/app/controllers/BaseController";
 import TestModel from "@/app/models/TestModel";
 
 export default class TestController extends BaseController {
@@ -469,29 +464,19 @@ For public assets
 ### Bootstrap
 Any startup loads
 
-At this time used for :
-- Init model connection
-- Declare custom exception
+Currently, only load from core package.
 
 Example :
 
 ```ts
-import knex from "knex";
-import {Model} from "objection";
-import ModelNotFoundException from "@/app/exceptions/ModelNotFoundException";
-import RedisException from "@/app/exceptions/RedisException";
-import RouterInvalidException from "@/app/exceptions/RouterInvalidException";
-import KnexConfig from "@/config/database";
-
-global.ModelNotFoundException = ModelNotFoundException;
-global.RedisException = RedisException;
-global.RouterInvalidException = RouterInvalidException;
-
-Model.knex(knex(KnexConfig));
+import "@bejibun/core/bootstrap";
 ```
 
 ### Redis
 Documentation : [@bejibun/redis](https://github.com/crenata/bejibun-redis/blob/master/README.md)
+
+### Cors
+Documentation : [@bejibun/cors](https://github.com/crenata/bejibun-cors/blob/master/README.md)
 
 ### Ace
 Any commands for development
@@ -652,7 +637,6 @@ bun start
 - [ ] Job Dispatch / Background Tasks
 - [ ] Rate Limiter
 - [ ] Cache (Redis)
-- [ ] Logger e.g. 2025-10-12 00:00:00.000 [INFO]: Message...
   
 ## Backlog
 - [ ] Import Excel

@@ -33,14 +33,9 @@ export default class ExceptionHandler {
     }
 
     public route(request: BunRequest): globalThis.Response {
-        if (request.method === HttpMethodEnum.Options) return Response
-            .setMessage("What are you looking for doesn't exists.")
-            .setStatus(204)
-            .send();
-
         return Response
             .setMessage("What are you looking for doesn't exists.")
-            .setStatus(404)
+            .setStatus(request.method === HttpMethodEnum.Options ? 204 : 404)
             .send();
     }
 }

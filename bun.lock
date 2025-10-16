@@ -4,8 +4,8 @@
     "": {
       "name": "bejibun",
       "dependencies": {
-        "@bejibun/core": "^0.1.35",
-        "@bejibun/redis": "^0.1.22",
+        "@bejibun/core": "^0.1.36",
+        "@bejibun/redis": "^0.1.24",
         "knex": "^3.1.0",
         "luxon": "^3.7.2",
         "objection": "^3.1.5",
@@ -23,9 +23,15 @@
     },
   },
   "packages": {
-    "@bejibun/core": ["@bejibun/core@0.1.35", "", { "dependencies": { "@vinejs/vine": "^3.0.1", "chalk": "^5.6.2", "knex": "^3.1.0", "luxon": "^3.7.2", "objection": "^3.1.5", "pg": "^8.16.3" } }, "sha512-prXFOHPynRkkBjDQssRRIBiPlBkhl8XSyATMQS0XlGQoTfB2tcuJs1882HMkiEpuGEnHKJgnUHK+Qri37lprHw=="],
+    "@bejibun/core": ["@bejibun/core@0.1.36", "", { "dependencies": { "@bejibun/cors": "^0.1.0", "@bejibun/logger": "^0.1.13", "@bejibun/utils": "^0.1.0", "@vinejs/vine": "^3.0.1", "chalk": "^5.6.2", "knex": "^3.1.0", "luxon": "^3.7.2", "objection": "^3.1.5", "pg": "^8.16.3" } }, "sha512-OguRXGhKVhTrD7+rmYCEVGd3DV5i/IyTDQduJHqSGEmipMVUkxpLiortRvWC/b6MaHp1bgsCFLWQmj0gSDrojw=="],
 
-    "@bejibun/redis": ["@bejibun/redis@0.1.22", "", { "dependencies": { "@bejibun/core": "^0.1.35" } }, "sha512-uTfMvyFBB25rpemlVRM2vQy7fS8zGKv68LWx0x3/hVwxS7xHSZbmaRYGKut/r5t62TjcxyI2MrG6Oh11W5pviQ=="],
+    "@bejibun/cors": ["@bejibun/cors@0.1.0", "", { "dependencies": { "@bejibun/utils": "^0.1.0" } }, "sha512-tyUraDQkhxjbKPBgo+QnY9ry7t+sJ9j4v8Fwe4kPk++S1P2LpKDBw/5XlBtN/jgHbrfSz1Dor7ENeJsUAuMlYQ=="],
+
+    "@bejibun/logger": ["@bejibun/logger@0.1.13", "", { "dependencies": { "@bejibun/utils": "^0.1.0", "chalk": "^5.6.2", "luxon": "^3.7.2" } }, "sha512-Vq17rFd10P/jtUdUHVNOP+cdHnMjobgw5t4rQ4iF/vPtS/qtyvBJN6rkmpL+4mtAquVYOdJCycZtk7cSdXhpGw=="],
+
+    "@bejibun/redis": ["@bejibun/redis@0.1.24", "", { "dependencies": { "@bejibun/logger": "^0.1.13", "@bejibun/utils": "^0.1.0" } }, "sha512-nhTIydIvrmOWeyQY7Mlq7z5tfvYaJhCQeDgcFZ8MkcJIfXw/0V8/XYbE4ka6joJOfA8E7IzeBNRiJ2N/BEV4fQ=="],
+
+    "@bejibun/utils": ["@bejibun/utils@0.1.0", "", {}, "sha512-zH9Sxo1C+y8rzLTf5/t78HfDYp8C34d+gsEzbo98OKKwI9so37ljdz2LDlXxDinp3lDBi9r/l/EmkNLECfP10g=="],
 
     "@poppinss/macroable": ["@poppinss/macroable@1.1.0", "", {}, "sha512-y/YKzZDuG8XrpXpM7Z1RdQpiIc0MAKyva24Ux1PB4aI7RiSI/79K8JVDcdyubriTm7vJ1LhFs8CrZpmPnx/8Pw=="],
 
