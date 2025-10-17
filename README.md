@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="https://github.com/crenata/bejibun/blob/master/public/images/bejibun.png?raw=true" width="150" alt="Bejibun" />
+
 ![GitHub top language](https://img.shields.io/github/languages/top/crenata/bejibun)
 ![GitHub all releases](https://img.shields.io/github/downloads/crenata/bejibun/total)
 ![GitHub issues](https://img.shields.io/github/issues/crenata/bejibun)
