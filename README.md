@@ -485,7 +485,7 @@ Any commands for development
 Usage: ace [options] [command]
 
 Ace for your commander
-Author: Acacia Malaccensis <acacia.malaccensis@gmail.com>
+Author: Havea Crenata <havea.crenata@gmail.com>
 
 Options:
   -v, --version            Show the current version
