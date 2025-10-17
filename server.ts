@@ -1,3 +1,4 @@
+import Logger from "@bejibun/logger";
 import ExceptionHandler from "@/app/exceptions/handler";
 import index from "@/public/index.html";
 import api from "@/routes/api";
@@ -23,4 +24,4 @@ const server = Bun.serve({
     }
 });
 
-console.log(`🚀 Server running at ${server.url}`);
+Logger.info(`🚀 Server running at ${server.url}`);

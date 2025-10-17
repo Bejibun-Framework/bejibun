@@ -1,8 +1,8 @@
-import {defineValue} from "@bejibun/core";
-import HttpMethodEnum from "@bejibun/core/enums/HttpMethodEnum";
+import {defineValue} from "@bejibun/utils";
 import ModelNotFoundException from "@bejibun/core/exceptions/ModelNotFoundException";
 import ValidatorException from "@bejibun/core/exceptions/ValidatorException";
 import Response from "@bejibun/core/facades/Response";
+import HttpMethodEnum from "@bejibun/utils/enums/HttpMethodEnum";
 import {BunRequest, ErrorLike} from "bun";
 import {ValidationError} from "objection";
 

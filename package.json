@@ -18,19 +18,19 @@
         "start": "NODE_ENV=production bun server.ts"
     },
     "dependencies": {
-        "@bejibun/core": "^0.1.38",
-        "@bejibun/redis": "^0.1.24",
+        "@bejibun/core": "^0.1.39",
+        "@bejibun/redis": "^0.1.26",
         "knex": "^3.1.0",
         "luxon": "^3.7.2",
         "objection": "^3.1.5",
-        "react": "^19",
-        "react-dom": "^19"
+        "react": "^19.2.0",
+        "react-dom": "^19.2.0"
     },
     "devDependencies": {
         "@types/bun": "latest",
         "@types/luxon": "^3.7.1",
-        "@types/react": "^19",
-        "@types/react-dom": "^19",
+        "@types/react": "^19.2.2",
+        "@types/react-dom": "^19.2.2",
         "commander": "^14.0.1",
         "ora": "^9.0.0"
     }

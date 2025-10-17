@@ -96,6 +96,7 @@ Example :
 
 ```ts
 import type {HandlerType} from "@bejibun/core/types";
+import Logger from "@bejibun/logger";
 import {BunRequest} from "bun";
 
 export default class TestMiddleware {
@@ -105,7 +106,7 @@ export default class TestMiddleware {
 
     public handle(handler: HandlerType): HandlerType {
         return async (request: BunRequest) => {
-            console.log(`[TestMiddleware]: ${request.url}`);
+            Logger.setContext("TestMiddleware").debug(request.url);
 
             return handler(request);
         };

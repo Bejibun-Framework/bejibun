@@ -3,11 +3,28 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [v0.1.43](https://github.com/crenata/bejibun/compare/v0.1.42...v0.1.43) - 2025-10-18
+
+### 🩹 Fixes
+
+### 📖 Changes
+What's New :
+- Move `ace` into `@bejibun/core` package
+
+### ❤️Contributors
+- Havea Crenata ([@crenata](https://github.com/crenata))
+- Ghulje ([@ghulje](https://github.com/ghulje))
+
+**Full Changelog**: https://github.com/crenata/bejibun/blob/master/CHANGELOG.md
+
+---
+
 ## [v0.1.42](https://github.com/crenata/bejibun/compare/v0.1.41...v0.1.42) - 2025-10-14
 
 ### 🩹 Fixes
 
 ### 📖 Changes
+What's New :
 - Move base class into `@bejibun/core` package
 - Integrate with `@bejibun/core` package
 
@@ -24,6 +41,7 @@ All notable changes to this project will be documented in this file.
 ### 🩹 Fixes
 
 ### 📖 Changes
+What's New :
 - Move redis into `@bejibun/redis` package
 - Move enum, str, and some utils to `@bejibun/core` package
 
@@ -40,7 +58,7 @@ All notable changes to this project will be documented in this file.
 ### 🩹 Fixes
 
 ### 📖 Changes
-New Features :
+What's New :
 - Redis
 
 Available Redis :
@@ -70,7 +88,7 @@ Available Redis :
 ### 🩹 Fixes
 
 ### 📖 Changes
-New Features :
+What's New :
 - Adding router for http methods, e.g. `Router.get("get", "TestController@get")`
 - Now, router group support object and array
 
@@ -109,7 +127,7 @@ Refactors :
 ### 🩹 Fixes
 
 ### 📖 Changes
-New Feature :
+What's New :
 - Adding cors config
 - Handle cors routing for preflight
 

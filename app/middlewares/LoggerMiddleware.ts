@@ -1,4 +1,5 @@
 import type {HandlerType} from "@bejibun/core/types";
+import Logger from "@bejibun/logger";
 import {BunRequest} from "bun";
 import {DateTime} from "luxon";
 
@@ -9,7 +10,7 @@ export default class LoggerMiddleware {
 
     public handle(handler: HandlerType): HandlerType {
         return async (request: BunRequest) => {
-            console.log(`[LoggerMiddleware]: ${Math.floor(DateTime.now().toSeconds())}`);
+            Logger.setContext("LoggerMiddleware").debug(Math.floor(DateTime.now().toSeconds()));
 
             return handler(request);
         };
