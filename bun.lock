@@ -5,7 +5,7 @@
       "name": "bejibun",
       "dependencies": {
         "@bejibun/core": "^0.1.39",
-        "@bejibun/redis": "^0.1.25",
+        "@bejibun/redis": "^0.1.26",
         "knex": "^3.1.0",
         "luxon": "^3.7.2",
         "objection": "^3.1.5",
