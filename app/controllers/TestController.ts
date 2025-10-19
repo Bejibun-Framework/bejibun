@@ -1,8 +1,8 @@
 import type {RedisPipeline} from "@bejibun/redis/types";
+import type {BunRequest} from "bun";
 import BaseController from "@bejibun/core/bases/BaseController";
 import Logger from "@bejibun/logger";
 import Redis from "@bejibun/redis";
-import {BunRequest} from "bun";
 import TestModel from "@/app/models/TestModel";
 import TestValidator from "@/app/validators/TestValidator";
 

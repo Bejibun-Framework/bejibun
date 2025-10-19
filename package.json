@@ -18,7 +18,7 @@
         "start": "NODE_ENV=production bun server.ts"
     },
     "dependencies": {
-        "@bejibun/core": "^0.1.39",
+        "@bejibun/core": "^0.1.40",
         "@bejibun/redis": "^0.1.26",
         "knex": "^3.1.0",
         "luxon": "^3.7.2",

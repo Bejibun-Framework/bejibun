@@ -1,6 +1,6 @@
 import type {HandlerType} from "@bejibun/core/types";
+import type {BunRequest} from "bun";
 import Logger from "@bejibun/logger";
-import {BunRequest} from "bun";
 
 export default class TestMiddleware {
     public constructor() {

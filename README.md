@@ -29,8 +29,8 @@ Logical processes
 Example :
 
 ```ts
+import type {BunRequest} from "bun";
 import BaseController from "@bejibun/core/bases/BaseController";
-import {BunRequest} from "bun";
 
 export default class HelloController extends BaseController {
     public async hello(request: BunRequest): Promise<Response> {
@@ -98,8 +98,8 @@ Example :
 
 ```ts
 import type {HandlerType} from "@bejibun/core/types";
+import type {BunRequest} from "bun";
 import Logger from "@bejibun/logger";
-import {BunRequest} from "bun";
 
 export default class TestMiddleware {
     public constructor() {
@@ -196,8 +196,8 @@ export default class TestValidator extends BaseValidator {
 Usage :
 
 ```ts
+import type {BunRequest} from "bun";
 import BaseController from "@bejibun/core/bases/BaseController";
-import {BunRequest} from "bun";
 import TestModel from "@/app/models/TestModel";
 import TestValidator from "@/app/validators/TestValidator";
 
@@ -242,8 +242,8 @@ export default class TestModel extends BaseModel implements TestColumns {
 Example :
 
 ```ts
+import type {BunRequest} from "bun";
 import BaseController from "@bejibun/core/bases/BaseController";
-import {BunRequest} from "bun";
 import TestModel from "@/app/models/TestModel";
 
 export default class TestController extends BaseController {
@@ -259,8 +259,8 @@ export default class TestController extends BaseController {
 Example :
 
 ```ts
+import type {BunRequest} from "bun";
 import BaseController from "@bejibun/core/bases/BaseController";
-import {BunRequest} from "bun";
 import TestModel from "@/app/models/TestModel";
 import TestValidator from "@/app/validators/TestValidator";
 
@@ -280,8 +280,8 @@ export default class TestController extends BaseController {
 Example :
 
 ```ts
+import type {BunRequest} from "bun";
 import BaseController from "@bejibun/core/bases/BaseController";
-import {BunRequest} from "bun";
 import TestModel from "@/app/models/TestModel";
 import TestValidator from "@/app/validators/TestValidator";
 
@@ -303,8 +303,8 @@ export default class TestController extends BaseController {
 Example :
 
 ```ts
+import type {BunRequest} from "bun";
 import BaseController from "@bejibun/core/bases/BaseController";
-import {BunRequest} from "bun";
 import TestModel from "@/app/models/TestModel";
 import TestValidator from "@/app/validators/TestValidator";
 
@@ -327,8 +327,8 @@ export default class TestController extends BaseController {
 Example :
 
 ```ts
+import type {BunRequest} from "bun";
 import BaseController from "@bejibun/core/bases/BaseController";
-import {BunRequest} from "bun";
 import TestModel from "@/app/models/TestModel";
 import TestValidator from "@/app/validators/TestValidator";
 
@@ -348,8 +348,8 @@ export default class TestController extends BaseController {
 Example :
 
 ```ts
+import type {BunRequest} from "bun";
 import BaseController from "@bejibun/core/bases/BaseController";
-import {BunRequest} from "bun";
 import TestModel from "@/app/models/TestModel";
 import TestValidator from "@/app/validators/TestValidator";
 
@@ -369,8 +369,8 @@ export default class TestController extends BaseController {
 Example :
 
 ```ts
+import type {BunRequest} from "bun";
 import BaseController from "@bejibun/core/bases/BaseController";
-import {BunRequest} from "bun";
 import TestModel from "@/app/models/TestModel";
 
 export default class TestController extends BaseController {
@@ -386,8 +386,8 @@ export default class TestController extends BaseController {
 Example :
 
 ```ts
+import type {BunRequest} from "bun";
 import BaseController from "@bejibun/core/bases/BaseController";
-import {BunRequest} from "bun";
 import TestModel from "@/app/models/TestModel";
 
 export default class TestController extends BaseController {
@@ -403,8 +403,8 @@ export default class TestController extends BaseController {
 Example :
 
 ```ts
+import type {BunRequest} from "bun";
 import BaseController from "@bejibun/core/bases/BaseController";
-import {BunRequest} from "bun";
 import TestModel from "@/app/models/TestModel";
 
 export default class TestController extends BaseController {
@@ -640,6 +640,7 @@ bun start
 - [ ] Job Dispatch / Background Tasks
 - [ ] Rate Limiter
 - [ ] Cache (Redis)
+- [ ] S3 [Read Docs](https://bun.com/docs/api/s3)
   
 ## Backlog
 - [ ] Import Excel

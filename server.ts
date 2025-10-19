@@ -1,3 +1,4 @@
+import Router from "@bejibun/core/facades/Router";
 import Logger from "@bejibun/logger";
 import ExceptionHandler from "@/app/exceptions/handler";
 import index from "@/public/index.html";
@@ -18,10 +19,12 @@ const server = Bun.serve({
     port: process.env.APP_PORT,
 
     routes: {
+        ...Router.namespace("app/exceptions").any("/*", "handler@route"),
+
         "/": index,
 
         ...api
     }
 });
 
-Logger.info(`🚀 Server running at ${server.url}`);
+Logger.setContext("APP").info(`🚀 Server running at ${server.url.origin}`);
