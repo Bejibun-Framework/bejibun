@@ -3,11 +3,11 @@ import type {Knex} from "knex";
 const config: Knex.Config = {
     client: "pg",
     connection: {
-        host: process.env.DB_HOST,
-        port: process.env.DB_PORT,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
-        database: process.env.DB_DATABASE
+        host: Bun.env.DB_HOST,
+        port: Bun.env.DB_PORT,
+        user: Bun.env.DB_USER,
+        password: Bun.env.DB_PASSWORD,
+        database: Bun.env.DB_DATABASE
     },
     migrations: {
         extension: "ts",

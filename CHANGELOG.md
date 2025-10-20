@@ -3,6 +3,27 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [v0.1.45](https://github.com/crenata/bejibun/compare/v0.1.44...v0.1.45) - 2025-10-21
+
+### 🩹 Fixes
+
+### 📖 Changes
+What's New :
+- Move exception handler into `@bejibun/core` and extends to it
+- Move `server.ts` into `@bejibun/core`
+- Restructure routes directory
+
+Chore :
+- Rename `process.env` to `Bun.env`
+
+### ❤️Contributors
+- Havea Crenata ([@crenata](https://github.com/crenata))
+- Ghulje ([@ghulje](https://github.com/ghulje))
+
+**Full Changelog**: https://github.com/crenata/bejibun/blob/master/CHANGELOG.md
+
+---
+
 ## [v0.1.44](https://github.com/crenata/bejibun/compare/v0.1.43...v0.1.44) - 2025-10-19
 
 ### 🩹 Fixes
