@@ -3,12 +3,11 @@ import ModelNotFoundException from "@bejibun/core/exceptions/ModelNotFoundExcept
 import ValidatorException from "@bejibun/core/exceptions/ValidatorException";
 import Response from "@bejibun/core/facades/Response";
 import HttpMethodEnum from "@bejibun/utils/enums/HttpMethodEnum";
-import {BunRequest, ErrorLike} from "bun";
 import {ValidationError} from "objection";
 
 export default class ExceptionHandler {
     public handle(
-        error: ErrorLike |
+        error: Bun.ErrorLike |
             typeof ModelNotFoundException |
             typeof ValidatorException |
             ValidationError
@@ -32,7 +31,7 @@ export default class ExceptionHandler {
             .send();
     }
 
-    public route(request: BunRequest): globalThis.Response {
+    public route(request: Bun.BunRequest): globalThis.Response {
         return Response
             .setMessage("What are you looking for doesn't exists.")
             .setStatus(request.method === HttpMethodEnum.Options ? 204 : 404)

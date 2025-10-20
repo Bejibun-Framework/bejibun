@@ -1,5 +1,4 @@
 import type {HandlerType} from "@bejibun/core/types";
-import type {BunRequest} from "bun";
 import Logger from "@bejibun/logger";
 
 export default class TestMiddleware {
@@ -8,7 +7,7 @@ export default class TestMiddleware {
     }
 
     public handle(handler: HandlerType): HandlerType {
-        return async (request: BunRequest) => {
+        return async (request: Bun.BunRequest) => {
             Logger.setContext("TestMiddleware").debug(request.url);
 
             return handler(request);

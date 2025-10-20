@@ -1,5 +1,4 @@
 import type {RedisPipeline} from "@bejibun/redis/types";
-import type {BunRequest} from "bun";
 import BaseController from "@bejibun/core/bases/BaseController";
 import Logger from "@bejibun/logger";
 import Redis from "@bejibun/redis";
@@ -7,7 +6,7 @@ import TestModel from "@/app/models/TestModel";
 import TestValidator from "@/app/validators/TestValidator";
 
 export default class TestController extends BaseController {
-    public async redis(request: BunRequest): Promise<Response> {
+    public async redis(request: Bun.BunRequest): Promise<Response> {
         await Redis.set("redis", {hello: "world"});
         const redis = await Redis.get("redis");
 
@@ -33,13 +32,13 @@ export default class TestController extends BaseController {
         return super.response.setData({redis, connection, pipeline}).send();
     }
 
-    public async get(request: BunRequest): Promise<Response> {
+    public async get(request: Bun.BunRequest): Promise<Response> {
         const tests = await TestModel.all();
 
         return super.response.setData(tests).send();
     }
 
-    public async detail(request: BunRequest): Promise<Response> {
+    public async detail(request: Bun.BunRequest): Promise<Response> {
         const body = await super.parse(request);
         await super.validate(TestValidator.detail, body);
 
@@ -48,7 +47,7 @@ export default class TestController extends BaseController {
         return super.response.setData(test).send();
     }
 
-    public async add(request: BunRequest): Promise<Response> {
+    public async add(request: Bun.BunRequest): Promise<Response> {
         const body = await super.parse(request);
         await super.validate(TestValidator.add, body);
 
@@ -59,7 +58,7 @@ export default class TestController extends BaseController {
         return super.response.setData(tests).send();
     }
 
-    public async edit(request: BunRequest): Promise<Response> {
+    public async edit(request: Bun.BunRequest): Promise<Response> {
         const body = await super.parse(request);
         await super.validate(TestValidator.edit, body);
 
@@ -71,7 +70,7 @@ export default class TestController extends BaseController {
         return super.response.setData(tests).send();
     }
 
-    public async delete(request: BunRequest): Promise<Response> {
+    public async delete(request: Bun.BunRequest): Promise<Response> {
         const body = await super.parse(request);
         await super.validate(TestValidator.delete, body);
 
@@ -80,7 +79,7 @@ export default class TestController extends BaseController {
         return super.response.setData(tests).send();
     }
 
-    public async restore(request: BunRequest): Promise<Response> {
+    public async restore(request: Bun.BunRequest): Promise<Response> {
         const body = await super.parse(request);
         await super.validate(TestValidator.restore, body);
 

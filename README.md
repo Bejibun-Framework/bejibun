@@ -29,11 +29,10 @@ Logical processes
 Example :
 
 ```ts
-import type {BunRequest} from "bun";
 import BaseController from "@bejibun/core/bases/BaseController";
 
 export default class HelloController extends BaseController {
-    public async hello(request: BunRequest): Promise<Response> {
+    public async hello(request: Bun.BunRequest): Promise<Response> {
         return super.response.setData({
             message: "Hello, world!",
             method: request.method
@@ -53,12 +52,11 @@ import HttpMethodEnum from "@bejibun/core/enums/HttpMethodEnum";
 import ModelNotFoundException from "@bejibun/core/exceptions/ModelNotFoundException";
 import ValidatorException from "@bejibun/core/exceptions/ValidatorException";
 import Response from "@bejibun/core/facades/Response";
-import {BunRequest, ErrorLike} from "bun";
 import {ValidationError} from "objection";
 
 export default class ExceptionHandler {
     public handle(
-        error: ErrorLike |
+        error: Bun.ErrorLike |
             typeof ModelNotFoundException |
             typeof ValidatorException |
             ValidationError
@@ -82,7 +80,7 @@ export default class ExceptionHandler {
             .send();
     }
 
-    public route(request: BunRequest): globalThis.Response {
+    public route(request: Bun.BunRequest): globalThis.Response {
         return Response
             .setMessage("What are you looking for doesn't exists.")
             .setStatus(request.method === HttpMethodEnum.Options ? 204 : 404)
@@ -98,7 +96,6 @@ Example :
 
 ```ts
 import type {HandlerType} from "@bejibun/core/types";
-import type {BunRequest} from "bun";
 import Logger from "@bejibun/logger";
 
 export default class TestMiddleware {
@@ -107,7 +104,7 @@ export default class TestMiddleware {
     }
 
     public handle(handler: HandlerType): HandlerType {
-        return async (request: BunRequest) => {
+        return async (request: Bun.BunRequest) => {
             Logger.setContext("TestMiddleware").debug(request.url);
 
             return handler(request);
@@ -196,13 +193,12 @@ export default class TestValidator extends BaseValidator {
 Usage :
 
 ```ts
-import type {BunRequest} from "bun";
 import BaseController from "@bejibun/core/bases/BaseController";
 import TestModel from "@/app/models/TestModel";
 import TestValidator from "@/app/validators/TestValidator";
 
 export default class TestController extends BaseController {
-    public async detail(request: BunRequest): Promise<Response> {
+    public async detail(request: Bun.BunRequest): Promise<Response> {
         const body = await super.parse(request);
         await super.validate(TestValidator.detail, body);
 
@@ -242,12 +238,11 @@ export default class TestModel extends BaseModel implements TestColumns {
 Example :
 
 ```ts
-import type {BunRequest} from "bun";
 import BaseController from "@bejibun/core/bases/BaseController";
 import TestModel from "@/app/models/TestModel";
 
 export default class TestController extends BaseController {
-    public async get(request: BunRequest): Promise<Response> {
+    public async get(request: Bun.BunRequest): Promise<Response> {
         const tests = await TestModel.all();
 
         return super.response.setData(tests).send();
@@ -259,13 +254,12 @@ export default class TestController extends BaseController {
 Example :
 
 ```ts
-import type {BunRequest} from "bun";
 import BaseController from "@bejibun/core/bases/BaseController";
 import TestModel from "@/app/models/TestModel";
 import TestValidator from "@/app/validators/TestValidator";
 
 export default class TestController extends BaseController {
-    public async detail(request: BunRequest): Promise<Response> {
+    public async detail(request: Bun.BunRequest): Promise<Response> {
         const body = await super.parse(request);
         await super.validate(TestValidator.detail, body);
 
@@ -280,13 +274,12 @@ export default class TestController extends BaseController {
 Example :
 
 ```ts
-import type {BunRequest} from "bun";
 import BaseController from "@bejibun/core/bases/BaseController";
 import TestModel from "@/app/models/TestModel";
 import TestValidator from "@/app/validators/TestValidator";
 
 export default class TestController extends BaseController {
-    public async add(request: BunRequest): Promise<Response> {
+    public async add(request: Bun.BunRequest): Promise<Response> {
         const body = await super.parse(request);
         await super.validate(TestValidator.add, body);
 
@@ -303,13 +296,12 @@ export default class TestController extends BaseController {
 Example :
 
 ```ts
-import type {BunRequest} from "bun";
 import BaseController from "@bejibun/core/bases/BaseController";
 import TestModel from "@/app/models/TestModel";
 import TestValidator from "@/app/validators/TestValidator";
 
 export default class TestController extends BaseController {
-    public async edit(request: BunRequest): Promise<Response> {
+    public async edit(request: Bun.BunRequest): Promise<Response> {
         const body = await super.parse(request);
         await super.validate(TestValidator.edit, body);
 
@@ -327,13 +319,12 @@ export default class TestController extends BaseController {
 Example :
 
 ```ts
-import type {BunRequest} from "bun";
 import BaseController from "@bejibun/core/bases/BaseController";
 import TestModel from "@/app/models/TestModel";
 import TestValidator from "@/app/validators/TestValidator";
 
 export default class TestController extends BaseController {
-    public async delete(request: BunRequest): Promise<Response> {
+    public async delete(request: Bun.BunRequest): Promise<Response> {
         const body = await super.parse(request);
         await super.validate(TestValidator.delete, body);
 
@@ -348,13 +339,12 @@ export default class TestController extends BaseController {
 Example :
 
 ```ts
-import type {BunRequest} from "bun";
 import BaseController from "@bejibun/core/bases/BaseController";
 import TestModel from "@/app/models/TestModel";
 import TestValidator from "@/app/validators/TestValidator";
 
 export default class TestController extends BaseController {
-    public async delete(request: BunRequest): Promise<Response> {
+    public async delete(request: Bun.BunRequest): Promise<Response> {
         const body = await super.parse(request);
         await super.validate(TestValidator.delete, body);
 
@@ -369,12 +359,11 @@ export default class TestController extends BaseController {
 Example :
 
 ```ts
-import type {BunRequest} from "bun";
 import BaseController from "@bejibun/core/bases/BaseController";
 import TestModel from "@/app/models/TestModel";
 
 export default class TestController extends BaseController {
-    public async get(request: BunRequest): Promise<Response> {
+    public async get(request: Bun.BunRequest): Promise<Response> {
         const tests = await TestModel.withTrashed();
 
         return super.response.setData(tests).send();
@@ -386,12 +375,11 @@ export default class TestController extends BaseController {
 Example :
 
 ```ts
-import type {BunRequest} from "bun";
 import BaseController from "@bejibun/core/bases/BaseController";
 import TestModel from "@/app/models/TestModel";
 
 export default class TestController extends BaseController {
-    public async get(request: BunRequest): Promise<Response> {
+    public async get(request: Bun.BunRequest): Promise<Response> {
         const tests = await TestModel.onlyTrashed();
 
         return super.response.setData(tests).send();
@@ -403,12 +391,11 @@ export default class TestController extends BaseController {
 Example :
 
 ```ts
-import type {BunRequest} from "bun";
 import BaseController from "@bejibun/core/bases/BaseController";
 import TestModel from "@/app/models/TestModel";
 
 export default class TestController extends BaseController {
-    public async restore(request: BunRequest): Promise<Response> {
+    public async restore(request: Bun.BunRequest): Promise<Response> {
         const body = await super.parse(request);
         await super.validate(TestValidator.restore, body);
 
