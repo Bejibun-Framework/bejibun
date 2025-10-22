@@ -478,16 +478,20 @@ Ace for your commander
 Author: Havea Crenata <havea.crenata@gmail.com>
 
 Options:
-  -v, --version            Show the current version
-  -h, --help               display help for command
+  -v, --version                Show the current version
+  -h, --help                   display help for command
 
 Commands:
-  db:seed                  Run database seeders
-  migrate:fresh [options]  Rollback all migrations and re-run migrations
-  migrate:latest           Run latest migration
-  migrate:rollback         Rollback the latest migrations
-  migrate:status           List migrations status
-  help [command]           display help for command
+  db:seed                      Run database seeders
+  hello:world                  Run hello world
+  maintenance:down [options]   Turn app into maintenance mode
+  maintenance:up               Turn app into live mode
+  migrate:fresh [options]      Rollback all migrations and re-run migrations
+  migrate:latest               Run latest migration
+  migrate:rollback [options]   Rollback the latest migrations
+  migrate:status [options]     List migrations status
+  package:configure [options]  Configure package after installation
+  help [command]               display help for command
 
 Examples:
   $ bun ace --help
@@ -623,11 +627,12 @@ bun start
 - [ ] Authentication
 - [ ] Unit Tests
 - [ ] Mail Service
-- [ ] Maintenance Mode (Up and Down)
 - [ ] Job Dispatch / Background Tasks
 - [ ] Rate Limiter
 - [ ] Cache (Redis)
 - [ ] S3 [Read Docs](https://bun.com/docs/api/s3)
+- [ ] Ace install package configure
+- [ ] Implement package provider (commands)
   
 ## Backlog
 - [ ] Import Excel
