@@ -484,6 +484,7 @@ Options:
 Commands:
   db:seed                      Run database seeders
   hello:world                  Run hello world
+  install <packages...>        Install package dependencies
   maintenance:down [options]   Turn app into maintenance mode
   maintenance:up               Turn app into live mode
   migrate:fresh [options]      Rollback all migrations and re-run migrations
@@ -631,8 +632,6 @@ bun start
 - [ ] Rate Limiter
 - [ ] Cache (Redis)
 - [ ] S3 [Read Docs](https://bun.com/docs/api/s3)
-- [ ] Ace install package configure
-- [ ] Implement package provider (commands)
   
 ## Backlog
 - [ ] Import Excel
