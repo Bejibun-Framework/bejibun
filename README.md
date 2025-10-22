@@ -624,14 +624,54 @@ bun dev
 bun start
 ```
 
+## What's Done
+- [x] Controller
+- [x] Exception Handler
+- [x] Middleware
+- [x] Database
+    - [x] Model
+    - [x] Migration
+    - [x] Seeder
+- [x] Validator
+- [x] Command
+    - [x] Database
+        - [x] `db:seed`
+        - [x] `migrate:fresh`
+        - [x] `migrate:latest`
+        - [x] `migrate:rollback`
+        - [x] `migrate:status`
+    - [x] Maintenance
+        - [x] `maintenance:down`
+        - [x] `maintenance:up`
+    - [x] Package
+        - [x] `install <packages...>`
+        - [x] `package:configure --package=...`
+- [x] Routing
+- [x] Response
+- [x] Cors
+- [x] Logger
+- [x] Redis
+
 ## Upcoming Features
+- [ ] Command
+    - [ ] External package can add Command
+    - [ ] `make:command`
+    - [ ] `make:controller`
+    - [ ] `make:middleware`
+    - [ ] `make:model`
+    - [ ] `make:validator`
+    - [ ] `make:job`
 - [ ] Authentication
-- [ ] Unit Tests
+- [ ] Unit Test
 - [ ] Mail Service
+    - [ ] Sendgrid
+    - [ ] Mailjet
 - [ ] Job Dispatch / Background Tasks
 - [ ] Rate Limiter
 - [ ] Cache (Redis)
-- [ ] S3 [Read Docs](https://bun.com/docs/api/s3)
+- [ ] Storage
+    - [ ] Local
+    - [ ] S3 [Read Docs](https://bun.com/docs/api/s3)
   
 ## Backlog
 - [ ] Import Excel
