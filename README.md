@@ -47,44 +47,12 @@ Handle any incoming errors
 Example :
 
 ```ts
-import {defineValue} from "@bejibun/core";
-import HttpMethodEnum from "@bejibun/core/enums/HttpMethodEnum";
-import ModelNotFoundException from "@bejibun/core/exceptions/ModelNotFoundException";
-import ValidatorException from "@bejibun/core/exceptions/ValidatorException";
-import Response from "@bejibun/core/facades/Response";
-import {ValidationError} from "objection";
+import ExceptionHandler from "@bejibun/core/exceptions/ExceptionHandler";
 
-export default class ExceptionHandler {
-    public handle(
-        error: Bun.ErrorLike |
-            typeof ModelNotFoundException |
-            typeof ValidatorException |
-            ValidationError
-    ): globalThis.Response {
-        if (
-            error instanceof ModelNotFoundException ||
-            error instanceof ValidatorException
-        ) return Response
-            .setMessage(error.message)
-            .setStatus(error.code)
-            .send();
-
-        if (error instanceof ValidationError) return Response
-            .setMessage(error.message)
-            .setStatus(error.statusCode)
-            .send();
-
-        return Response
-            .setMessage(defineValue(error.message, "Internal server error."))
-            .setStatus(500)
-            .send();
-    }
-
-    public route(request: Bun.BunRequest): globalThis.Response {
-        return Response
-            .setMessage("What are you looking for doesn't exists.")
-            .setStatus(request.method === HttpMethodEnum.Options ? 204 : 404)
-            .send();
+export default class Handler extends ExceptionHandler {
+    public handle(error: any): globalThis.Response {
+        // Your code goes here
+        return super.handle(error);
     }
 }
 ```
@@ -99,10 +67,6 @@ import type {HandlerType} from "@bejibun/core/types";
 import Logger from "@bejibun/logger";
 
 export default class TestMiddleware {
-    public constructor() {
-        //
-    }
-
     public handle(handler: HandlerType): HandlerType {
         return async (request: Bun.BunRequest) => {
             Logger.setContext("TestMiddleware").debug(request.url);
@@ -446,10 +410,13 @@ export async function seed(knex: Knex): Promise<void> {
 ```
 
 ### Public
-For public assets
+For public assets and Frontend use.
 
 ### Resources
-- Views
+
+#### Views
+
+Currently, used for frontend initiation.
 
 ### Bootstrap
 Any startup loads
@@ -633,6 +600,10 @@ bun start
     - [x] Migration
     - [x] Seeder
 - [x] Validator
+    - [x] Vine as Base Validator
+    - [x] Vine with Database
+        - [x] `.exists()`
+        - [x] `.unique()`
 - [x] Command
     - [x] Database
         - [x] `db:seed`
@@ -664,9 +635,15 @@ bun start
 - [ ] Authentication
 - [ ] Unit Test
 - [ ] Mail Service
-    - [ ] Sendgrid
-    - [ ] Mailjet
+    - [ ] Provider
+        - [ ] Sendgrid
+        - [ ] Mailjet
+    - [ ] Template
+        - [ ] Edge / Anything html with flexible params
 - [ ] Job Dispatch / Background Tasks
+- [ ] Scheduler / Cronjob
+    - [ ] Command
+        - [ ] `scheduler:run`
 - [ ] Rate Limiter
 - [ ] Cache (Redis)
 - [ ] Storage
