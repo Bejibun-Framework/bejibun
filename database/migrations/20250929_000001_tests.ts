@@ -1,7 +1,7 @@
 import type {Knex} from "knex";
 import TestModel from "@/app/models/TestModel";
 
-export function up(knex: Knex): void {
+export function up(knex: Knex): Knex.SchemaBuilder {
     return knex.schema.createTable(TestModel.tableName, (table: Knex.TableBuilder) => {
         table.bigIncrements("id");
         table.string("name");
@@ -10,6 +10,6 @@ export function up(knex: Knex): void {
     });
 }
 
-export function down(knex: Knex): void {
+export function down(knex: Knex): Knex.SchemaBuilder {
     return knex.schema.dropTable(TestModel.tableName);
 }

@@ -21,6 +21,131 @@ A typescript framework using Bun runtime.
 - [Luxon](https://moment.github.io/luxon) - Date and Time
 - [React](https://react.dev) - Homepage only
 
+## Usage
+
+### Installation
+If you don't have bun installed :
+
+```bash
+# Linux / Mac OS
+curl -fsSL https://bun.sh/install | bash
+
+# Windows
+powershell -c "irm bun.sh/install.ps1 | iex"
+```
+
+Setup the project.
+
+```bash
+bunx bejibun your-project
+```
+
+### Available Commands
+To see list of available commands, run.
+
+```bash
+bun ace
+bun ace help
+bun ace --h
+bun ace --help
+```
+
+To see help of specific command, run :
+
+```bash
+bun ace help migrate:latest
+bun ace migrate:latest --h
+bun ace migrate:latest --help
+```
+
+### Database
+
+#### Migrations
+To fresh or drop all table and re-run the migrations, run :
+
+```bash
+bun ace migrate:fresh
+```
+
+Example :
+
+```bash
+This will DROP ALL tables and re-run ALL migrations. Are you want to continue? (Y/N): Y
+
+✔ Rolled back all migrations
+✔ Batch 1 finished
+✔ 20250929_000001_tests.ts
+```
+
+To migrate the migrations, run :
+
+```bash
+bun ace migrate:latest
+```
+
+Example :
+
+```bash
+✔ Batch 1 finished
+✔ 20250929_000001_tests.ts
+```
+
+To rollback the migrations, run :
+
+```bash
+bun ace migrate:rollback
+```
+
+Example :
+
+```bash
+This will ROLLBACK latest migrations. Are you want to continue? (Y/N): Y
+
+✔ Batch 1 finished
+✔ 20250929_000001_tests.ts
+```
+
+To see migrations status, run :
+
+```bash
+bun ace migrate:status
+```
+
+Example :
+
+```bash
+✔ Completed Migrations :
+✔ No migrations were completed.
+
+✔ Pending Migrations :
+✔ 20250929_000001_tests.ts
+```
+
+#### Seeders
+To execute seeder, run :
+
+```bash
+bun ace db:seed
+```
+
+Example :
+
+```bash
+✔ Seeding finished
+✔ 20250929_000001_seeder_test.ts
+```
+
+### Run the Project
+To run the project, run :
+
+```bash
+# Development Mode
+bun dev
+
+# Production Mode
+bun start
+```
+
 ## Features
 
 ### Controllers
@@ -454,6 +579,7 @@ Commands:
   install <packages...>        Install package dependencies
   maintenance:down [options]   Turn app into maintenance mode
   maintenance:up               Turn app into live mode
+  make:migration <file>        Create a new migration file
   migrate:fresh [options]      Rollback all migrations and re-run migrations
   migrate:latest               Run latest migration
   migrate:rollback [options]   Rollback the latest migrations
@@ -465,130 +591,6 @@ Examples:
   $ bun ace --help
   $ bun ace --version
   $ bun ace migrate:latest
-```
-
-## Usage
-
-### Installation
-If you don't have bun installed :
-
-```bash
-# Linux / Mac OS
-curl -fsSL https://bun.sh/install | bash
-
-# Windows
-powershell -c "irm bun.sh/install.ps1 | iex"
-```
-Install project dependencies.
-
-```bash
-bun install
-```
-
-### Available Commands
-To see list of available commands, run.
-
-```bash
-bun ace
-bun ace help
-bun ace --h
-bun ace --help
-```
-
-To see help of specific command, run :
-
-```bash
-bun ace help migrate:latest
-bun ace migrate:latest --h
-bun ace migrate:latest --help
-```
-
-### Database
-
-#### Migrations
-To fresh or drop all table and re-run the migrations, run :
-
-```bash
-bun ace migrate:fresh
-```
-
-Example :
-
-```bash
-This will DROP ALL tables and re-run ALL migrations. Are you want to continue? (Y/N): Y
-
-✔ Rolled back all migrations
-✔ Batch 1 finished
-✔ 20250929_000001_tests.ts
-```
-
-To migrate the migrations, run :
-
-```bash
-bun ace migrate:latest
-```
-
-Example :
-
-```bash
-✔ Batch 1 finished
-✔ 20250929_000001_tests.ts
-```
-
-To rollback the migrations, run :
-
-```bash
-bun ace migrate:rollback
-```
-
-Example :
-
-```bash
-This will ROLLBACK latest migrations. Are you want to continue? (Y/N): Y
-
-✔ Batch 1 finished
-✔ 20250929_000001_tests.ts
-```
-
-To see migrations status, run :
-
-```bash
-bun ace migrate:status
-```
-
-Example :
-
-```bash
-✔ Completed Migrations :
-✔ No migrations were completed.
-
-✔ Pending Migrations :
-✔ 20250929_000001_tests.ts
-```
-
-#### Seeders
-To execute seeder, run :
-
-```bash
-bun ace db:seed
-```
-
-Example :
-
-```bash
-✔ Seeding finished
-✔ 20250929_000001_seeder_test.ts
-```
-
-### Run the Project
-To run the project, run :
-
-```bash
-# Development Mode
-bun dev
-
-# Production Mode
-bun start
 ```
 
 ## What's Done
@@ -645,6 +647,7 @@ bun start
     - [ ] Command
         - [ ] `scheduler:run`
 - [ ] Rate Limiter
+- [ ] Database Transaction
 - [ ] Cache (Redis)
 - [ ] Storage
     - [ ] Local
@@ -667,7 +670,7 @@ If you find this project helpful and want to support it, you can donate via PayP
 
 Or if you are prefer using crypto :
 
-| EVM | Solana |
-| --- | ------ |
+| EVM                                                                                                     | Solana                                                                                                  |
+| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
 | <img src="https://github.com/crenata/bejibun/blob/master/public/images/EVM.png?raw=true" width="150" /> | <img src="https://github.com/crenata/bejibun/blob/master/public/images/SOL.png?raw=true" width="150" /> |
-| 0xdABe8750061410D35cE52EB2a418c8cB004788B3 | GAnoyvy9p3QFyxikWDh9hA3fmSk2uiPLNWyQ579cckMn |
+| 0xdABe8750061410D35cE52EB2a418c8cB004788B3                                                              | GAnoyvy9p3QFyxikWDh9hA3fmSk2uiPLNWyQ579cckMn                                                            |
