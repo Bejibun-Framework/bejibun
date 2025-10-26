@@ -37,7 +37,7 @@ powershell -c "irm bun.sh/install.ps1 | iex"
 Setup the project.
 
 ```bash
-bunx bejibun your-project
+bunx @bejibun/cli your-project
 ```
 
 ### Available Commands
