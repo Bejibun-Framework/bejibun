@@ -579,7 +579,11 @@ Commands:
   install <packages...>        Install package dependencies
   maintenance:down [options]   Turn app into maintenance mode
   maintenance:up               Turn app into live mode
+  make:command <file>          Create a new command file
+  make:controller <file>       Create a new controller file
+  make:middleware <file>       Create a new middleware file
   make:migration <file>        Create a new migration file
+  make:seeder <file>           Create a new seeder file
   migrate:fresh [options]      Rollback all migrations and re-run migrations
   migrate:latest               Run latest migration
   migrate:rollback [options]   Rollback the latest migrations
@@ -594,6 +598,7 @@ Examples:
 ```
 
 ## What's Done
+- [x] Installation CLI `bunx @bejibun/cli your-project`
 - [x] Controller
 - [x] Exception Handler
 - [x] Middleware
@@ -607,6 +612,10 @@ Examples:
         - [x] `.exists()`
         - [x] `.unique()`
 - [x] Command
+    - [x] Scaffolding
+        - [x] `make:command`
+        - [x] `make:controller`
+        - [x] `make:middleware`
     - [x] Database
         - [x] `db:seed`
         - [x] `migrate:fresh`
@@ -628,9 +637,6 @@ Examples:
 ## Upcoming Features
 - [ ] Command
     - [ ] External package can add Command
-    - [ ] `make:command`
-    - [ ] `make:controller`
-    - [ ] `make:middleware`
     - [ ] `make:model`
     - [ ] `make:validator`
     - [ ] `make:job`
