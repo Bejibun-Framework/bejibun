@@ -583,7 +583,9 @@ Commands:
   make:controller <file>       Create a new controller file
   make:middleware <file>       Create a new middleware file
   make:migration <file>        Create a new migration file
+  make:model <file>            Create a new model file
   make:seeder <file>           Create a new seeder file
+  make:validator <file>        Create a new validator file
   migrate:fresh [options]      Rollback all migrations and re-run migrations
   migrate:latest               Run latest migration
   migrate:rollback [options]   Rollback the latest migrations
@@ -616,6 +618,8 @@ Examples:
         - [x] `make:command`
         - [x] `make:controller`
         - [x] `make:middleware`
+        - [x] `make:model`
+        - [x] `make:validator`
     - [x] Database
         - [x] `db:seed`
         - [x] `migrate:fresh`
@@ -637,8 +641,6 @@ Examples:
 ## Upcoming Features
 - [ ] Command
     - [ ] External package can add Command
-    - [ ] `make:model`
-    - [ ] `make:validator`
     - [ ] `make:job`
 - [ ] Authentication
 - [ ] Unit Test

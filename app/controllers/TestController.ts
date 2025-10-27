@@ -25,9 +25,10 @@ export default class TestController extends BaseController {
             Logger.setContext(channel).debug(message);
         });
         await Redis.publish("redis-subscribe", "Hai redis subscriber!");
-        setTimeout(async () => {
-            await subscriber.unsubscribe();
-        }, 500);
+
+        await Bun.sleep(500);
+
+        await subscriber.unsubscribe();
 
         return super.response.setData({redis, connection, pipeline}).send();
     }

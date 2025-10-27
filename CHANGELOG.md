@@ -3,6 +3,26 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [v0.1.46](https://github.com/crenata/bejibun/compare/v0.1.45...v0.1.46) - 2025-10-27
+
+### 🩹 Fixes
+
+### 📖 Changes
+What's New :
+- Adding `make:command <file>` to create a new command file
+- Adding `make:controller <file>` to create a new controller file
+- Adding `make:middleware <file>` to create a new middleware file
+- Adding `make:model <file>` to create a new model file
+- Adding `make:validator <file>` to create a new validator file
+
+### ❤️Contributors
+- Havea Crenata ([@crenata](https://github.com/crenata))
+- Ghulje ([@ghulje](https://github.com/ghulje))
+
+**Full Changelog**: https://github.com/crenata/bejibun/blob/master/CHANGELOG.md
+
+---
+
 ## [v0.1.45](https://github.com/crenata/bejibun/compare/v0.1.44...v0.1.45) - 2025-10-21
 
 ### 🩹 Fixes
