@@ -662,10 +662,11 @@ Examples:
     - [ ] S3 [Read Docs](https://bun.com/docs/api/s3)
   
 ## Backlog
+- [ ] Build own ORM based on Bun SQL
+- [ ] CSRF/XSS Protection
 - [ ] Import Excel
 - [ ] Export Excel
 - [ ] Export PDF
-- [ ] CSRF/XSS Protection
 
 ## Contributors
 - [Havea Crenata](mailto:havea.crenata@gmail.com)
