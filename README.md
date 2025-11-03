@@ -665,6 +665,8 @@ Examples:
   
 ## Backlog
 - [ ] Build own ORM based on Bun SQL
+- [ ] Web3 ? We'll work on this after the framework stable
+    - [ ] Share your idea to [Havea Crenata](mailto:havea.crenata@gmail.com)
 - [ ] CSRF/XSS Protection
 - [ ] Import Excel
 - [ ] Export Excel
@@ -675,11 +677,7 @@ Examples:
 
 ## ☕ Support / Donate
 
-If you find this project helpful and want to support it, you can donate via PayPal :
-
-[![Donate with PayPal](https://img.shields.io/badge/Donate-PayPal-blue.svg?logo=paypal)](https://paypal.me/hafiizhghulam)
-
-Or if you are prefer using crypto :
+If you find this project helpful and want to support it, you can donate via crypto :
 
 | EVM                                                                                                     | Solana                                                                                                  |
 | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
