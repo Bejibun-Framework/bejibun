@@ -15,6 +15,8 @@ A typescript framework using Bun runtime.
 
 X : [@bjbnframework](https://x.com/bjbnframework)
 
+CA : CQhbNnCGKfDaKXt8uE61i5DrBYJV7NPsCDD9vQgypump
+
 ## Tech Stacks
 - [Bun](https://bun.com) - Runtime
 - [Knex](https://knexjs.org) - Migrations & Seeders
