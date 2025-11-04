@@ -618,6 +618,7 @@ Examples:
         - [x] `.exists()`
         - [x] `.unique()`
 - [x] Command
+    - [x] External package can add Command
     - [x] Scaffolding
         - [x] `make:command`
         - [x] `make:controller`
@@ -644,7 +645,6 @@ Examples:
 
 ## Upcoming Features
 - [ ] Command
-    - [ ] External package can add Command
     - [ ] `make:job`
 - [ ] Authentication
 - [ ] Unit Test

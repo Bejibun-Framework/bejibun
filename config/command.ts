@@ -1,7 +1,8 @@
 const config: Array<Record<string, any>> = [
     /*
     {
-        path: "your-dependencies/directory/commands"
+        path: "your-dependencies/your-directory-commands",
+        path: "@bejibun/database/commands" // Example
     }
     */
 ];
