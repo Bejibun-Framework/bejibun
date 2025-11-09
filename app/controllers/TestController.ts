@@ -1,5 +1,6 @@
 import type {RedisPipeline} from "@bejibun/redis/types";
 import BaseController from "@bejibun/core/bases/BaseController";
+import Cache from "@bejibun/cache";
 import Logger from "@bejibun/logger";
 import Redis from "@bejibun/redis";
 import TestModel from "@/app/models/TestModel";
@@ -31,6 +32,40 @@ export default class TestController extends BaseController {
         await subscriber.unsubscribe();
 
         return super.response.setData({redis, connection, pipeline}).send();
+    }
+
+    public async cache(request: Bun.BunRequest): Promise<Response> {
+        const remember = await Cache.remember("test", () => {
+            return "Hello world"
+        });
+
+        const has = await Cache.has("test");
+
+        const get = await Cache.get("test");
+
+        const add = await Cache.add("test-add", "Lorem ipsum");
+        const addValue = await Cache.get("test-add");
+
+        const put = await Cache.put("test", "Hello bejibun");
+        const putValue = await Cache.get("test");
+
+        await Cache.forget("test");
+        const forgetValue = await Cache.get("test");
+
+        return super.response.setData({
+            remember,
+            has,
+            get,
+            add: {
+                status: add,
+                value: addValue
+            },
+            put: {
+                status: put,
+                value: putValue
+            },
+            forget: forgetValue
+        }).send();
     }
 
     public async get(request: Bun.BunRequest): Promise<Response> {

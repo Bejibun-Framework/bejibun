@@ -3,6 +3,29 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [v0.1.48](https://github.com/crenata/bejibun/compare/v0.1.47...v0.1.48) - 2025-11-09
+
+### 🩹 Fixes
+
+### 📖 Changes
+What's New :
+
+Cache with Redis, currently only redis.
+
+- `.remember()` Fetch data from cache if exists
+- `.has()` Check if cache exists
+- `.get()` Fetch data from cache
+- `.add()` Insert data to cache, will return false if cache is already exists
+- `.put()` Update cache data
+- `.forget()` Delete cache
+
+### ❤️Contributors
+- Havea Crenata ([@crenata](https://github.com/crenata))
+
+**Full Changelog**: https://github.com/crenata/bejibun/blob/master/CHANGELOG.md
+
+---
+
 ## [v0.1.47](https://github.com/crenata/bejibun/compare/v0.1.46...v0.1.47) - 2025-11-04
 
 ### 🩹 Fixes

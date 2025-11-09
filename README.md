@@ -13,6 +13,8 @@
 # Framework for Bun
 A typescript framework using Bun runtime.
 
+Docs : [bejibun.com](https://bejibun.com)
+
 X : [@bjbnframework](https://x.com/bjbnframework)
 
 CA : CQhbNnCGKfDaKXt8uE61i5DrBYJV7NPsCDD9vQgypump
@@ -564,6 +566,9 @@ Documentation : [@bejibun/redis](https://github.com/crenata/bejibun-redis/blob/m
 ### Cors
 Documentation : [@bejibun/cors](https://github.com/crenata/bejibun-cors/blob/master/README.md)
 
+### Cache
+Documentation : [@bejibun/cache](https://github.com/crenata/bejibun-cache/blob/master/README.md)
+
 ### Ace
 Any commands for development
 
@@ -660,7 +665,10 @@ Examples:
         - [ ] `scheduler:run`
 - [ ] Rate Limiter
 - [ ] Database Transaction
-- [ ] Cache (Redis)
+- [ ] Cache
+    - [ ] Expire Time
+    - [ ] Redis
+    - [ ] Memcached
 - [ ] Storage
     - [ ] Local
     - [ ] S3 [Read Docs](https://bun.com/docs/api/s3)
