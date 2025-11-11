@@ -652,6 +652,7 @@ Examples:
 - [ ] Command
     - [ ] `make:job`
 - [ ] Authentication
+- [ ] x402 Protocol
 - [ ] Unit Test
 - [ ] Mail Service
     - [ ] Provider
