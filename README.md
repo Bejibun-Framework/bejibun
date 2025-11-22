@@ -644,15 +644,16 @@ Examples:
         - [x] `package:configure --package=...`
 - [x] Routing
 - [x] Response
-- [x] Cors
+- [x] Cors ([@bejibun/cors](https://github.com/crenata/bejibun-cors/blob/master/README.md))
 - [x] Logger
-- [x] Redis
+- [x] Redis ([@bejibun/redis](https://github.com/crenata/bejibun-redis/blob/master/README.md))
+- [x] Cache ([@bejibun/cache](https://github.com/crenata/bejibun-cache/blob/master/README.md))
+- [x] x402 Protocol ([@bejibun/x402](https://github.com/crenata/bejibun-x402/blob/master/README.md))
 
 ## Upcoming Features
 - [ ] Command
     - [ ] `make:job`
 - [ ] Authentication
-- [ ] x402 Protocol
 - [ ] Unit Test
 - [ ] Mail Service
     - [ ] Provider
