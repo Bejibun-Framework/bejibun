@@ -3,6 +3,27 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [v0.1.49](https://github.com/crenata/bejibun/compare/v0.1.48...v0.1.49) - 2025-11-24
+
+### 🩹 Fixes
+
+### 📖 Changes
+What's New :
+- Adding `Rate Limiter` to limit any action in a certain time.
+
+Available `Rate Limiter` functions :
+- `.attempt(key, limit, callback, duration)` throw an error if limit reached.
+- `.tooManyAttempts(key, limit, duration)` method to check if limit has reached.
+- `.clear(key)` reset the counter.
+
+### ❤️Contributors
+- Havea Crenata ([@crenata](https://github.com/crenata))
+- Ghulje ([@ghulje](https://github.com/ghulje))
+
+**Full Changelog**: https://github.com/crenata/bejibun/blob/master/CHANGELOG.md
+
+---
+
 ## [v0.1.48](https://github.com/crenata/bejibun/compare/v0.1.47...v0.1.48) - 2025-11-09
 
 ### 🩹 Fixes
