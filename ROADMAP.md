@@ -18,6 +18,7 @@
 - [x] Redis ([@bejibun/redis](https://github.com/crenata/bejibun-redis/blob/master/README.md))
 - [x] Cache ([@bejibun/cache](https://github.com/crenata/bejibun-cache/blob/master/README.md))
 - [x] x402 Protocol ([@bejibun/x402](https://github.com/crenata/bejibun-x402/blob/master/README.md))
+- [x] Listing [Coingecko](https://www.coingecko.com/en/coins/bejibun)
   
 
 - [ ] Storage
@@ -27,6 +28,7 @@
 
 ### Q1
 - [ ] Website Phase 1
+- [ ] SEO
 - [ ] Authentication
 - [ ] Mail Service
 - [ ] Queue
@@ -36,6 +38,7 @@
 ### Q2
 - [ ] Website Phase 2
 - [ ] Scheduler / Cronjob
+- [ ] Database Transaction
 - [ ] Cache
     - [ ] Memcached
 - [ ] Storage
@@ -50,9 +53,12 @@
 - [ ] Database Supports
     - [ ] Mysql
     - [ ] MongoDB
+- [ ] Listing Coinmarketcap
   
 ### Q4
 - [ ] Build own ORM based on Bun SQL
+- [ ] Token Utility
+- [ ] Listing CEX
 
 
 #### This may change over time
