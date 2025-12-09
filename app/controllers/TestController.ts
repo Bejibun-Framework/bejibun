@@ -85,6 +85,7 @@ export default class TestController extends BaseController {
 
     public async add(request: Bun.BunRequest): Promise<Response> {
         const body = await super.parse(request);
+        console.log(body)
         await super.validate(TestValidator.add, body);
 
         const tests = await TestModel.create({
