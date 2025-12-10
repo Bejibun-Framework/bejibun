@@ -3,6 +3,21 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [v0.1.53](https://github.com/crenata/bejibun/compare/v0.1.52...v0.1.53) - 2025-12-10
+
+### 🩹 Fixes
+
+### 📖 Changes
+#### Upgrade [@bejibun/core](https://github.com/crenata/bejibun-core) to v0.1.60
+- Convert `ip` to safe filename for rate limiter.
+
+### ❤️Contributors
+- Ghulje ([@ghulje](https://github.com/ghulje))
+
+**Full Changelog**: https://github.com/crenata/bejibun/blob/master/CHANGELOG.md
+
+---
+
 ## [v0.1.52](https://github.com/crenata/bejibun/compare/v0.1.51...v0.1.52) - 2025-12-09
 
 ### 🩹 Fixes
