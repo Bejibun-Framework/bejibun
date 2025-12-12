@@ -651,6 +651,7 @@ Examples:
 - [x] Cache ([@bejibun/cache](https://github.com/crenata/bejibun-cache/blob/master/README.md))
     - [x] Expire Time
     - [x] Redis
+    - [x] File Scheme
 - [x] x402 Protocol ([@bejibun/x402](https://github.com/crenata/bejibun-x402/blob/master/README.md))
 
 ## Upcoming Features
