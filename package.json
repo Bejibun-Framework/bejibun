@@ -20,9 +20,9 @@
         "start": "NODE_ENV=production bun server.ts"
     },
     "dependencies": {
-        "@bejibun/core": "^0.1.60",
-        "react": "^19.2.1",
-        "react-dom": "^19.2.1"
+        "@bejibun/core": "^0.1.61",
+        "react": "^19.2.3",
+        "react-dom": "^19.2.3"
     },
     "devDependencies": {
         "@types/bun": "latest",
