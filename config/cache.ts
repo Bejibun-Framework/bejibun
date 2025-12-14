@@ -1,14 +1,17 @@
 import App from "@bejibun/app";
+import CacheDriverEnum from "@/enums/CacheDriverEnum";
 
 const config: Record<string, any> = {
     connection: "local",
 
     connections: {
         local: {
+            driver: CacheDriverEnum.Local,
             path: App.Path.storagePath("cache") // absolute path
         },
 
         redis: {
+            driver: CacheDriverEnum.Redis,
             host: Bun.env.REDIS_HOST,
             port: Bun.env.REDIS_PORT,
             password: Bun.env.REDIS_PASSWORD,
