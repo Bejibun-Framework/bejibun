@@ -1,5 +1,5 @@
 import App from "@bejibun/app";
-import CacheDriverEnum from "@/enums/CacheDriverEnum";
+import CacheDriverEnum from "@bejibun/cache/enums/CacheDriverEnum";
 
 const config: Record<string, any> = {
     connection: "local",
