@@ -5,7 +5,7 @@
     "": {
       "name": "bejibun",
       "dependencies": {
-        "@bejibun/core": "^0.1.62",
+        "@bejibun/core": "^0.1.63",
         "react": "^19.2.3",
         "react-dom": "^19.2.3",
       },
@@ -19,9 +19,9 @@
   "packages": {
     "@bejibun/app": ["@bejibun/app@0.1.22", "", { "dependencies": { "@bejibun/utils": "^0.1.1" } }, "sha512-z8es89IdxPm9DVrhpkp9X/XtulQo7oV2BTYLx5jqkj65peBrKR7zdPDj58edPDgj+zO4Fv76VMhUqGO9LjO5DA=="],
 
-    "@bejibun/cache": ["@bejibun/cache@0.1.16", "", { "dependencies": { "@bejibun/app": "^0.1.22", "@bejibun/logger": "^0.1.22", "@bejibun/redis": "^0.1.36", "@bejibun/utils": "^0.1.28" } }, "sha512-VBw90QQOEZf1mIDOdwEbyXsb+Eb7V5vgOUhZgLNU7jwtqLpC/Wnvr9BfZlAExuvN9ETO6BRRyKtzdveLvoo57g=="],
+    "@bejibun/cache": ["@bejibun/cache@0.1.17", "", { "dependencies": { "@bejibun/app": "^0.1.22", "@bejibun/logger": "^0.1.22", "@bejibun/redis": "^0.1.36", "@bejibun/utils": "^0.1.28" } }, "sha512-FIZqtJJ6HlpKR39/m1GfkOGTtuEpmAW53xxrtr8lThjU0Hbnsym5o8hcsZpOZz7oz6PyjSwsXeK2w9nvpyrngw=="],
 
-    "@bejibun/core": ["@bejibun/core@0.1.62", "", { "dependencies": { "@bejibun/app": "^0.1.22", "@bejibun/cache": "^0.1.16", "@bejibun/cors": "^0.1.16", "@bejibun/database": "^0.1.19", "@bejibun/logger": "^0.1.22", "@bejibun/utils": "^0.1.28", "@vinejs/vine": "^3.0.1", "commander": "^14.0.2", "luxon": "^3.7.2", "objection": "^3.1.5" } }, "sha512-5FjsMfk6ZpgajukQgGYY9PvdeQ4yJfa6OLvVzY8BnnDDWavz51Brqv3lQ2nXstPyN+WsSUZQFXstSHioHNXRyQ=="],
+    "@bejibun/core": ["@bejibun/core@0.1.63", "", { "dependencies": { "@bejibun/app": "^0.1.22", "@bejibun/cache": "^0.1.17", "@bejibun/cors": "^0.1.16", "@bejibun/database": "^0.1.19", "@bejibun/logger": "^0.1.22", "@bejibun/utils": "^0.1.28", "@vinejs/vine": "^3.0.1", "commander": "^14.0.2", "luxon": "^3.7.2", "objection": "^3.1.5" } }, "sha512-p327XHRdWljOFW4zAKIemhDGKdlB4wk5cZ3AjjtacW7oWvdnIuqh/gWnyn0hHiNVNvYee0n0B+siUoCUVDTDEw=="],
 
     "@bejibun/cors": ["@bejibun/cors@0.1.16", "", { "dependencies": { "@bejibun/app": "^0.1.19", "@bejibun/utils": "^0.1.14" } }, "sha512-kzlrExbhbowVWyVibe78uOp46lTXxu15r3GjK6IN9mT1aIE0l098Bek93wuJPDColIruLeucfXHjOaFplpUlwA=="],
 
