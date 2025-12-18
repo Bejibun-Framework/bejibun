@@ -560,6 +560,30 @@ Example :
 import "@bejibun/core/bootstrap";
 ```
 
+### Storage
+A facade for filesystem.
+
+```ts
+import Storage from "@bejibun/core/facades/Storage";
+
+await Storage.get("path/to/your/file.ext");
+await Storage.put("path/to/your/file.ext", "content");
+
+/* Process file with specified disk */
+await Storage.disk("public").get("path/to/your/file.ext");
+await Storage.disk("public").put("path/to/your/file.ext", "content");
+
+/* Create a new disk at runtime */
+await Storage.build({
+    driver: "local", // "local", DiskDriverEnum.Local
+    root: App.Path.storagePath("custom")
+}).get("path/to/your/file.ext");
+await Storage.build({
+    driver: "local", // "local", DiskDriverEnum.Local
+    root: App.Path.storagePath("custom")
+}).put("path/to/your/file.ext", "content");
+```
+
 ### Redis
 Documentation : [@bejibun/redis](https://github.com/crenata/bejibun-redis/blob/master/README.md)
 

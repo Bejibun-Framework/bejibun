@@ -14,8 +14,7 @@ export default class TestValidator extends BaseValidator {
     public static get add(): ValidatorType {
         return super.validator.compile(
             super.validator.object({
-                name: super.validator.string(),
-                amount: super.validator.number(),
+                name: super.validator.string()
             })
         );
     }
