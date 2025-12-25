@@ -704,6 +704,8 @@ Examples:
     - [x] Redis
     - [x] File Scheme
 - [x] x402 Protocol ([@bejibun/x402](https://github.com/crenata/bejibun-x402/blob/master/README.md))
+- [x] Storage
+    - [x] Local
 
 ## Upcoming Features
 - [ ] Command
@@ -724,7 +726,6 @@ Examples:
 - [ ] Cache
     - [ ] Memcached
 - [ ] Storage
-    - [ ] Local
     - [ ] S3 [Read Docs](https://bun.com/docs/api/s3)
   
 ## Backlog
