@@ -19,10 +19,8 @@
 - [x] Cache ([@bejibun/cache](https://github.com/crenata/bejibun-cache/blob/master/README.md))
 - [x] x402 Protocol ([@bejibun/x402](https://github.com/crenata/bejibun-x402/blob/master/README.md))
 - [x] Listing [Coingecko](https://www.coingecko.com/en/coins/bejibun)
-  
-
-- [ ] Storage
-    - [ ] Local
+- [x] Storage
+    - [x] Local
 
 ## 2026
 
