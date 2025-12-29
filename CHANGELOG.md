@@ -3,6 +3,22 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [v0.1.57](https://github.com/crenata/bejibun/compare/v0.1.56...v0.1.57) - 2025-12-29
+
+### 🩹 Fixes
+- Router namespace on group - [#6](https://github.com/crenata/bejibun-core/issues/6)
+
+### 📖 Changes
+#### Upgrade [@bejibun/core](https://github.com/crenata/bejibun-core) to v0.1.65
+- Fix router namespace on group
+
+### ❤️Contributors
+- Havea Crenata ([@crenata](https://github.com/crenata))
+
+**Full Changelog**: https://github.com/crenata/bejibun/blob/master/CHANGELOG.md
+
+---
+
 ## [v0.1.56](https://github.com/crenata/bejibun/compare/v0.1.53...v0.1.56) - 2025-12-25
 
 ### 🩹 Fixes
