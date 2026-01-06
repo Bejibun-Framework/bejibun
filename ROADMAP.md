@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://github.com/crenata/bejibun/blob/master/public/images/bejibun.png?raw=true" width="150" alt="Bejibun" />
+<img src="https://github.com/Bejibun-Framework/bejibun/blob/master/public/images/bejibun.png?raw=true" width="150" alt="Bejibun" />
 
 </div>
 
@@ -14,10 +14,10 @@
 - [x] Command
 - [x] Router
 - [x] Rate Limiter
-- [x] Cors ([@bejibun/cors](https://github.com/crenata/bejibun-cors/blob/master/README.md))
-- [x] Redis ([@bejibun/redis](https://github.com/crenata/bejibun-redis/blob/master/README.md))
-- [x] Cache ([@bejibun/cache](https://github.com/crenata/bejibun-cache/blob/master/README.md))
-- [x] x402 Protocol ([@bejibun/x402](https://github.com/crenata/bejibun-x402/blob/master/README.md))
+- [x] Cors ([@bejibun/cors](https://github.com/Bejibun-Framework/bejibun-cors/blob/master/README.md))
+- [x] Redis ([@bejibun/redis](https://github.com/Bejibun-Framework/bejibun-redis/blob/master/README.md))
+- [x] Cache ([@bejibun/cache](https://github.com/Bejibun-Framework/bejibun-cache/blob/master/README.md))
+- [x] x402 Protocol ([@bejibun/x402](https://github.com/Bejibun-Framework/bejibun-x402/blob/master/README.md))
 - [x] Listing [Coingecko](https://www.coingecko.com/en/coins/bejibun)
 - [x] Storage
     - [x] Local
