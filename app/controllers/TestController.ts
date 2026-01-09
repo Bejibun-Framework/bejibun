@@ -5,6 +5,7 @@ import Logger from "@bejibun/logger";
 import Redis from "@bejibun/redis";
 import TestModel from "@/app/models/TestModel";
 import TestValidator from "@/app/validators/TestValidator";
+import TestJob from "@/app/jobs/TestJob";
 
 export default class TestController extends BaseController {
     public async redis(request: Bun.BunRequest): Promise<Response> {
@@ -70,6 +71,8 @@ export default class TestController extends BaseController {
 
     public async get(request: Bun.BunRequest): Promise<Response> {
         const tests = await TestModel.all();
+
+        await TestJob.dispatch("hehe", "ntaps").send();
 
         return super.response.setData(tests).send();
     }
