@@ -717,7 +717,9 @@ Examples:
         - [ ] Mailjet
     - [ ] Template
         - [ ] Edge / Anything html with flexible params
-- [ ] Job Dispatch / Background Tasks
+- [ ] Queue
+    - [ ] Job Dispatch
+    - [ ] Job Worker
 - [ ] Scheduler / Cronjob
     - [ ] Command
         - [ ] `scheduler:run`
