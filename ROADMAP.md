@@ -25,13 +25,13 @@
 ## 2026
 
 ### Q1
-- [ ] Website Phase 1
+- [x] Website Phase 1
 - [ ] SEO
 - [ ] Authentication
 - [ ] Mail Service
 - [ ] Queue
-- [ ] Job Dispatch / Background Tasks
-    - [ ] Job Worker
+  - [ ] Job Dispatch
+  - [ ] Job Worker
   
 ### Q2
 - [ ] Website Phase 2
