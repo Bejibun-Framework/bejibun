@@ -1,9 +1,10 @@
-import {useRef, type FormEvent} from "react";
+import type {FormEvent} from "react";
+import {useRef} from "react";
 
 export function ApiTester() {
     const responseInputRef = useRef<HTMLTextAreaElement>(null);
 
-    const testEndpoint = async (e: FormEvent<HTMLFormElement>) => {
+    const testEndpoint: Function = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
 
         try {
