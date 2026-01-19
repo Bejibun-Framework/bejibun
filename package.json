@@ -1,6 +1,6 @@
 {
     "name": "@bejibun/bejibun",
-    "version": "0.1.58",
+    "version": "0.1.59",
     "private": true,
     "description": "A typescript framework using Bun runtime.",
     "author": "Havea Crenata <havea.crenata@gmail.com>",

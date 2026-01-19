@@ -26,12 +26,13 @@
 
 ### Q1
 - [x] Website Phase 1
-- [ ] SEO
-- [ ] Authentication
-- [ ] Mail Service
-- [ ] Queue
+- [x] Storage
+  - [x] S3 [Read Docs](https://bun.com/docs/api/s3)
+- [ ] Queue ([In Progress](https://github.com/Bejibun-Framework/bejibun-core/tree/queue))
   - [ ] Job Dispatch
   - [ ] Job Worker
+- [ ] Authentication
+- [ ] SEO
   
 ### Q2
 - [ ] Website Phase 2
@@ -41,7 +42,6 @@
     - [ ] Memcached
 - [ ] Storage
     - [ ] Disk Management
-    - [ ] S3 [Read Docs](https://bun.com/docs/api/s3)
     - [ ] Cross Disks
   
 ### Q3
@@ -54,6 +54,7 @@
 - [ ] Listing Coinmarketcap
   
 ### Q4
+- [ ] Mail Service
 - [ ] Build own ORM based on Bun SQL
 - [ ] Token Utility
 - [ ] Listing CEX
