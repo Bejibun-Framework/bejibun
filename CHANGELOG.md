@@ -3,6 +3,21 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [v0.1.60](https://github.com/Bejibun-Framework/bejibun/compare/v0.1.59...v0.1.60) - 2026-02-02
+
+### 🩹 Fixes
+
+### 📖 Changes
+#### Upgrade [@bejibun/core](https://github.com/Bejibun-Framework/bejibun-core) to v0.1.73
+- Fix infinite nested router
+
+### ❤️Contributors
+- Havea Crenata ([@crenata](https://github.com/crenata))
+
+**Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
+
+---
+
 ## [v0.1.59](https://github.com/Bejibun-Framework/bejibun/compare/v0.1.58...v0.1.59) - 2026-01-19
 
 ### 🩹 Fixes
