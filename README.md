@@ -606,6 +606,17 @@ await Storage.build({
 }).delete("path/to/your/file.ext");
 ```
 
+### Queue
+Run processes at background.
+
+```ts
+// Immediately
+await TestJob.dispatch(/*any params here*/).send();
+
+// With delay
+await TestJob.dispatch(/*any params here*/).delay(60 * 10 /*10 minutes*/).send();
+```
+
 ### Redis
 Documentation : [@bejibun/redis](https://github.com/Bejibun-Framework/bejibun-redis/blob/master/README.md)
 
