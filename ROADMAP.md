@@ -28,9 +28,9 @@
 - [x] Website Phase 1
 - [x] Storage
   - [x] S3 [Read Docs](https://bun.com/docs/api/s3)
-- [ ] Queue ([In Progress](https://github.com/Bejibun-Framework/bejibun-core/tree/queue))
-  - [ ] Job Dispatch
-  - [ ] Job Worker
+- [x] Queue
+  - [x] Job Dispatch
+  - [x] Queue Worker
 - [ ] Authentication
 - [ ] SEO
   
