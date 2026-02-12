@@ -8,6 +8,8 @@ export default class TestJob extends BaseJob {
      * @var $arguments Array<any>
      */
     public async handle(args: Array<any>): Promise<void> {
-        Logger.debug("Hello World!");
+        for (const arg of args) {
+            Logger.debug(`Hello ${arg}!`);
+        }
     }
 }

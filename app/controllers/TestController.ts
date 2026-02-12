@@ -69,10 +69,16 @@ export default class TestController extends BaseController {
         }).send();
     }
 
+    public async queue(request: Bun.BunRequest): Promise<Response> {
+        const body = await super.parse(request);
+
+        await TestJob.dispatch(body.name).send();
+
+        return super.response.setData().send();
+    }
+
     public async get(request: Bun.BunRequest): Promise<Response> {
         const tests = await TestModel.all();
-
-        await TestJob.dispatch("hehe", "ntaps").send();
 
         return super.response.setData(tests).send();
     }

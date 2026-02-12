@@ -10,6 +10,7 @@ export default Router.prefix("test")
     .group([
         Router.get("redis", "TestController@redis"),
         Router.get("cache", "TestController@cache"),
+        Router.get("queue", "TestController@queue"),
         Router.get("get", "TestController@get"),
         Router.get("detail/:id", "TestController@detail"),
         Router.post("add", "TestController@add"),
