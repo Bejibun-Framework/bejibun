@@ -5,7 +5,7 @@
     "": {
       "name": "bejibun",
       "dependencies": {
-        "@bejibun/core": "^0.2.1",
+        "@bejibun/core": "^0.2.11",
         "react": "^19.2.4",
         "react-dom": "^19.2.4",
       },
@@ -21,9 +21,9 @@
 
     "@bejibun/cache": ["@bejibun/cache@0.1.18", "", { "dependencies": { "@bejibun/app": "^0.1.22", "@bejibun/logger": "^0.1.22", "@bejibun/redis": "^0.1.36", "@bejibun/utils": "^0.1.28" } }, "sha512-7T053Sj9PkPVMsuACJboj30qStZYqp7X8QD8K5rnGkWU8sdkpQx2TgIQ7b0SrCon+YQnu1W//n8fyocWTj3lUg=="],
 
-    "@bejibun/core": ["@bejibun/core@0.2.1", "", { "dependencies": { "@bejibun/app": "^0.1.23", "@bejibun/cache": "^0.1.18", "@bejibun/cors": "^0.1.16", "@bejibun/database": "^0.1.19", "@bejibun/logger": "^0.1.22", "@bejibun/utils": "^0.1.28", "@vinejs/vine": "^4.3.0", "commander": "^14.0.3", "luxon": "^3.7.2", "objection": "^3.1.5" } }, "sha512-f7GX2W+Bgo8aXv8Ix6W5CmkZ6906SVpn1zwbr2JwvzO1eYZ5902Qfhxmm1NNAvbjRqP9Qp1u3nuBa++tUMiJWg=="],
+    "@bejibun/core": ["@bejibun/core@0.2.11", "", { "dependencies": { "@bejibun/app": "^0.1.23", "@bejibun/cache": "^0.1.18", "@bejibun/cors": "^0.1.17", "@bejibun/database": "^0.1.19", "@bejibun/logger": "^0.1.22", "@bejibun/utils": "^0.1.28", "@vinejs/vine": "^4.3.0", "commander": "^14.0.3", "luxon": "^3.7.2", "objection": "^3.1.5" } }, "sha512-rQar+wPi0H1Wp688zEVAFpfN4AcRD1gXtwKyjlP1UxcX95vS39E7AD2pfesuQmw9e5Vd1nfQ1/ail9eJbPC5hA=="],
 
-    "@bejibun/cors": ["@bejibun/cors@0.1.16", "", { "dependencies": { "@bejibun/app": "^0.1.19", "@bejibun/utils": "^0.1.14" } }, "sha512-kzlrExbhbowVWyVibe78uOp46lTXxu15r3GjK6IN9mT1aIE0l098Bek93wuJPDColIruLeucfXHjOaFplpUlwA=="],
+    "@bejibun/cors": ["@bejibun/cors@0.1.17", "", { "dependencies": { "@bejibun/app": "^0.1.22", "@bejibun/utils": "^0.1.28" } }, "sha512-c7HIHJggxiC5IHypNV0rdGVi8Hym7rYi6zrqAecrzStgNMmyrn1eyJm6rHMEx38S/BgpvywVsaWm1nWIz8qd0g=="],
 
     "@bejibun/database": ["@bejibun/database@0.1.19", "", { "dependencies": { "@bejibun/app": "^0.1.20", "@bejibun/logger": "^0.1.20", "@bejibun/utils": "^0.1.18", "knex": "^3.1.0", "ora": "^9.0.0", "pg": "^8.16.3" } }, "sha512-ldHAOgOkGJY7LYikq/1Zyp/P/AK7ytsjlSbQ1QDzy5PsEEu2CMS1rWaC68EIJJKhF/TgRnnA1vpsoVRHN5bn9A=="],
 
