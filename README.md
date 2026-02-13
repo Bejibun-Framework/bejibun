@@ -647,6 +647,7 @@ Commands:
   maintenance:up               Turn app into live mode
   make:command <file>          Create a new command file
   make:controller <file>       Create a new controller file
+  make:job <file>              Create a new job file
   make:middleware <file>       Create a new middleware file
   make:migration <file>        Create a new migration file
   make:model <file>            Create a new model file
@@ -657,6 +658,9 @@ Commands:
   migrate:rollback [options]   Rollback the latest migrations
   migrate:status [options]     List migrations status
   package:configure [options]  Configure package after installation
+  queue:flush                  Flush all of the failed queue jobs
+  queue:retry                  Retry a failed queue job
+  queue:work                   Start processing jobs on the queue as a daemon
   help [command]               display help for command
 
 Examples:
@@ -664,86 +668,6 @@ Examples:
   $ bun ace --version
   $ bun ace migrate:latest
 ```
-
-## What's Done
-- [x] Installation CLI `bunx @bejibun/cli your-project`
-- [x] Controller
-- [x] Exception Handler
-- [x] Middleware
-- [x] Database
-    - [x] Model
-    - [x] Migration
-    - [x] Seeder
-- [x] Validator
-    - [x] Vine as Base Validator
-    - [x] Vine with Database
-        - [x] `.exists()`
-        - [x] `.unique()`
-- [x] Command
-    - [x] External package can add Command
-    - [x] Scaffolding
-        - [x] `make:command`
-        - [x] `make:controller`
-        - [x] `make:middleware`
-        - [x] `make:model`
-        - [x] `make:validator`
-    - [x] Database
-        - [x] `db:seed`
-        - [x] `migrate:fresh`
-        - [x] `migrate:latest`
-        - [x] `migrate:rollback`
-        - [x] `migrate:status`
-    - [x] Maintenance
-        - [x] `maintenance:down`
-        - [x] `maintenance:up`
-    - [x] Package
-        - [x] `install <packages...>`
-        - [x] `package:configure --package=...`
-- [x] Routing
-- [x] Response
-- [x] Rate Limiter
-- [x] Cors ([@bejibun/cors](https://github.com/Bejibun-Framework/bejibun-cors/blob/master/README.md))
-- [x] Logger
-- [x] Redis ([@bejibun/redis](https://github.com/Bejibun-Framework/bejibun-redis/blob/master/README.md))
-- [x] Cache ([@bejibun/cache](https://github.com/Bejibun-Framework/bejibun-cache/blob/master/README.md))
-    - [x] Expire Time
-    - [x] Redis
-    - [x] File Scheme
-- [x] x402 Protocol ([@bejibun/x402](https://github.com/Bejibun-Framework/bejibun-x402/blob/master/README.md))
-- [x] Storage
-    - [x] Local
-
-## Upcoming Features
-- [ ] Command
-    - [ ] `make:job`
-- [ ] Authentication
-- [ ] Unit Test
-- [ ] Mail Service
-    - [ ] Provider
-        - [ ] Sendgrid
-        - [ ] Mailjet
-    - [ ] Template
-        - [ ] Edge / Anything html with flexible params
-- [ ] Queue
-    - [ ] Job Dispatch
-    - [ ] Job Worker
-- [ ] Scheduler / Cronjob
-    - [ ] Command
-        - [ ] `scheduler:run`
-- [ ] Database Transaction
-- [ ] Cache
-    - [ ] Memcached
-- [ ] Storage
-    - [ ] S3 [Read Docs](https://bun.com/docs/api/s3)
-  
-## Backlog
-- [ ] Build own ORM based on Bun SQL
-- [ ] Web3 ? We'll work on this after the framework stable
-    - [ ] Share your idea to [Havea Crenata](mailto:havea.crenata@gmail.com)
-- [ ] CSRF/XSS Protection
-- [ ] Import Excel
-- [ ] Export Excel
-- [ ] Export PDF
 
 ## Contributors
 - [Havea Crenata](mailto:havea.crenata@gmail.com)
