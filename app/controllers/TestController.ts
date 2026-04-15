@@ -8,6 +8,9 @@ import TestValidator from "@/app/validators/TestValidator";
 import TestJob from "@/app/jobs/TestJob";
 
 export default class TestController extends BaseController {
+    @ApiDoc({
+        description: "Redis"
+    })
     public async redis(request: Bun.BunRequest): Promise<Response> {
         await Redis.set("redis", {hello: "world"});
         const redis = await Redis.get("redis");
@@ -35,6 +38,9 @@ export default class TestController extends BaseController {
         return super.response.setData({redis, connection, pipeline}).send();
     }
 
+    @ApiDoc({
+        description: "Cache"
+    })
     public async cache(request: Bun.BunRequest): Promise<Response> {
         const remember = await Cache.remember("test", () => {
             return "Hello world"
@@ -69,6 +75,9 @@ export default class TestController extends BaseController {
         }).send();
     }
 
+    @ApiDoc({
+        description: "Queue"
+    })
     public async queue(request: Bun.BunRequest): Promise<Response> {
         const body = await super.parse(request);
 
@@ -77,12 +86,30 @@ export default class TestController extends BaseController {
         return super.response.setData().send();
     }
 
+    @ApiDoc({
+        description: "Get test list"
+    })
     public async get(request: Bun.BunRequest): Promise<Response> {
         const tests = await TestModel.all();
 
         return super.response.setData(tests).send();
     }
 
+    @ApiDoc({
+        description: "Get detail list",
+        request: {
+            params: [
+                {
+                    name: "id",
+                    in: "path",
+                    required: true,
+                    schema: {
+                        type: "number"
+                    }
+                }
+            ]
+        }
+    })
     public async detail(request: Bun.BunRequest): Promise<Response> {
         const body = await super.parse(request);
         await super.validate(TestValidator.detail, body);
@@ -92,6 +119,21 @@ export default class TestController extends BaseController {
         return super.response.setData(test).send();
     }
 
+    @ApiDoc({
+        description: "Add test data",
+        request: {
+            params: [
+                {
+                    name: "name",
+                    in: "query",
+                    required: true,
+                    schema: {
+                        type: "string"
+                    }
+                }
+            ]
+        }
+    })
     public async add(request: Bun.BunRequest): Promise<Response> {
         const body = await super.parse(request);
         await super.validate(TestValidator.add, body);
@@ -103,6 +145,29 @@ export default class TestController extends BaseController {
         return super.response.setData(tests).send();
     }
 
+    @ApiDoc({
+        description: "Update test data",
+        request: {
+            params: [
+                {
+                    name: "id",
+                    in: "path",
+                    required: true,
+                    schema: {
+                        type: "number"
+                    }
+                },
+                {
+                    name: "name",
+                    in: "path",
+                    required: true,
+                    schema: {
+                        type: "string"
+                    }
+                }
+            ]
+        }
+    })
     public async edit(request: Bun.BunRequest): Promise<Response> {
         const body = await super.parse(request);
         await super.validate(TestValidator.edit, body);
@@ -115,6 +180,21 @@ export default class TestController extends BaseController {
         return super.response.setData(tests).send();
     }
 
+    @ApiDoc({
+        description: "Delete test data",
+        request: {
+            params: [
+                {
+                    name: "id",
+                    in: "path",
+                    required: true,
+                    schema: {
+                        type: "number"
+                    }
+                }
+            ]
+        }
+    })
     public async delete(request: Bun.BunRequest): Promise<Response> {
         const body = await super.parse(request);
         await super.validate(TestValidator.delete, body);
@@ -124,6 +204,21 @@ export default class TestController extends BaseController {
         return super.response.setData(tests).send();
     }
 
+    @ApiDoc({
+        description: "Restore test data",
+        request: {
+            params: [
+                {
+                    name: "id",
+                    in: "path",
+                    required: true,
+                    schema: {
+                        type: "number"
+                    }
+                }
+            ]
+        }
+    })
     public async restore(request: Bun.BunRequest): Promise<Response> {
         const body = await super.parse(request);
         await super.validate(TestValidator.restore, body);
