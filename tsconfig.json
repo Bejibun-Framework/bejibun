@@ -9,6 +9,8 @@
         "skipLibCheck": true,
         "allowSyntheticDefaultImports": true,
         "forceConsistentCasingInFileNames": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
         "baseUrl": ".",
         "paths": {
             "@/*": ["./*"]

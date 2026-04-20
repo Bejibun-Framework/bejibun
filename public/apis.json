@@ -1,0 +1,267 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Route List",
+    "version": "0.2.16",
+    "description": "Bejibun Route List"
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:3000"
+    }
+  ],
+  "paths": {
+    "/api/hello/{name}": {
+      "get": {
+        "summary": "Hello Name",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Success",
+                  "status": 200
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/test/redis": {
+      "get": {
+        "summary": "Redis",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Success",
+                  "status": 200
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/test/cache": {
+      "get": {
+        "summary": "Cache",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Success",
+                  "status": 200
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/test/queue": {
+      "get": {
+        "summary": "Queue",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Success",
+                  "status": 200
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/test/get": {
+      "get": {
+        "summary": "Get test list",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Success",
+                  "status": 200
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/test/detail/{id}": {
+      "get": {
+        "summary": "Get detail list",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Success",
+                  "status": 200
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/test/add": {
+      "post": {
+        "summary": "Add test data",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Success",
+                  "status": 200
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/test/edit": {
+      "post": {
+        "summary": "Update test data",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Success",
+                  "status": 200
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/test/delete/{id}": {
+      "delete": {
+        "summary": "Delete test data",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Success",
+                  "status": 200
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/test/restore/{id}": {
+      "get": {
+        "summary": "Restore test data",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Success",
+                  "status": 200
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
