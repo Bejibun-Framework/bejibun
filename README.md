@@ -617,6 +617,50 @@ await TestJob.dispatch(/*any params here*/).send();
 await TestJob.dispatch(/*any params here*/).delay(60 * 10 /*10 minutes*/).send();
 ```
 
+### Decorator
+All available decorators.
+
+#### @ApiDoc
+```ts
+@ApiDoc({
+    description: "Hello with Name",
+    request: {
+        params: [
+            {
+                name: "name",
+                in: "path",
+                required: true,
+                schema: {
+                    type: "string"
+                }
+            }
+        ]
+    }
+})
+public async helloName(request: Bun.BunRequest): Promise<Response> {
+    const body = await super.parse(request);
+    await super.validate(HelloValidator.helloName, body);
+
+    return super.response.setData({
+        message: `Hello, ${body.name}!`,
+    }).send();
+}
+```
+
+### Scheduler
+Run code in period.
+```ts
+// commands/Kernel.ts
+import type Schedule from "@bejibun/core/facades/Schedule";
+
+export default class Kernel {
+    public schedule(schedule: Schedule): void {
+        // Your code goes here
+        schedule.command("hello:world").everyMinute();
+    }
+}
+```
+
 ### Redis
 Documentation : [@bejibun/redis](https://github.com/Bejibun-Framework/bejibun-redis/blob/master/README.md)
 
