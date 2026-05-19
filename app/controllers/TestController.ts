@@ -9,7 +9,8 @@ import TestJob from "@/app/jobs/TestJob";
 
 export default class TestController extends BaseController {
     @ApiDoc({
-        description: "Redis"
+        description: "Redis",
+        tags: ["Test"]
     })
     public async redis(request: Bun.BunRequest): Promise<Response> {
         await Redis.set("redis", {hello: "world"});
@@ -39,7 +40,8 @@ export default class TestController extends BaseController {
     }
 
     @ApiDoc({
-        description: "Cache"
+        description: "Cache",
+        tags: ["Test"]
     })
     public async cache(request: Bun.BunRequest): Promise<Response> {
         const remember = await Cache.remember("test", () => {
@@ -76,7 +78,8 @@ export default class TestController extends BaseController {
     }
 
     @ApiDoc({
-        description: "Queue"
+        description: "Queue",
+        tags: ["Test"]
     })
     public async queue(request: Bun.BunRequest): Promise<Response> {
         const body = await super.parse(request);
@@ -87,7 +90,8 @@ export default class TestController extends BaseController {
     }
 
     @ApiDoc({
-        description: "Get test list"
+        description: "Get test list",
+        tags: ["Test"]
     })
     public async get(request: Bun.BunRequest): Promise<Response> {
         const tests = await TestModel.all();
@@ -97,6 +101,7 @@ export default class TestController extends BaseController {
 
     @ApiDoc({
         description: "Get detail list",
+        tags: ["Test"],
         request: {
             params: [
                 {
@@ -121,6 +126,7 @@ export default class TestController extends BaseController {
 
     @ApiDoc({
         description: "Add test data",
+        tags: ["Test"],
         request: {
             params: [
                 {
@@ -147,6 +153,7 @@ export default class TestController extends BaseController {
 
     @ApiDoc({
         description: "Update test data",
+        tags: ["Test"],
         request: {
             params: [
                 {
@@ -182,6 +189,7 @@ export default class TestController extends BaseController {
 
     @ApiDoc({
         description: "Delete test data",
+        tags: ["Test"],
         request: {
             params: [
                 {
@@ -206,6 +214,7 @@ export default class TestController extends BaseController {
 
     @ApiDoc({
         description: "Restore test data",
+        tags: ["Test"],
         request: {
             params: [
                 {

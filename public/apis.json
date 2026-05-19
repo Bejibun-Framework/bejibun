@@ -1,8 +1,38 @@
 {
   "openapi": "3.0.0",
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-api-key"
+      },
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "security": [
+    {
+      "ApiKeyAuth": []
+    },
+    {
+      "BearerAuth": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Hello",
+      "description": "Dummy APIs"
+    },
+    {
+      "name": "Test",
+      "description": "Example APIs"
+    }
+  ],
   "info": {
     "title": "Route List",
-    "version": "0.3.12",
     "description": "Bejibun Route List"
   },
   "servers": [
@@ -11,9 +41,50 @@
     }
   ],
   "paths": {
+    "/api/hello": {
+      "get": {
+        "parameters": [],
+        "summary": "Hello",
+        "tags": [
+          "Hello"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Success",
+                  "status": 200
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [],
+        "summary": "Hello",
+        "tags": [
+          "Hello"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Success",
+                  "status": 200
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/hello/{name}": {
       "get": {
-        "summary": "Hello with Name",
         "parameters": [
           {
             "name": "name",
@@ -23,6 +94,10 @@
               "type": "string"
             }
           }
+        ],
+        "summary": "Hello with Name",
+        "tags": [
+          "Hello"
         ],
         "responses": {
           "200": {
@@ -41,8 +116,11 @@
     },
     "/api/test/redis": {
       "get": {
-        "summary": "Redis",
         "parameters": [],
+        "summary": "Redis",
+        "tags": [
+          "Test"
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -60,8 +138,11 @@
     },
     "/api/test/cache": {
       "get": {
-        "summary": "Cache",
         "parameters": [],
+        "summary": "Cache",
+        "tags": [
+          "Test"
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -79,8 +160,11 @@
     },
     "/api/test/queue": {
       "get": {
-        "summary": "Queue",
         "parameters": [],
+        "summary": "Queue",
+        "tags": [
+          "Test"
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -98,8 +182,11 @@
     },
     "/api/test/get": {
       "get": {
-        "summary": "Get test list",
         "parameters": [],
+        "summary": "Get test list",
+        "tags": [
+          "Test"
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -117,7 +204,6 @@
     },
     "/api/test/detail/{id}": {
       "get": {
-        "summary": "Get detail list",
         "parameters": [
           {
             "name": "id",
@@ -127,6 +213,10 @@
               "type": "number"
             }
           }
+        ],
+        "summary": "Get detail list",
+        "tags": [
+          "Test"
         ],
         "responses": {
           "200": {
@@ -145,7 +235,6 @@
     },
     "/api/test/add": {
       "post": {
-        "summary": "Add test data",
         "parameters": [
           {
             "name": "name",
@@ -155,6 +244,10 @@
               "type": "string"
             }
           }
+        ],
+        "summary": "Add test data",
+        "tags": [
+          "Test"
         ],
         "responses": {
           "200": {
@@ -173,7 +266,6 @@
     },
     "/api/test/edit": {
       "post": {
-        "summary": "Update test data",
         "parameters": [
           {
             "name": "id",
@@ -192,6 +284,10 @@
             }
           }
         ],
+        "summary": "Update test data",
+        "tags": [
+          "Test"
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -209,7 +305,6 @@
     },
     "/api/test/delete/{id}": {
       "delete": {
-        "summary": "Delete test data",
         "parameters": [
           {
             "name": "id",
@@ -219,6 +314,10 @@
               "type": "number"
             }
           }
+        ],
+        "summary": "Delete test data",
+        "tags": [
+          "Test"
         ],
         "responses": {
           "200": {
@@ -237,7 +336,6 @@
     },
     "/api/test/restore/{id}": {
       "get": {
-        "summary": "Restore test data",
         "parameters": [
           {
             "name": "id",
@@ -247,6 +345,10 @@
               "type": "number"
             }
           }
+        ],
+        "summary": "Restore test data",
+        "tags": [
+          "Test"
         ],
         "responses": {
           "200": {

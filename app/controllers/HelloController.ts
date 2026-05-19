@@ -3,7 +3,8 @@ import HelloValidator from "@/app/validators/HelloValidator";
 
 export default class HelloController extends BaseController {
     @ApiDoc({
-        description: "Hello"
+        description: "Hello",
+        tags: ["Hello"]
     })
     public async hello(request: Bun.BunRequest): Promise<Response> {
         return super.response.setData({
@@ -14,6 +15,7 @@ export default class HelloController extends BaseController {
 
     @ApiDoc({
         description: "Hello with Name",
+        tags: ["Hello"],
         request: {
             params: [
                 {

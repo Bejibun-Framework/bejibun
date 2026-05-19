@@ -3,6 +3,26 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [v0.3.14](https://github.com/Bejibun-Framework/bejibun/compare/v0.3.12...v0.3.14) - 2026-05-12
+
+### 🩹 Fixes
+- `Router.match()` and `Router.any()` not working - [#20](https://github.com/Bejibun-Framework/bejibun-core/pull/20)
+- Fix route list for multiple method - [#22](https://github.com/Bejibun-Framework/bejibun-core/pull/22)
+
+### 📖 Changes
+- Added `config/route.ts` for route list config
+- Added `bun ace route:list` for list all registered routes
+
+#### Upgrade [@bejibun/core](https://github.com/Bejibun-Framework/bejibun-core) to v0.3.14
+[https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.3.14](https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.3.14)
+
+### ❤️Contributors
+- Havea Crenata ([@crenata](https://github.com/crenata))
+
+**Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
+
+---
+
 ## [v0.3.13](https://github.com/Bejibun-Framework/bejibun/compare/v0.3.12...v0.3.13) - 2026-05-12
 
 ### 🩹 Fixes
