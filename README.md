@@ -661,6 +661,18 @@ export default class Kernel {
 }
 ```
 
+### Global Functions
+
+#### Config
+```ts
+config("disk.default");
+```
+
+#### Env
+```ts
+env("APP_KEY");
+```
+
 ### Redis
 Documentation : [@bejibun/redis](https://github.com/Bejibun-Framework/bejibun-redis/blob/master/README.md)
 

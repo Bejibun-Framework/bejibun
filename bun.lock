@@ -5,7 +5,7 @@
     "": {
       "name": "bejibun",
       "dependencies": {
-        "@bejibun/core": "^0.3.14",
+        "@bejibun/core": "^0.3.15",
         "react": "^19.2.6",
         "react-dom": "^19.2.6",
       },
@@ -21,7 +21,7 @@
 
     "@bejibun/cache": ["@bejibun/cache@0.1.22", "", { "dependencies": { "@bejibun/app": "^0.1.23", "@bejibun/logger": "^0.1.22", "@bejibun/redis": "^0.1.44", "@bejibun/utils": "^0.1.28" } }, "sha512-XfGQOWQ9YIP8ddzhJuWmFvRW5egzkFx9+4w4Wp1KuAe2j5FicK0cyzbSP8BrWKOFxw79UxzYf5qkl8VWhQwHIw=="],
 
-    "@bejibun/core": ["@bejibun/core@0.3.14", "", { "dependencies": { "@bejibun/app": "^0.1.23", "@bejibun/cache": "^0.1.22", "@bejibun/cors": "^0.1.17", "@bejibun/database": "^0.1.20", "@bejibun/logger": "^0.1.22", "@bejibun/utils": "^0.1.28", "@vinejs/vine": "^4.4.0", "commander": "^14.0.3", "cron-parser": "^5.5.0", "luxon": "^3.7.2", "objection": "^3.1.5", "reflect-metadata": "^0.2.2" } }, "sha512-u5g2gG0XsRY71XpoKFiNe5mJmM1qcZLn3MdDYA4NkOfMWfs4XxHQVt3ANIqO/CTaz7oFDYIz5Aybz8VRZLsodA=="],
+    "@bejibun/core": ["@bejibun/core@0.3.15", "", { "dependencies": { "@bejibun/app": "^0.1.23", "@bejibun/cache": "^0.1.22", "@bejibun/cors": "^0.1.17", "@bejibun/database": "^0.1.20", "@bejibun/logger": "^0.1.22", "@bejibun/utils": "^0.1.28", "@vinejs/vine": "^4.4.0", "commander": "^14.0.3", "cron-parser": "^5.5.0", "luxon": "^3.7.2", "objection": "^3.1.5", "reflect-metadata": "^0.2.2" } }, "sha512-Axs8YakPbTYCTLIlVqXWHJfFd+zwtL0jTsn9y05iAPvWe9+/b4Tl0TWdmq4YHIrftdUnpSVHR8OxF8hjKUL42Q=="],
 
     "@bejibun/cors": ["@bejibun/cors@0.1.17", "", { "dependencies": { "@bejibun/app": "^0.1.22", "@bejibun/utils": "^0.1.28" } }, "sha512-c7HIHJggxiC5IHypNV0rdGVi8Hym7rYi6zrqAecrzStgNMmyrn1eyJm6rHMEx38S/BgpvywVsaWm1nWIz8qd0g=="],
 

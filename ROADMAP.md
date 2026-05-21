@@ -31,12 +31,10 @@
 - [x] Queue
   - [x] Job Dispatch
   - [x] Queue Worker
-- [ ] Authentication
-- [ ] SEO
   
 ### Q2
-- [ ] Website Phase 2
-- [ ] Scheduler / Cronjob
+- [x] Scheduler / Cronjob
+- [x] Route List (Swagger)
 - [ ] Database Transaction
 - [ ] Cache
     - [ ] Memcached
@@ -45,6 +43,7 @@
     - [ ] Cross Disks
   
 ### Q3
+- [ ] Website Phase 2
 - [ ] Unit Test
 - [ ] Websocket
 - [ ] Model Relations
@@ -58,6 +57,8 @@
 - [ ] Build own ORM based on Bun SQL
 - [ ] Token Utility
 - [ ] Listing CEX
+- [ ] Authentication
+- [ ] SEO
 
 
 #### This may change over time
