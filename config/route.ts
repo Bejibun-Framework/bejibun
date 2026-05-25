@@ -37,11 +37,21 @@ const config: Record<string, any> = {
             ],
             info: {
                 title: "Route List",
-                description: "Bejibun Route List"
+                description: "Bejibun Route List",
+                contact: {
+                    name: "API Support",
+                    email: "havea@bejibun.com",
+                    url: "https://bejibun.com"
+                },
+                license: {
+                    name: "MIT",
+                    url: "https://github.com/Bejibun-Framework/bejibun/blob/master/LICENSE"
+                }
             },
             servers: [
                 {
-                    url: Bun.env.APP_URL
+                    url: Bun.env.APP_URL,
+                    description: `${Bun.env.APP_ENV} server`
                 }
             ],
             paths: {}

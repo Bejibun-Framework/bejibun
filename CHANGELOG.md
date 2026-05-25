@@ -3,6 +3,24 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [v0.3.16](https://github.com/Bejibun-Framework/bejibun/compare/v0.3.12...v0.3.16) - 2026-05-25
+
+### 🩹 Fixes
+
+### 📖 Changes
+- Swagger improvements - [#23](https://github.com/Bejibun-Framework/bejibun-core/pull/23)
+- Adds a sleep to `queue:work` if the job is empty to prevent access to the database
+
+#### Upgrade [@bejibun/core](https://github.com/Bejibun-Framework/bejibun-core) to v0.3.16
+[https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.3.16](https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.3.16)
+
+### ❤️Contributors
+- Havea Crenata ([@crenata](https://github.com/crenata))
+
+**Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
+
+---
+
 ## [v0.3.15](https://github.com/Bejibun-Framework/bejibun/compare/v0.3.12...v0.3.15) - 2026-05-21
 
 ### 🩹 Fixes

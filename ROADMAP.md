@@ -40,6 +40,7 @@
     - [ ] Memcached
 - [ ] Storage
     - [ ] Disk Management
+    - [ ] Archive [Read Docs](https://bun.com/docs/runtime/archive)
     - [ ] Cross Disks
   
 ### Q3
