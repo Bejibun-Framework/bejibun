@@ -53,6 +53,7 @@
   "paths": {
     "/api/hello": {
       "get": {
+        "deprecated": false,
         "parameters": [],
         "summary": "Hello",
         "tags": [
@@ -73,6 +74,7 @@
         }
       },
       "put": {
+        "deprecated": false,
         "parameters": [],
         "summary": "Hello",
         "tags": [
@@ -95,6 +97,7 @@
     },
     "/api/hello/{name}": {
       "get": {
+        "deprecated": false,
         "parameters": [
           {
             "name": "name",
@@ -126,6 +129,7 @@
     },
     "/api/test/redis": {
       "get": {
+        "deprecated": false,
         "parameters": [],
         "summary": "Redis",
         "tags": [
@@ -148,6 +152,7 @@
     },
     "/api/test/cache": {
       "get": {
+        "deprecated": false,
         "parameters": [],
         "summary": "Cache",
         "tags": [
@@ -170,6 +175,7 @@
     },
     "/api/test/queue": {
       "get": {
+        "deprecated": false,
         "parameters": [],
         "summary": "Queue",
         "tags": [
@@ -192,6 +198,7 @@
     },
     "/api/test/get": {
       "get": {
+        "deprecated": false,
         "parameters": [],
         "summary": "Get test list",
         "tags": [
@@ -214,6 +221,7 @@
     },
     "/api/test/detail/{id}": {
       "get": {
+        "deprecated": false,
         "parameters": [
           {
             "name": "id",
@@ -245,6 +253,7 @@
     },
     "/api/test/add": {
       "post": {
+        "deprecated": false,
         "parameters": [
           {
             "name": "name",
@@ -276,6 +285,7 @@
     },
     "/api/test/edit": {
       "post": {
+        "deprecated": false,
         "parameters": [
           {
             "name": "id",
@@ -315,6 +325,7 @@
     },
     "/api/test/delete/{id}": {
       "delete": {
+        "deprecated": false,
         "parameters": [
           {
             "name": "id",
@@ -346,6 +357,7 @@
     },
     "/api/test/restore/{id}": {
       "get": {
+        "deprecated": false,
         "parameters": [
           {
             "name": "id",
