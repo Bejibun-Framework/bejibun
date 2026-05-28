@@ -35,6 +35,7 @@
 ### Q2
 - [x] Scheduler / Cronjob
 - [x] Route List (Swagger)
+- [x] Websocket
 - [ ] Database Transaction
 - [ ] Cache
     - [ ] Memcached
@@ -46,7 +47,6 @@
 ### Q3
 - [ ] Website Phase 2
 - [ ] Unit Test
-- [ ] Websocket
 - [ ] Model Relations
 - [ ] Database Supports
     - [ ] Mysql

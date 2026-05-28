@@ -5,7 +5,7 @@
     "": {
       "name": "bejibun",
       "dependencies": {
-        "@bejibun/core": "^0.3.16",
+        "@bejibun/core": "^0.4.0",
         "react": "^19.2.6",
         "react-dom": "^19.2.6",
       },
@@ -21,7 +21,7 @@
 
     "@bejibun/cache": ["@bejibun/cache@0.1.22", "", { "dependencies": { "@bejibun/app": "^0.1.23", "@bejibun/logger": "^0.1.22", "@bejibun/redis": "^0.1.44", "@bejibun/utils": "^0.1.28" } }, "sha512-XfGQOWQ9YIP8ddzhJuWmFvRW5egzkFx9+4w4Wp1KuAe2j5FicK0cyzbSP8BrWKOFxw79UxzYf5qkl8VWhQwHIw=="],
 
-    "@bejibun/core": ["@bejibun/core@0.3.16", "", { "dependencies": { "@bejibun/app": "^0.1.23", "@bejibun/cache": "^0.1.22", "@bejibun/cors": "^0.1.17", "@bejibun/database": "^0.1.20", "@bejibun/logger": "^0.1.22", "@bejibun/utils": "^0.1.28", "@vinejs/vine": "^4.4.0", "commander": "^14.0.3", "cron-parser": "^5.5.0", "luxon": "^3.7.2", "objection": "^3.1.5", "reflect-metadata": "^0.2.2" } }, "sha512-vwje9k/rpNNU6t5ZBstwkrGRJb8Ii0idg1vQ2Eo6dylu7VfCpk55/8rzxmPf94c6Tjr4+HPJsQpKcfxfMSEu8Q=="],
+    "@bejibun/core": ["@bejibun/core@0.4.0", "", { "dependencies": { "@bejibun/app": "^0.1.23", "@bejibun/cache": "^0.1.22", "@bejibun/cors": "^0.1.17", "@bejibun/database": "^0.1.20", "@bejibun/logger": "^0.1.22", "@bejibun/utils": "^0.1.28", "@vinejs/vine": "^4.4.0", "commander": "^14.0.3", "cron-parser": "^5.5.0", "luxon": "^3.7.2", "objection": "^3.1.5", "reflect-metadata": "^0.2.2" } }, "sha512-+ZU1wWEGeQ62+3LQrhJ7iErspalIrFB6rxfLEk32z8zygHyQD6+FIVkIdotzglENpO9YhTXVjvthMhDzXVt7Kg=="],
 
     "@bejibun/cors": ["@bejibun/cors@0.1.17", "", { "dependencies": { "@bejibun/app": "^0.1.22", "@bejibun/utils": "^0.1.28" } }, "sha512-c7HIHJggxiC5IHypNV0rdGVi8Hym7rYi6zrqAecrzStgNMmyrn1eyJm6rHMEx38S/BgpvywVsaWm1nWIz8qd0g=="],
 
@@ -77,7 +77,7 @@
 
     "csstype": ["csstype@3.2.3", "", {}, "sha512-z1HGKcYy2xA8AGQfwrn0PAy+PB7X/GSj3UVJW9qKyn43xWa+gl5nXmU4qqLMRzWVLFC8KusUX8T/0kCiOYpAIQ=="],
 
-    "dayjs": ["dayjs@1.11.20", "", {}, "sha512-YbwwqR/uYpeoP4pu043q+LTDLFBLApUP6VxRihdfNTqu4ubqMlGDLd6ErXhEgsyvY0K6nCs7nggYumAN+9uEuQ=="],
+    "dayjs": ["dayjs@1.11.21", "", {}, "sha512-98IT+HOahAisibz/yjKbzuOBwYcjJ7BCLPzARyHiyEBmRz4fatF+KPJszEHXsGYjUG234aH/cOjW1wwTbKUZlA=="],
 
     "db-errors": ["db-errors@0.2.3", "", {}, "sha512-OOgqgDuCavHXjYSJoV2yGhv6SeG8nk42aoCSoyXLZUH7VwFG27rxbavU1z+VrZbZjphw5UkDQwUlD21MwZpUng=="],
 
