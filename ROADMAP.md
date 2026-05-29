@@ -27,7 +27,7 @@
 ### Q1
 - [x] Website Phase 1
 - [x] Storage
-  - [x] S3 [Read Docs](https://bun.com/docs/api/s3)
+  - [x] S3 ([Reference](https://bun.com/docs/api/s3))
 - [x] Queue
   - [x] Job Dispatch
   - [x] Queue Worker
@@ -35,13 +35,13 @@
 ### Q2
 - [x] Scheduler / Cronjob
 - [x] Route List (Swagger)
-- [x] Websocket
+- [x] WebSocket
 - [ ] Database Transaction
 - [ ] Cache
     - [ ] Memcached
 - [ ] Storage
     - [ ] Disk Management
-    - [ ] Archive [Read Docs](https://bun.com/docs/runtime/archive)
+    - [ ] Archive ([Reference](https://bun.com/docs/runtime/archive))
     - [ ] Cross Disks
   
 ### Q3
@@ -56,10 +56,10 @@
 ### Q4
 - [ ] Mail Service
 - [ ] Build own ORM based on Bun SQL
-- [ ] Token Utility
-- [ ] Listing CEX
 - [ ] Authentication
 - [ ] SEO
+- [ ] Token Utility
+- [ ] Listing CEX
 
 
 #### This may change over time
