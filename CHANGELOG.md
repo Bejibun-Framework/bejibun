@@ -3,6 +3,25 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [v0.4.2](https://github.com/Bejibun-Framework/bejibun/compare/v0.4.1...v0.4.2) - 2026-05-31
+
+### 🩹 Fixes
+
+### 📖 Changes
+- Added `bun test` to run tests in `/tests`
+- Added `.testsPath(path?: string)` path to `tests` directory
+- Added `.websocketsPath(path?: string)` path to `app/websockets` directory
+
+#### Upgrade [@bejibun/core](https://github.com/Bejibun-Framework/bejibun-core) to v0.4.2
+[https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.4.2](https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.4.2)
+
+### ❤️Contributors
+- Havea Crenata ([@crenata](https://github.com/crenata))
+
+**Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
+
+---
+
 ## [v0.4.1](https://github.com/Bejibun-Framework/bejibun/compare/v0.4.0...v0.4.1) - 2026-05-28
 
 ### 🩹 Fixes
