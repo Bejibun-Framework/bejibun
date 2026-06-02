@@ -1,6 +1,6 @@
 {
     "name": "@bejibun/bejibun",
-    "version": "0.4.22",
+    "version": "0.4.23",
     "private": true,
     "description": "A typescript framework using Bun runtime.",
     "author": "Havea Crenata <havea.crenata@gmail.com>",
@@ -20,13 +20,13 @@
         "start": "NODE_ENV=production bun server.ts"
     },
     "dependencies": {
-        "@bejibun/core": "^0.4.22",
-        "react": "^19.2.6",
-        "react-dom": "^19.2.6"
+        "@bejibun/core": "^0.4.23",
+        "react": "^19.2.7",
+        "react-dom": "^19.2.7"
     },
     "devDependencies": {
         "@types/bun": "latest",
-        "@types/react": "^19.2.15",
+        "@types/react": "^19.2.16",
         "@types/react-dom": "^19.2.3"
     }
 }
