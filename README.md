@@ -11,21 +11,60 @@
 </div>
 
 # Framework for Bun
-A typescript framework using Bun runtime.
+**A modern TypeScript framework powered by Bun.**
 
-Docs : [bejibun.com](https://bejibun.com)
+**Bejibun** is a high-performance framework built on the Bun runtime, following the proven **Model–View–Controller (MVC)** architecture.
+It provides a structured and scalable foundation for developing modern web applications and APIs while maintaining a strong focus
+on developer productivity and code maintainability.
 
-X : [@bjbnframework](https://x.com/bjbnframework)
+Designed for rapid application development, **Bejibun** includes a comprehensive set of built-in features such as database migrations,
+seeders, caching, CORS management, validation, and middleware support.
+These capabilities enable developers to build production-ready applications with minimal configuration.
 
-CA : CQhbNnCGKfDaKXt8uE61i5DrBYJV7NPsCDD9vQgypump
+The framework features a powerful Command Line Interface (CLI) that automates common development tasks through
+code generation and scaffolding tools. Developers can quickly generate controllers, models, middleware, migrations, seeders,
+validators, and other application components, significantly reducing boilerplate code and accelerating development workflows.
+
+**Bejibun** also includes application lifecycle management tools, including maintenance mode support,
+allowing applications to be seamlessly transitioned between live and maintenance states during deployments and system updates.
+
+By combining the speed of Bun with a clean MVC architecture and a robust developer experience,
+**Bejibun** empowers teams to build scalable, maintainable, and efficient backend services with confidence.
+
+**Documentation** : [bejibun.com](https://bejibun.com)
+
+**X (Twitter)** : [@bjbnframework](https://x.com/bjbnframework)
+
+**Contract Address** : CQhbNnCGKfDaKXt8uE61i5DrBYJV7NPsCDD9vQgypump
+
+---
 
 ## Tech Stacks
-- [Bun](https://bun.com) - Runtime
-- [Knex](https://knexjs.org) - Migrations & Seeders
-- [Objection](https://vincit.github.io/objection.js) - Model
-- [Vine](https://vinejs.dev) - Validator
-- [Luxon](https://moment.github.io/luxon) - Date and Time
-- [React](https://react.dev) - Homepage only
+- **[Bun](https://bun.com)** — JavaScript and TypeScript Runtime
+- **[Knex.js](https://knexjs.org)** — Database Migrations and Seeders
+- **[Objection.js](https://vincit.github.io/objection.js)** — ORM and Model Layer
+- **[Vine.js](https://vinejs.dev)** — Request Validation
+- **[Luxon](https://moment.github.io/luxon)** — Date and Time Management
+- **[React](https://react.dev)** — Project Website and Documentation Portal
+
+---
+
+## Key Features
+- MVC Architecture
+- TypeScript First
+- Built on Bun Runtime
+- Database Migrations & Seeders
+- Model ORM Integration
+- Validation System
+- Middleware Support
+- CORS Management
+- Caching System
+- CLI Scaffolding Tools
+- Maintenance Mode
+- Production-Ready Structure
+- Scalable and Maintainable Codebase
+
+---
 
 ## Usage
 
