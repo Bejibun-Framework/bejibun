@@ -35,7 +35,7 @@ By combining the speed of Bun with a clean MVC architecture and a robust develop
 
 **X (Twitter)** : [@bjbnframework](https://x.com/bjbnframework)
 
-**Contract Address** : CQhbNnCGKfDaKXt8uE61i5DrBYJV7NPsCDD9vQgypump
+**Contract Address** : [CQhbNnCGKfDaKXt8uE61i5DrBYJV7NPsCDD9vQgypump](https://solscan.io/token/CQhbNnCGKfDaKXt8uE61i5DrBYJV7NPsCDD9vQgypump)
 
 ---
 
@@ -58,9 +58,11 @@ By combining the speed of Bun with a clean MVC architecture and a robust develop
 - Validation System
 - Middleware Support
 - CORS Management
+- Storage Management
 - Caching System
 - CLI Scaffolding Tools
 - Maintenance Mode
+- X402 Protocol
 - Production-Ready Structure
 - Scalable and Maintainable Codebase
 
