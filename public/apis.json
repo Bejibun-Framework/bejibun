@@ -284,7 +284,7 @@
       }
     },
     "/api/test/edit": {
-      "post": {
+      "put": {
         "deprecated": false,
         "parameters": [
           {
