@@ -50,8 +50,8 @@ const config: Record<string, any> = {
             },
             servers: [
                 {
-                    url: Bun.env.APP_URL,
-                    description: `${Bun.env.APP_ENV} server`
+                    url: env("APP_URL"),
+                    description: `${env("APP_ENV")} server`
                 }
             ],
             paths: {}

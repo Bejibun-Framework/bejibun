@@ -2,7 +2,7 @@ import App from "@bejibun/app";
 import CacheDriverEnum from "@bejibun/cache/enums/CacheDriverEnum";
 
 const config: Record<string, any> = {
-    default: "local",
+    default: env("CACHE_DRIVER", "local"),
 
     connections: {
         local: {
@@ -12,10 +12,10 @@ const config: Record<string, any> = {
 
         redis: {
             driver: CacheDriverEnum.Redis,
-            host: Bun.env.REDIS_HOST,
-            port: Bun.env.REDIS_PORT,
-            password: Bun.env.REDIS_PASSWORD,
-            database: Bun.env.REDIS_DATABASE
+            host: env("REDIS_HOST"),
+            port: env("REDIS_PORT"),
+            password: env("REDIS_PASSWORD"),
+            database: env("REDIS_DATABASE")
         }
     }
 };
