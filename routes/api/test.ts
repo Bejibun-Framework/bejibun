@@ -11,10 +11,10 @@ export default Router.prefix("test")
         Router.get("redis", "TestController@redis"),
         Router.get("cache", "TestController@cache"),
         Router.get("queue", "TestController@queue"),
-        Router.get("get", "TestController@get"),
-        Router.get("detail/:id", "TestController@detail"),
-        Router.post("add", "TestController@add"),
-        Router.put("edit", "TestController@edit"),
-        Router.delete("delete/:id", "TestController@delete"),
-        Router.get("restore/:id", "TestController@restore")
+        Router.get("/", "TestController@index"),
+        Router.get("/:id", "TestController@show"),
+        Router.post("/", "TestController@store"),
+        Router.put("/:id", "TestController@update"),
+        Router.delete("/:id", "TestController@destroy"),
+        Router.patch("/:id", "TestController@restore")
     ]);

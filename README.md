@@ -200,7 +200,7 @@ Logical processes
 
 Example :
 
-```ts
+```ts app/controllers/HelloController.ts
 import BaseController from "@bejibun/core/bases/BaseController";
 
 export default class HelloController extends BaseController {
@@ -218,7 +218,7 @@ Handle any incoming errors
 
 Example :
 
-```ts
+```ts app/exceptions/handler.ts
 import ExceptionHandler from "@bejibun/core/exceptions/ExceptionHandler";
 
 export default class Handler extends ExceptionHandler {
@@ -234,7 +234,7 @@ Handle any request before forwarding to controller
 
 Example :
 
-```ts
+```ts app/middlewares/TestMiddleware.ts
 import type {HandlerType} from "@bejibun/core/types";
 import Logger from "@bejibun/logger";
 
@@ -251,7 +251,7 @@ export default class TestMiddleware {
 
 Usage :
 
-```ts
+```ts routes/api/test.ts
 import Router from "@bejibun/core/facades/Router";
 import YourController from "@/app/controllers/YourController";
 import TestMiddleware from "@/app/middlewares/TestMiddleware";
@@ -263,13 +263,12 @@ export default Router.prefix("test")
         new LoggerMiddleware()
     )
     .group([
-        Router.get("redis", "TestController@redis"),
-        Router.get("get", "TestController@get"),
-        Router.get("detail/:id", "TestController@detail"),
-        Router.post("add", "TestController@add"),
-        Router.put("edit", "TestController@edit"),
-        Router.delete("delete/:id", "TestController@delete"),
-        Router.get("restore/:id", "TestController@restore"),
+        Router.get("/", "TestController@index"),
+        Router.get("/:id", "TestController@show"),
+        Router.post("/", "TestController@store"),
+        Router.put("/:id", "TestController@update"),
+        Router.delete("/:id", "TestController@destroy"),
+        Router.patch("/:id", "TestController@restore"),
 
         Router.resource("path", YourController),
         Router.resource("path", YourController, {
@@ -286,32 +285,32 @@ Validate any incoming requests
 
 Example :
 
-```ts
+```ts app/validators/TestValidator.ts
 import type {ValidatorType} from "@bejibun/core/types/ValidatorType";
 import BaseValidator from "@bejibun/core/bases/BaseValidator";
 import TestModel from "@/app/models/TestModel";
 
 export default class TestValidator extends BaseValidator {
-    public static get detail(): ValidatorType {
+    public static get show(): ValidatorType {
         return super.validator.create({
             id: super.validator.number().min(1).exists(TestModel, "id")
         });
     }
 
-    public static get add(): ValidatorType {
+    public static get store(): ValidatorType {
         return super.validator.create({
             name: super.validator.string()
         });
     }
 
-    public static get edit(): ValidatorType {
+    public static get update(): ValidatorType {
         return super.validator.create({
             id: super.validator.number().min(1).exists(TestModel, "id"),
             name: super.validator.string()
         });
     }
 
-    public static get delete(): ValidatorType {
+    public static get destroy(): ValidatorType {
         return super.validator.create({
             id: super.validator.number().min(1).exists(TestModel, "id")
         });
@@ -327,15 +326,31 @@ export default class TestValidator extends BaseValidator {
 
 Usage :
 
-```ts
+```ts app/controllers/TestController.ts
 import BaseController from "@bejibun/core/bases/BaseController";
 import TestModel from "@/app/models/TestModel";
 import TestValidator from "@/app/validators/TestValidator";
 
 export default class TestController extends BaseController {
-    public async detail(request: Bun.BunRequest): Promise<Response> {
+    @ApiDoc({
+        description: "Show detail test",
+        tags: ["Test"],
+        request: {
+            params: [
+                {
+                    name: "id",
+                    in: "path",
+                    required: true,
+                    schema: {
+                        type: "number"
+                    }
+                }
+            ]
+        }
+    })
+    public async show(request: Bun.BunRequest): Promise<Response> {
         const body = await super.parse(request);
-        await super.validate(TestValidator.detail, body);
+        await super.validate(TestValidator.show, body);
 
         const test = await TestModel.findOrFail(body.id as number | string);
 
@@ -349,7 +364,7 @@ Database table model
 
 Example :
 
-```ts
+```ts app/models/TestModel.ts
 import type {Timestamp, NullableTimestamp} from "@bejibun/core/bases/BaseModel";
 import BaseModel from "@bejibun/core/bases/BaseModel";
 
@@ -368,12 +383,16 @@ export default class TestModel extends BaseModel {
 #### Fetch All
 Example :
 
-```ts
+```ts app/controllers/TestController.ts
 import BaseController from "@bejibun/core/bases/BaseController";
 import TestModel from "@/app/models/TestModel";
 
 export default class TestController extends BaseController {
-    public async get(request: Bun.BunRequest): Promise<Response> {
+    @ApiDoc({
+        description: "Get test list",
+        tags: ["Test"]
+    })
+    public async index(request: Bun.BunRequest): Promise<Response> {
         const tests = await TestModel.all();
 
         return super.response.setData(tests).send();
@@ -384,15 +403,31 @@ export default class TestController extends BaseController {
 #### Find or Fail
 Example :
 
-```ts
+```ts app/controllers/TestController.ts
 import BaseController from "@bejibun/core/bases/BaseController";
 import TestModel from "@/app/models/TestModel";
 import TestValidator from "@/app/validators/TestValidator";
 
 export default class TestController extends BaseController {
-    public async detail(request: Bun.BunRequest): Promise<Response> {
+    @ApiDoc({
+        description: "Show detail test",
+        tags: ["Test"],
+        request: {
+            params: [
+                {
+                    name: "id",
+                    in: "path",
+                    required: true,
+                    schema: {
+                        type: "number"
+                    }
+                }
+            ]
+        }
+    })
+    public async show(request: Bun.BunRequest): Promise<Response> {
         const body = await super.parse(request);
-        await super.validate(TestValidator.detail, body);
+        await super.validate(TestValidator.show, body);
 
         const test = await TestModel.findOrFail(body.id as number | string);
 
@@ -404,21 +439,37 @@ export default class TestController extends BaseController {
 #### Create
 Example :
 
-```ts
+```ts app/controllers/TestController.ts
 import BaseController from "@bejibun/core/bases/BaseController";
 import TestModel from "@/app/models/TestModel";
 import TestValidator from "@/app/validators/TestValidator";
 
 export default class TestController extends BaseController {
-    public async add(request: Bun.BunRequest): Promise<Response> {
+    @ApiDoc({
+        description: "Store test data",
+        tags: ["Test"],
+        request: {
+            params: [
+                {
+                    name: "name",
+                    in: "query",
+                    required: true,
+                    schema: {
+                        type: "string"
+                    }
+                }
+            ]
+        }
+    })
+    public async store(request: Bun.BunRequest): Promise<Response> {
         const body = await super.parse(request);
-        await super.validate(TestValidator.add, body);
+        await super.validate(TestValidator.store, body);
 
-        const tests = await TestModel.create({
+        const test = await TestModel.create({
             name: body.name as string
         });
 
-        return super.response.setData(tests).send();
+        return super.response.setData(test).send();
     }
 }
 ```
@@ -426,22 +477,46 @@ export default class TestController extends BaseController {
 #### Update
 Example :
 
-```ts
+```ts app/controllers/TestController.ts
 import BaseController from "@bejibun/core/bases/BaseController";
 import TestModel from "@/app/models/TestModel";
 import TestValidator from "@/app/validators/TestValidator";
 
 export default class TestController extends BaseController {
-    public async edit(request: Bun.BunRequest): Promise<Response> {
+    @ApiDoc({
+        description: "Update test data",
+        tags: ["Test"],
+        request: {
+            params: [
+                {
+                    name: "id",
+                    in: "path",
+                    required: true,
+                    schema: {
+                        type: "number"
+                    }
+                },
+                {
+                    name: "name",
+                    in: "path",
+                    required: true,
+                    schema: {
+                        type: "string"
+                    }
+                }
+            ]
+        }
+    })
+    public async update(request: Bun.BunRequest): Promise<Response> {
         const body = await super.parse(request);
-        await super.validate(TestValidator.edit, body);
+        await super.validate(TestValidator.update, body);
 
-        const tests = await TestModel.find(body.id as number | string)
+        const test = await TestModel.find(body.id as number | string)
             .update({
                 name: body.name as string
             });
 
-        return super.response.setData(tests).send();
+        return super.response.setData(test).send();
     }
 }
 ```
@@ -449,19 +524,35 @@ export default class TestController extends BaseController {
 #### Soft Delete
 Example :
 
-```ts
+```ts app/controllers/TestController.ts
 import BaseController from "@bejibun/core/bases/BaseController";
 import TestModel from "@/app/models/TestModel";
 import TestValidator from "@/app/validators/TestValidator";
 
 export default class TestController extends BaseController {
-    public async delete(request: Bun.BunRequest): Promise<Response> {
+    @ApiDoc({
+        description: "Destroy test data",
+        tags: ["Test"],
+        request: {
+            params: [
+                {
+                    name: "id",
+                    in: "path",
+                    required: true,
+                    schema: {
+                        type: "number"
+                    }
+                }
+            ]
+        }
+    })
+    public async destroy(request: Bun.BunRequest): Promise<Response> {
         const body = await super.parse(request);
-        await super.validate(TestValidator.delete, body);
+        await super.validate(TestValidator.destroy, body);
 
-        const tests = await TestModel.find(body.id as number | string).delete();
+        const test = await TestModel.find(body.id as number | string).delete();
 
-        return super.response.setData(tests).send();
+        return super.response.setData(test).send();
     }
 }
 ```
@@ -469,19 +560,35 @@ export default class TestController extends BaseController {
 #### Force Delete
 Example :
 
-```ts
+```ts app/controllers/TestController.ts
 import BaseController from "@bejibun/core/bases/BaseController";
 import TestModel from "@/app/models/TestModel";
 import TestValidator from "@/app/validators/TestValidator";
 
 export default class TestController extends BaseController {
-    public async delete(request: Bun.BunRequest): Promise<Response> {
+    @ApiDoc({
+        description: "Destroy test data",
+        tags: ["Test"],
+        request: {
+            params: [
+                {
+                    name: "id",
+                    in: "path",
+                    required: true,
+                    schema: {
+                        type: "number"
+                    }
+                }
+            ]
+        }
+    })
+    public async destroy(request: Bun.BunRequest): Promise<Response> {
         const body = await super.parse(request);
-        await super.validate(TestValidator.delete, body);
+        await super.validate(TestValidator.destroy, body);
 
-        const tests = await TestModel.find(body.id as number | string).forceDelete();
+        const test = await TestModel.find(body.id as number | string).forceDelete();
 
-        return super.response.setData(tests).send();
+        return super.response.setData(test).send();
     }
 }
 ```
@@ -489,12 +596,16 @@ export default class TestController extends BaseController {
 #### With Trashed
 Example :
 
-```ts
+```ts app/controllers/TestController.ts
 import BaseController from "@bejibun/core/bases/BaseController";
 import TestModel from "@/app/models/TestModel";
 
 export default class TestController extends BaseController {
-    public async get(request: Bun.BunRequest): Promise<Response> {
+    @ApiDoc({
+        description: "Get test list",
+        tags: ["Test"]
+    })
+    public async indexWithTrashed(request: Bun.BunRequest): Promise<Response> {
         const tests = await TestModel.withTrashed();
 
         return super.response.setData(tests).send();
@@ -505,12 +616,16 @@ export default class TestController extends BaseController {
 #### Only Trashed
 Example :
 
-```ts
+```ts app/controllers/TestController.ts
 import BaseController from "@bejibun/core/bases/BaseController";
 import TestModel from "@/app/models/TestModel";
 
 export default class TestController extends BaseController {
-    public async get(request: Bun.BunRequest): Promise<Response> {
+    @ApiDoc({
+        description: "Get test list",
+        tags: ["Test"]
+    })
+    public async indexOnlyTrashed(request: Bun.BunRequest): Promise<Response> {
         const tests = await TestModel.onlyTrashed();
 
         return super.response.setData(tests).send();
@@ -521,18 +636,34 @@ export default class TestController extends BaseController {
 #### Restore
 Example :
 
-```ts
+```ts app/controllers/TestController.ts
 import BaseController from "@bejibun/core/bases/BaseController";
 import TestModel from "@/app/models/TestModel";
 
 export default class TestController extends BaseController {
+    @ApiDoc({
+        description: "Restore test data",
+        tags: ["Test"],
+        request: {
+            params: [
+                {
+                    name: "id",
+                    in: "path",
+                    required: true,
+                    schema: {
+                        type: "number"
+                    }
+                }
+            ]
+        }
+    })
     public async restore(request: Bun.BunRequest): Promise<Response> {
         const body = await super.parse(request);
         await super.validate(TestValidator.restore, body);
 
-        const tests = await TestModel.find(body.id as number | string).restore();
+        const test = await TestModel.find(body.id as number | string).restore();
 
-        return super.response.setData(tests).send();
+        return super.response.setData(test).send();
     }
 }
 ```
@@ -542,7 +673,7 @@ export default class TestController extends BaseController {
 #### Migrations
 Example :
 
-```ts
+```ts database/migrations/20250929_000001_tests.ts
 import type {Knex} from "knex";
 import TestModel from "@/app/models/TestModel";
 
@@ -563,7 +694,7 @@ export function down(knex: Knex): void {
 #### Seeders
 Example :
 
-```ts
+```ts database/seeders/20250929_000001_tests.ts
 import type {Knex} from "knex";
 import TestModel from "@/app/models/TestModel";
 
@@ -592,7 +723,7 @@ Currently, only load from core package.
 
 Example :
 
-```ts
+```ts bootstrap.ts
 import "@bejibun/core/bootstrap";
 ```
 
@@ -702,8 +833,7 @@ public async helloName(request: Bun.BunRequest): Promise<Response> {
 
 ### Scheduler
 Run code in period.
-```ts
-// commands/Kernel.ts
+```ts commands/Kernel.ts
 import type Schedule from "@bejibun/core/facades/Schedule";
 
 export default class Kernel {
@@ -716,7 +846,7 @@ export default class Kernel {
 
 ### WebSocket
 Setup websocket like router.
-```ts
+```ts routes/websocket/chat.ts
 import Router from "@bejibun/core/facades/Router";
 
 export default Router.prefix("chat").group([
@@ -724,7 +854,7 @@ export default Router.prefix("chat").group([
 ]);
 ```
 
-```ts
+```ts app/websockets/ChatWebSocket.ts
 import BaseWebSocket from "@bejibun/core/bases/BaseWebSocket";
 
 export default class ChatWebSocket extends BaseWebSocket {

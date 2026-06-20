@@ -93,14 +93,14 @@ export default class TestController extends BaseController {
         description: "Get test list",
         tags: ["Test"]
     })
-    public async get(request: Bun.BunRequest): Promise<Response> {
+    public async index(request: Bun.BunRequest): Promise<Response> {
         const tests = await TestModel.all();
 
         return super.response.setData(tests).send();
     }
 
     @ApiDoc({
-        description: "Get detail list",
+        description: "Show detail test",
         tags: ["Test"],
         request: {
             params: [
@@ -115,9 +115,9 @@ export default class TestController extends BaseController {
             ]
         }
     })
-    public async detail(request: Bun.BunRequest): Promise<Response> {
+    public async show(request: Bun.BunRequest): Promise<Response> {
         const body = await super.parse(request);
-        await super.validate(TestValidator.detail, body);
+        await super.validate(TestValidator.show, body);
 
         const test = await TestModel.findOrFail(body.id as number | string);
 
@@ -125,7 +125,7 @@ export default class TestController extends BaseController {
     }
 
     @ApiDoc({
-        description: "Add test data",
+        description: "Store test data",
         tags: ["Test"],
         request: {
             params: [
@@ -140,15 +140,15 @@ export default class TestController extends BaseController {
             ]
         }
     })
-    public async add(request: Bun.BunRequest): Promise<Response> {
+    public async store(request: Bun.BunRequest): Promise<Response> {
         const body = await super.parse(request);
-        await super.validate(TestValidator.add, body);
+        await super.validate(TestValidator.store, body);
 
-        const tests = await TestModel.create({
+        const test = await TestModel.create({
             name: body.name as string
         });
 
-        return super.response.setData(tests).send();
+        return super.response.setData(test).send();
     }
 
     @ApiDoc({
@@ -175,20 +175,20 @@ export default class TestController extends BaseController {
             ]
         }
     })
-    public async edit(request: Bun.BunRequest): Promise<Response> {
+    public async update(request: Bun.BunRequest): Promise<Response> {
         const body = await super.parse(request);
-        await super.validate(TestValidator.edit, body);
+        await super.validate(TestValidator.update, body);
 
-        const tests = await TestModel.find(body.id as number | string)
+        const test = await TestModel.find(body.id as number | string)
             .update({
                 name: body.name as string
             });
 
-        return super.response.setData(tests).send();
+        return super.response.setData(test).send();
     }
 
     @ApiDoc({
-        description: "Delete test data",
+        description: "Destroy test data",
         tags: ["Test"],
         request: {
             params: [
@@ -203,13 +203,13 @@ export default class TestController extends BaseController {
             ]
         }
     })
-    public async delete(request: Bun.BunRequest): Promise<Response> {
+    public async destroy(request: Bun.BunRequest): Promise<Response> {
         const body = await super.parse(request);
-        await super.validate(TestValidator.delete, body);
+        await super.validate(TestValidator.destroy, body);
 
-        const tests = await TestModel.find(body.id as number | string).delete();
+        const test = await TestModel.find(body.id as number | string).delete();
 
-        return super.response.setData(tests).send();
+        return super.response.setData(test).send();
     }
 
     @ApiDoc({
@@ -232,8 +232,8 @@ export default class TestController extends BaseController {
         const body = await super.parse(request);
         await super.validate(TestValidator.restore, body);
 
-        const tests = await TestModel.find(body.id as number | string).restore();
+        const test = await TestModel.find(body.id as number | string).restore();
 
-        return super.response.setData(tests).send();
+        return super.response.setData(test).send();
     }
 }
