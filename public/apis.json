@@ -196,7 +196,7 @@
         }
       }
     },
-    "/api/test/get": {
+    "/api/test": {
       "get": {
         "deprecated": false,
         "parameters": [],
@@ -217,41 +217,7 @@
             }
           }
         }
-      }
-    },
-    "/api/test/detail/{id}": {
-      "get": {
-        "deprecated": false,
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "number"
-            }
-          }
-        ],
-        "summary": "Get detail list",
-        "tags": [
-          "Test"
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "example": {
-                  "message": "Success",
-                  "status": 200
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/test/add": {
+      },
       "post": {
         "deprecated": false,
         "parameters": [
@@ -264,7 +230,7 @@
             }
           }
         ],
-        "summary": "Add test data",
+        "summary": "Store test data",
         "tags": [
           "Test"
         ],
@@ -283,7 +249,37 @@
         }
       }
     },
-    "/api/test/edit": {
+    "/api/test/{id}": {
+      "get": {
+        "deprecated": false,
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "summary": "Show detail test",
+        "tags": [
+          "Test"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Success",
+                  "status": 200
+                }
+              }
+            }
+          }
+        }
+      },
       "put": {
         "deprecated": false,
         "parameters": [
@@ -321,9 +317,7 @@
             }
           }
         }
-      }
-    },
-    "/api/test/delete/{id}": {
+      },
       "delete": {
         "deprecated": false,
         "parameters": [
@@ -336,7 +330,7 @@
             }
           }
         ],
-        "summary": "Delete test data",
+        "summary": "Destroy test data",
         "tags": [
           "Test"
         ],
@@ -353,10 +347,8 @@
             }
           }
         }
-      }
-    },
-    "/api/test/restore/{id}": {
-      "get": {
+      },
+      "patch": {
         "deprecated": false,
         "parameters": [
           {
