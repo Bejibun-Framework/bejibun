@@ -4,7 +4,7 @@ import {facilitator} from "@coinbase/x402";
 const config: Record<string, any> = {
     version: 2,
     scheme: "exact" as TScheme,
-    price: "$0.0001",
+    price: "$0.001",
     networks: {
         evm: {
             network: "eip155:8453" as Network,
