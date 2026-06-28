@@ -2,7 +2,6 @@ import type {TFacilitator, TNetwork, TPrice, TScheme} from "@bejibun/x402/types/
 import {facilitator} from "@coinbase/x402";
 
 const config: Record<string, any> = {
-    version: 2,
     scheme: "exact" as TScheme,
     price: "$1" as TPrice,
     networks: [
