@@ -1,8 +1,8 @@
 {
     "name": "@bejibun/bejibun",
-    "version": "0.4.24",
+    "version": "0.4.25",
     "private": true,
-    "description": "A typescript framework using Bun runtime.",
+    "description": "A batteries-included TypeScript framework for building scalable APIs, Web3 platforms, and backend services with confidence.",
     "author": "Havea Crenata <havea.crenata@gmail.com>",
     "license": "MIT",
     "keywords": [
@@ -20,14 +20,14 @@
         "start": "NODE_ENV=production bun server.ts"
     },
     "dependencies": {
-        "@bejibun/core": "^0.4.24",
-        "react": "^19.2.7",
-        "react-dom": "^19.2.7"
+        "@bejibun/core": "^0.4.25",
+        "react": "^19.2.8",
+        "react-dom": "^19.2.8"
     },
     "devDependencies": {
         "@coinbase/x402": "^2.1.0",
         "@types/bun": "latest",
-        "@types/react": "^19.2.17",
-        "@types/react-dom": "^19.2.3"
+        "@types/react": "^19.2.18",
+        "@types/react-dom": "^19.2.4"
     }
 }
