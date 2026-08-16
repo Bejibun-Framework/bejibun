@@ -1,23 +1,23 @@
 import App from "@bejibun/app";
-import DiskDriverEnum from "@bejibun/core/enums/DiskDriverEnum";
+import StorageDiskDriverEnum from "@bejibun/storage/enums/StorageDiskDriverEnum";
 
 const config: Record<string, any> = {
     default: env("FILESYSTEM_DISK", "local"),
 
     disks: {
         local: {
-            driver: DiskDriverEnum.Local,
+            driver: StorageDiskDriverEnum.Local,
             root: App.Path.storagePath("app")
         },
 
         public: {
-            driver: DiskDriverEnum.Local,
+            driver: StorageDiskDriverEnum.Local,
             root: App.Path.storagePath("app/public"),
             url: `${env(APP_URL)}/storage/public`
         },
 
         s3: {
-            driver: DiskDriverEnum.S3,
+            driver: StorageDiskDriverEnum.S3,
             endpoint: env("S3_ENDPOINT"),
             region: env("S3_REGION"),
             bucket: env("S3_BUCKET"),

@@ -1,6 +1,6 @@
 {
     "name": "@bejibun/bejibun",
-    "version": "0.5.0",
+    "version": "0.6.0",
     "private": true,
     "description": "A batteries-included TypeScript framework for building scalable APIs, Web3 platforms, and backend services with confidence.",
     "author": "Havea Crenata <havea.crenata@gmail.com>",
@@ -20,7 +20,7 @@
         "start": "NODE_ENV=production bun server.ts"
     },
     "dependencies": {
-        "@bejibun/core": "^0.5.0",
+        "@bejibun/core": "^0.6.0",
         "react": "^19.2.8",
         "react-dom": "^19.2.8"
     },
