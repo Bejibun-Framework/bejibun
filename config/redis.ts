@@ -1,5 +1,5 @@
 const config: Record<string, any> = {
-    default: env("REDIS_CONNECTION"),
+    default: env("REDIS_CONNECTION", "local"),
 
     connections: {
         local: {
