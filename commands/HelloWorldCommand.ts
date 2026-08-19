@@ -30,6 +30,10 @@ export default class HelloWorldCommand {
     protected $arguments: Array<Array<string>> = [];
 
     public async handle(options: any, args: Array<string>): Promise<void> {
+        Logger.separator();
         Logger.debug("Hello World!");
+        Logger.debug(`Options: ${JSON.stringify(options)}`);
+        Logger.debug(`Arguments: ${JSON.stringify(args)}`);
+        Logger.separator();
     }
 }

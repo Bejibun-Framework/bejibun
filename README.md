@@ -11,6 +11,7 @@
 </div>
 
 # Framework for Bun
+
 **A modern TypeScript framework powered by Bun.**
 
 **Bejibun** is a high-performance framework built on the Bun runtime, following the proven **Model–View–Controller (MVC)** architecture.
@@ -40,6 +41,7 @@ By combining the speed of Bun with a clean MVC architecture and a robust develop
 ---
 
 ## Tech Stacks
+
 - **[Bun](https://bun.com)** — JavaScript and TypeScript Runtime
 - **[Knex.js](https://knexjs.org)** — Database Migrations and Seeders
 - **[Objection.js](https://vincit.github.io/objection.js)** — ORM and Model Layer
@@ -50,6 +52,7 @@ By combining the speed of Bun with a clean MVC architecture and a robust develop
 ---
 
 ## Key Features
+
 - MVC Architecture
 - TypeScript First
 - Built on Bun Runtime
@@ -71,6 +74,7 @@ By combining the speed of Bun with a clean MVC architecture and a robust develop
 ## Usage
 
 ### Installation
+
 If you don't have bun installed :
 
 ```bash
@@ -88,6 +92,7 @@ bunx @bejibun/cli your-project
 ```
 
 ### Available Commands
+
 To see list of available commands, run.
 
 ```bash
@@ -108,6 +113,7 @@ bun ace migrate:latest --help
 ### Database
 
 #### Migrations
+
 To fresh or drop all table and re-run the migrations, run :
 
 ```bash
@@ -169,6 +175,7 @@ Example :
 ```
 
 #### Seeders
+
 To execute seeder, run :
 
 ```bash
@@ -183,6 +190,7 @@ Example :
 ```
 
 ### Run the Project
+
 To run the project, run :
 
 ```bash
@@ -196,6 +204,7 @@ bun start
 ## Features
 
 ### Controllers
+
 Logical processes
 
 Example :
@@ -205,15 +214,18 @@ import BaseController from "@bejibun/core/bases/BaseController";
 
 export default class HelloController extends BaseController {
     public async hello(request: Bun.BunRequest): Promise<Response> {
-        return super.response.setData({
-            message: "Hello, world!",
-            method: request.method
-        }).send();
+        return super.response
+            .setData({
+                message: "Hello, world!",
+                method: request.method
+            })
+            .send();
     }
 }
 ```
 
 ### Exception Handler
+
 Handle any incoming errors
 
 Example :
@@ -230,6 +242,7 @@ export default class Handler extends ExceptionHandler {
 ```
 
 ### Middlewares
+
 Handle any request before forwarding to controller
 
 Example :
@@ -258,10 +271,7 @@ import TestMiddleware from "@/app/middlewares/TestMiddleware";
 import LoggerMiddleware from "@/app/middlewares/LoggerMiddleware";
 
 export default Router.prefix("test")
-    .middleware(
-        new TestMiddleware(),
-        new LoggerMiddleware()
-    )
+    .middleware(new TestMiddleware(), new LoggerMiddleware())
     .group([
         Router.get("/", "TestController@index"),
         Router.get("/:id", "TestController@show"),
@@ -281,6 +291,7 @@ export default Router.prefix("test")
 ```
 
 ### Validators
+
 Validate any incoming requests
 
 Example :
@@ -360,6 +371,7 @@ export default class TestController extends BaseController {
 ```
 
 ### Models
+
 Database table model
 
 Example :
@@ -381,6 +393,7 @@ export default class TestModel extends BaseModel {
 ```
 
 #### Fetch All
+
 Example :
 
 ```ts app/controllers/TestController.ts
@@ -401,6 +414,7 @@ export default class TestController extends BaseController {
 ```
 
 #### Find or Fail
+
 Example :
 
 ```ts app/controllers/TestController.ts
@@ -437,6 +451,7 @@ export default class TestController extends BaseController {
 ```
 
 #### Create
+
 Example :
 
 ```ts app/controllers/TestController.ts
@@ -475,6 +490,7 @@ export default class TestController extends BaseController {
 ```
 
 #### Update
+
 Example :
 
 ```ts app/controllers/TestController.ts
@@ -511,10 +527,9 @@ export default class TestController extends BaseController {
         const body = await super.parse(request);
         await super.validate(TestValidator.update, body);
 
-        const test = await TestModel.find(body.id as number | string)
-            .update({
-                name: body.name as string
-            });
+        const test = await TestModel.find(body.id as number | string).update({
+            name: body.name as string
+        });
 
         return super.response.setData(test).send();
     }
@@ -522,6 +537,7 @@ export default class TestController extends BaseController {
 ```
 
 #### Soft Delete
+
 Example :
 
 ```ts app/controllers/TestController.ts
@@ -558,6 +574,7 @@ export default class TestController extends BaseController {
 ```
 
 #### Force Delete
+
 Example :
 
 ```ts app/controllers/TestController.ts
@@ -594,6 +611,7 @@ export default class TestController extends BaseController {
 ```
 
 #### With Trashed
+
 Example :
 
 ```ts app/controllers/TestController.ts
@@ -614,6 +632,7 @@ export default class TestController extends BaseController {
 ```
 
 #### Only Trashed
+
 Example :
 
 ```ts app/controllers/TestController.ts
@@ -634,6 +653,7 @@ export default class TestController extends BaseController {
 ```
 
 #### Restore
+
 Example :
 
 ```ts app/controllers/TestController.ts
@@ -671,6 +691,7 @@ export default class TestController extends BaseController {
 ### Database
 
 #### Migrations
+
 Example :
 
 ```ts database/migrations/20250929_000001_tests.ts
@@ -692,6 +713,7 @@ export function down(knex: Knex): void {
 ```
 
 #### Seeders
+
 Example :
 
 ```ts database/seeders/20250929_000001_tests.ts
@@ -708,6 +730,7 @@ export async function seed(knex: Knex): Promise<void> {
 ```
 
 ### Public
+
 For public assets and Frontend use.
 
 ### Resources
@@ -717,6 +740,7 @@ For public assets and Frontend use.
 Currently, used for frontend initiation.
 
 ### Bootstrap
+
 Any startup loads
 
 Currently, only load from core package.
@@ -728,11 +752,13 @@ import "@bejibun/core/bootstrap";
 ```
 
 ### Storage
+
 Documentation: [@bejibun/storage](https://github.com/Bejibun-Framework/bejibun-storage/blob/master/README.md)
 
 A filesystem facade, with built-in disk management including disks configuration and build disk at runtime.
 
 - Standard Use
+
 ```ts
 import Storage from "@bejibun/storage";
 
@@ -750,6 +776,7 @@ await Storage.lastModified("path/to/your/file.ext"); // Get the file's last modi
 ```
 
 - With Specified Disk
+
 ```ts
 import Storage from "@bejibun/storage";
 
@@ -767,6 +794,7 @@ await Storage.disk("public").lastModified("path/to/your/file.ext");
 ```
 
 - New Disk at Runtime
+
 ```ts
 import Storage from "@bejibun/storage";
 
@@ -817,6 +845,7 @@ await Storage.build({
 ```
 
 ### Rate Limiter
+
 Documentation: [@bejibun/limiter](https://github.com/Bejibun-Framework/bejibun-limiter/blob/master/README.md)
 
 Throttle repeated actions -- login attempts, API calls, anything you need to cap -- with a simple key-based counter.
@@ -824,14 +853,20 @@ Throttle repeated actions -- login attempts, API calls, anything you need to cap
 ```ts
 import RateLimiter from "@bejibun/limiter";
 
-await RateLimiter.attempt(`user:${user.id}`, 60 /* limit */, () => {
-    //
-}, 60 /* duration (optional) */);
+await RateLimiter.attempt(
+    `user:${user.id}`,
+    60 /* limit */,
+    () => {
+        //
+    },
+    60 /* duration (optional) */
+);
 await RateLimiter.tooManyAttempts(`user:${user.id}`, 60 /* limit */, 60 /* duration (optional) */);
 await RateLimiter.clear(`user:${user.id}`);
 ```
 
 ### Queue
+
 Run processes at background.
 
 ```ts
@@ -839,13 +874,17 @@ Run processes at background.
 await TestJob.dispatch(/*any params here*/).send();
 
 // With delay
-await TestJob.dispatch(/*any params here*/).delay(60 * 10 /*10 minutes*/).send();
+await TestJob.dispatch(/*any params here*/)
+    .delay(60 * 10 /*10 minutes*/)
+    .send();
 ```
 
 ### Decorator
+
 All available decorators.
 
 #### @ApiDoc
+
 ```ts
 @ApiDoc({
     description: "Hello with Name",
@@ -873,7 +912,9 @@ public async helloName(request: Bun.BunRequest): Promise<Response> {
 ```
 
 ### Scheduler
+
 Run code in period.
+
 ```ts commands/Kernel.ts
 import type Schedule from "@bejibun/core/facades/Schedule";
 
@@ -886,20 +927,23 @@ export default class Kernel {
 ```
 
 ### WebSocket
+
 Setup websocket like router.
+
 ```ts routes/websocket/chat.ts
 import Router from "@bejibun/core/facades/Router";
 
-export default Router.prefix("chat").group([
-    Router.websocket("/", "ChatWebSocket@handle")
-]);
+export default Router.prefix("chat").group([Router.websocket("/", "ChatWebSocket@handle")]);
 ```
 
 ```ts app/websockets/ChatWebSocket.ts
 import BaseWebSocket from "@bejibun/core/bases/BaseWebSocket";
 
 export default class ChatWebSocket extends BaseWebSocket {
-    public async handle(ws: Bun.ServerWebSocket<any>, message: string | Buffer<ArrayBuffer>): Promise<void> {
+    public async handle(
+        ws: Bun.ServerWebSocket<any>,
+        message: string | Buffer<ArrayBuffer>
+    ): Promise<void> {
         for (const connection of super.connections) {
             if (connection.data.id !== ws.data.id) {
                 if (connection.readyState === 1) {
@@ -914,16 +958,19 @@ export default class ChatWebSocket extends BaseWebSocket {
 ### Global Functions
 
 #### Config
+
 ```ts
 config("disk.default");
 ```
 
 #### Env
+
 ```ts
 env("APP_KEY");
 ```
 
 ### Redis
+
 Documentation: [@bejibun/redis](https://github.com/Bejibun-Framework/bejibun-redis/blob/master/README.md)
 
 ```ts
@@ -935,21 +982,24 @@ import Redis from "@bejibun/redis";
 export default class TestController extends BaseController {
     public async redis(request: Bun.BunRequest): Promise<Response> {
         await Redis.set("redis", {hello: "world"});
-        
+
         const keys = await Redis.keys("pattern");
-        
+
         const redis = await Redis.get("redis");
 
         await Redis.connection("local").set("connection", "This is using custom connection.");
         const connection = await Redis.connection("local").get("connection");
 
-        await Redis.setClient({
-            host: "127.0.0.1",
-            port: 6379,
-            password: "",
-            database: 0,
-            maxRetries: 10
-        }, "optional-connection-name").set("redis", {hello: "world"});
+        await Redis.setClient(
+            {
+                host: "127.0.0.1",
+                port: 6379,
+                password: "",
+                database: 0,
+                maxRetries: 10
+            },
+            "optional-connection-name"
+        ).set("redis", {hello: "world"});
         // for publish and subscibe recommended using custom connection name to make sure connection matched
 
         const pipeline = await Redis.pipeline((pipe: RedisPipeline) => {
@@ -960,9 +1010,12 @@ export default class TestController extends BaseController {
             pipe.get("redis-pipeline-2");
         });
 
-        const subscriber = await Redis.subscribe("redis-subscribe", (message: string, channel: string) => {
-            Logger.setContext(channel).debug(message);
-        });
+        const subscriber = await Redis.subscribe(
+            "redis-subscribe",
+            (message: string, channel: string) => {
+                Logger.setContext(channel).debug(message);
+            }
+        );
         await Redis.publish("redis-subscribe", "Hai redis subscriber!");
 
         await Bun.sleep(500);
@@ -983,6 +1036,7 @@ export default class TestController extends BaseController {
 ```
 
 ### Cors
+
 Documentation: [@bejibun/cors](https://github.com/Bejibun-Framework/bejibun-cors/blob/master/README.md)
 
 ```ts
@@ -999,6 +1053,7 @@ export default config;
 ```
 
 ### Cache
+
 Documentation: [@bejibun/cache](https://github.com/Bejibun-Framework/bejibun-cache/blob/master/README.md)
 
 ```ts
@@ -1018,6 +1073,7 @@ await Cache.decrementBy("key", 5); // number
 ```
 
 ### Ace
+
 Any commands for development
 
 ```bash

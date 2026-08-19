@@ -1,4 +1,5 @@
 # Changelog
+
 All notable changes to this project will be documented in this file.
 
 ---
@@ -6,10 +7,13 @@ All notable changes to this project will be documented in this file.
 ## [v0.6.1](https://github.com/Bejibun-Framework/bejibun/compare/v0.6.0...v0.6.1) - 2026-08-17
 
 ### 🩹 Fixes
+
 - Fixed a race condition in `queue:work` and `queue:retry` where multiple concurrent workers could pick up and process the same job simultaneously
 
 ### 📖 Changes
+
 #### Response Cookies
+
 `ResponseBuilder` and the `Response` facade can now set and delete cookies on outgoing responses, on top of Bun's native `CookieMap`.
 Cookies are automatically applied as `Set-Cookie` headers on both `.send()` and `.stream()`.
 
@@ -20,26 +24,22 @@ Cookies are automatically applied as `Set-Cookie` headers on both `.send()` and 
 - `ResponseBuilder` now holds an internal `Bun.CookieMap`; `.send()` and `.stream()` merge `Set-Cookie` headers in via a new `applyCookies()` helper alongside existing CORS headers
 
 **Example:**
+
 ```ts
-return Response
-    .setData(user)
+return Response.setData(user)
     .setCookie("sessionId", sessionId, {httpOnly: true, sameSite: "strict", path: "/"})
     .send();
- 
-return Response
-    .setMessage("Signed out")
-    .deleteCookie("sessionId")
-    .send();
- 
-return Response
-    .setCookies([
-        {key: "sessionId", value: sessionId, options: {httpOnly: true}},
-        {key: "theme", value: "dark", options: {maxAge: 60 * 60 * 24 * 30}}
-    ])
-    .send();
+
+return Response.setMessage("Signed out").deleteCookie("sessionId").send();
+
+return Response.setCookies([
+    {key: "sessionId", value: sessionId, options: {httpOnly: true}},
+    {key: "theme", value: "dark", options: {maxAge: 60 * 60 * 24 * 30}}
+]).send();
 ```
 
 #### Queue System
+
 Added a configurable `queue` config file, plus a dedicated `QueueException` for queue-related failures.
 `queue:work` now reads its retry/poll interval from config instead of a hardcoded value, and jobs are now reserved before processing
 so concurrent workers don't step on each other.
@@ -53,9 +53,11 @@ so concurrent workers don't step on each other.
 - A job's reservation is cleared (`reserved_at: null`) if its handler throws, so it becomes claimable again on the next pass instead of staying locked until attempts increment
 
 ### 📦 Dependencies
+
 - Bumped [`@bejibun/core`](https://github.com/Bejibun-Framework/bejibun-core) from `^0.6.0` to `^0.6.1`
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 
 **Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
@@ -67,7 +69,9 @@ so concurrent workers don't step on each other.
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 #### Storage moved to `@bejibun/storage`
+
 The built-in `Storage` facade, disk driver builders, and disk config have been removed from `@bejibun/core` and replaced with the new standalone [`@bejibun/storage`](https://github.com/Bejibun-Framework/bejibun-storage) package.
 
 - Removed `Storage` facade, `StorageBuilder`, `StorageLocalBuilder`/`StorageS3Builder`, `DiskException`, `DiskDriverEnum`, and `config/disk.ts` from `@bejibun/core`
@@ -77,6 +81,7 @@ The built-in `Storage` facade, disk driver builders, and disk config have been r
 > ⚠️ **Breaking change**: if you're using `Storage` from `@bejibun/core`, switch to the `@bejibun/storage` package and move your disk config from `config/disk.ts` to `config/storage.ts` (see the [`@bejibun/storage` README](https://github.com/Bejibun-Framework/bejibun-storage#readme) for the new config shape).
 
 #### RateLimiter moved to `@bejibun/limiter`
+
 The built-in `RateLimiter` facade, `RateLimiterBuilder`, and `RateLimiterException` have been removed from `@bejibun/core` and replaced with the new standalone [`@bejibun/limiter`](https://github.com/Bejibun-Framework/bejibun-limiter) package.
 
 - Removed `RateLimiter` facade, `RateLimiterBuilder`, and `RateLimiterException` from `@bejibun/core`
@@ -87,15 +92,18 @@ The built-in `RateLimiter` facade, `RateLimiterBuilder`, and `RateLimiterExcepti
 > ⚠️ **Breaking change**: if you're using `RateLimiter` from `@bejibun/core`, switch to the `@bejibun/limiter` package (`import RateLimiter from "@bejibun/limiter"`). `RateLimiterMiddleware` keeps working as-is.
 
 #### Newly exported: EpochTimestamps
+
 `EpochTimestamps` existed internally but wasn't part of the public API -- it's now exported from the package root.
 
 - `EpochTimestamps` model is now exported from `@bejibun/core`
 - `RuntimeException` is now exported from `@bejibun/core`
 
 ### 📦 Dependencies
+
 - Bumped [`@bejibun/core`](https://github.com/Bejibun-Framework/bejibun-core) from `^0.5.0` to `^0.6.0`
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 
 **Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
@@ -107,18 +115,21 @@ The built-in `RateLimiter` facade, `RateLimiterBuilder`, and `RateLimiterExcepti
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 #### X402 Middleware Refactor -- `@bejibun/x402` v0.2.0
+
 Bumped `@bejibun/x402` from `^0.1.1` to `^0.2.1` and updated the `.x402()` route middleware to match its new multi-network payment API.
 
 **What changed under the hood ([`@bejibun/x402` v0.2.0](https://github.com/Bejibun-Framework/bejibun-x402/compare/v0.1.0...v0.2.0)):**
+
 - **Multi-network support (EVM + SVM)** -- routes can now accept payment from both EVM chains (Base, etc.) and Solana simultaneously, matching `@x402/express` behavior, instead of the old single-network setup
 - Payment resolution follows a 4-level priority cascade: explicit `accepts` array -> route-level `network` + `payTo` shorthand -> config-wide `networks` block -> built-in defaults (Base, Polygon, Arbitrum, World Chain for EVM; Solana mainnet for SVM)
 - New **`BunAdapter`** implements `@x402/core`'s `HTTPAdapter` directly against `Bun.BunRequest`
 - Payment verification/settlement now delegates to `@x402/core`'s `x402HTTPResourceServer` instead of the old hand-rolled verify/settle/decode chain, and initializes each route's server only once via a static cache
 - Underlying dependency swapped from `x402` to `@coinbase/x402`, `@x402/core`, `@x402/evm`, and `@x402/svm`
 
-
 **How this surfaces in `@bejibun/core`:**
+
 - **`Router.x402()` / `RouterBuilder.x402()`** -- signature changed from `x402(config?, facilitatorConfig?, paywallConfig?)` to `x402(facilitator?: TFacilitator, routePayment?: TRoutePayment)`
     - `TRoutePayment` replaces `TX402Config` and supports the new `accepts` array for full multi-network control (per-network `scheme`, `price`, `network`, `payTo`, `description`, `mimeType`)
     - `TFacilitator` is now a plain `{ url?, createAuthHeaders? }` object; defaults to the Coinbase facilitator
@@ -128,6 +139,7 @@ Bumped `@bejibun/x402` from `^0.1.1` to `^0.2.1` and updated the `.x402()` route
 > ⚠️ **Breaking change**: existing calls to `Router.x402(config, facilitatorConfig, paywallConfig)` must be updated to `Router.x402(facilitator, routePayment)`.
 
 **Example:**
+
 ```ts
 Router.x402(
     {
@@ -146,13 +158,16 @@ Router.x402(
 ```
 
 #### CLI
+
 - Documented new `route:list` and `schedule:work` ace commands in the README
 - `db:seed` help output now shows `[options]`
 
 #### Misc
+
 - Simplified the "Support / Donate" section in the README (replaced crypto address table with a donate badge/link) and removed the Contributors section
 
 ### 📦 Dependencies
+
 - Bumped [`@bejibun/core`](https://github.com/Bejibun-Framework/bejibun-core) from `^0.4.24` to `^0.4.25`
 - Bumped [`@bejibun/cache`](https://github.com/Bejibun-Framework/bejibun-cache) from `^0.1.23` to `^0.1.24`
 - Bumped [`@bejibun/x402`](https://github.com/Bejibun-Framework/bejibun-x402) (devDependency) from `^0.1.1` to `^0.2.1`
@@ -162,6 +177,7 @@ Router.x402(
 - Bumped `tsc-alias` (devDependency) from `^1.8.17` to `^1.9.1`
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 
 **Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
@@ -173,20 +189,26 @@ Router.x402(
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 #### Global Utilities
+
 - Added default value for `env(key: string, defaultValue: any = null)` - Return default value when given key is empty
 
 #### Storage Management Utilities
+
 This release introduces built-in helpers for retrieving file metadata and storage information across supported Storage drivers.
 
 #### Storage Utilities
+
 Added new storage helper methods:
+
 - Added `.metadata()` - Retrieve complete file metadata and statistics
 - Added `.size()` - Get the file size in bytes
 - Added `.mimeType()` - Get the file MIME type
 - Added `.lastModified()` - Get the file's last modification date
 
 **Example:**
+
 ```ts
 const metadata = await Storage.metadata("uploads/avatar.png");
 
@@ -198,10 +220,11 @@ const lastModified = await Storage.lastModified("uploads/avatar.png");
 ```
 
 #### Method Signatures
+
 ```ts
 export interface StorageDriver {
     // ...
-    
+
     /**
      * Retrieve metadata for a file.
      *
@@ -239,9 +262,11 @@ export interface StorageDriver {
 These helpers provide a simple and consistent API for inspecting files and retrieving metadata without requiring direct access to the underlying storage provider implementation.
 
 ### 📦 Dependencies
+
 - Bumped [`@bejibun/core`](https://github.com/Bejibun-Framework/bejibun-core) from `^0.4.24` to `^0.4.25`
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 
 **Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
@@ -253,17 +278,22 @@ These helpers provide a simple and consistent API for inspecting files and retri
 ### 🩹 Fixes
 
 ### ⚡ Improvements
+
 #### CORS Initialization Optimization
+
 CORS configuration is now loaded during application startup instead of being resolved per request.
 
 #### Benefits :
+
 - Reduced request-processing overhead
 - Faster response times
 - Improved throughput under high traffic
 - More efficient request lifecycle
 
 #### Comparison :
+
 Before
+
 ```shell
 # oha -z 10s http://localhost:3000/api/hello
 Summary:
@@ -315,6 +345,7 @@ Error distribution:
 ```
 
 After
+
 ```shell
 # oha -z 10s http://localhost:3000/api/hello
 Summary:
@@ -366,9 +397,11 @@ Error distribution:
 ```
 
 ### 📦 Dependencies
+
 - Upgraded `@bejibun/core` to v0.4.24
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 
 **Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
@@ -380,11 +413,15 @@ Error distribution:
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 #### Counter & Numeric Value Utilities
+
 This release introduces built-in helpers for managing counters and numeric values across Redis and Cache drivers.
 
 #### Redis Utilities
+
 Added new Redis helper methods :
+
 - Added `.exists()` Check whether a key exists
 - Added `.incr()` Increment a numeric value by 1
 - Added `.decr()` Decrement a numeric value by 1
@@ -392,6 +429,7 @@ Added new Redis helper methods :
 - Added `.decrBy()` Decrement a numeric value by a specified amount
 
 #### Example :
+
 ```ts
 await Redis.exists("visitors");
 
@@ -403,11 +441,14 @@ await Redis.decrBy("visitors", 5);
 ```
 
 #### Cache Utilities
+
 Added atomic cache counter operations :
+
 - Added `.incrementBy()` Increment a numeric value by a specified amount
 - Added `.decrementBy()` Decrement a numeric value by a specified amount
 
 #### Example :
+
 ```ts
 await Cache.incrementBy("cache-key", 10);
 await Cache.decrementBy("cache-key", 5);
@@ -416,11 +457,13 @@ await Cache.decrementBy("cache-key", 5);
 These helpers eliminate the need for manual read-modify-write operations and provide a cleaner API for working with numeric values.
 
 ### 📦 Dependencies
+
 - Upgraded `@bejibun/redis` to v0.1.45
 - Upgraded `@bejibun/cache` to v0.1.23
 - Upgraded `@bejibun/core` to v0.4.23
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 
 **Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
@@ -430,37 +473,44 @@ These helpers eliminate the need for manual read-modify-write operations and pro
 ## [v0.4.22](https://github.com/Bejibun-Framework/bejibun/compare/v0.4.2...v0.4.22) - 2026-06-01
 
 ### 🩹 Fixes
+
 - Invalid parameter for specific seeder - [#2](https://github.com/Bejibun-Framework/bejibun-database/issues/2)
 
 ### 📖 Changes
+
 #### WebSocket Controller Enhancements
+
 To simplify connection management and enable more advanced real-time features, the current WebSocket client instance is now automatically passed to controller methods.
 
 #### New controller signature :
+
 ```ts
 (ws: Bun.ServerWebSocket<any>, message: string | Buffer<ArrayBuffer>)
 ```
 
 #### This allows handlers to :
+
 - Access the active client connection directly
 - Identify the sender without performing additional lookups
 - Broadcast messages more efficiently
 - Build room, presence, and private messaging systems with less boilerplate
 
 #### Updated websocket routing example :
+
 ```ts
 import Router from "@bejibun/core/facades/Router";
 
-export default Router.prefix("chat").group([
-    Router.websocket("/", "ChatWebSocket@handle")
-]);
+export default Router.prefix("chat").group([Router.websocket("/", "ChatWebSocket@handle")]);
 ```
 
 ```ts
 import BaseWebSocket from "@bejibun/core/bases/BaseWebSocket";
 
 export default class ChatWebSocket extends BaseWebSocket {
-    public async handle(ws: Bun.ServerWebSocket<any>, message: string | Buffer<ArrayBuffer>): Promise<void> {
+    public async handle(
+        ws: Bun.ServerWebSocket<any>,
+        message: string | Buffer<ArrayBuffer>
+    ): Promise<void> {
         for (const connection of super.connections) {
             if (connection.data.id !== ws.data.id) {
                 if (connection.readyState === 1) {
@@ -473,10 +523,12 @@ export default class ChatWebSocket extends BaseWebSocket {
 ```
 
 ### 📦 Dependencies
+
 - Upgraded `@bejibun/core` to v0.4.22
 - Upgraded `@bejibun/database` to v0.1.21
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 
 **Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
@@ -488,14 +540,17 @@ export default class ChatWebSocket extends BaseWebSocket {
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 - Added `bun test` to run tests in `/tests`
 - Added `.testsPath(path?: string)` path to `tests` directory
 - Added `.websocketsPath(path?: string)` path to `app/websockets` directory
 
 #### Upgrade [@bejibun/core](https://github.com/Bejibun-Framework/bejibun-core) to v0.4.2
+
 [https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.4.2](https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.4.2)
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 
 **Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
@@ -505,14 +560,17 @@ export default class ChatWebSocket extends BaseWebSocket {
 ## [v0.4.1](https://github.com/Bejibun-Framework/bejibun/compare/v0.4.0...v0.4.1) - 2026-05-28
 
 ### 🩹 Fixes
+
 - Fix crashed `bun ace`
 
 ### 📖 Changes
 
 #### Upgrade [@bejibun/core](https://github.com/Bejibun-Framework/bejibun-core) to v0.4.1
+
 [https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.4.1](https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.4.1)
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 
 **Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
@@ -524,17 +582,20 @@ export default class ChatWebSocket extends BaseWebSocket {
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 - Introduced WebSocket route support with a simple router-based setup
 - Added `Router.websocket()` method for registering WebSocket handlers directly from the router
 - Enabled prefix chaining support for WebSocket routes using `Router.prefix()`
 - Simplified WebSocket initialization to match standard HTTP route definitions for a more consistent developer experience
 
 ### Feedback
+
 - WebSocket routes now feel identical to regular route registration
 - Reduced boilerplate for real-time feature setup
 - Cleaner and more maintainable routing configuration
 
 Example
+
 ```ts
 import Router from "@bejibun/core/facades/Router";
 
@@ -544,9 +605,11 @@ export default Router.prefix("hello").group([
 ```
 
 #### Upgrade [@bejibun/core](https://github.com/Bejibun-Framework/bejibun-core) to v0.4.0
+
 [https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.4.0](https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.4.0)
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 
 **Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
@@ -558,13 +621,16 @@ export default Router.prefix("hello").group([
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 - Swagger improvements - [#23](https://github.com/Bejibun-Framework/bejibun-core/pull/23)
 - Adds a sleep to `queue:work` if the job is empty to prevent access to the database
 
 #### Upgrade [@bejibun/core](https://github.com/Bejibun-Framework/bejibun-core) to v0.3.16
+
 [https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.3.16](https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.3.16)
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 
 **Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
@@ -574,6 +640,7 @@ export default Router.prefix("hello").group([
 ## [v0.3.15](https://github.com/Bejibun-Framework/bejibun/compare/v0.3.12...v0.3.15) - 2026-05-21
 
 ### 🩹 Fixes
+
 - Reworked schedule worker execution logic to fix cron timing inaccuracies
 - Fixed potential duplicate execution caused by cron re-evaluation per tick
 - Fixed drift issues in scheduling caused by `cron-parser.prev()` based checks
@@ -581,6 +648,7 @@ export default Router.prefix("hello").group([
 - Improved shutdown handling of schedule worker interval
 
 ### 📖 Changes
+
 - Replaced per-tick cron parsing with cached `CronExpression`
 - Added `nextRun` based execution system instead of `lastRuns` tracking
 - Replaced `setInterval` loop with adaptive `setTimeout` scheduler (better timing accuracy)
@@ -595,9 +663,11 @@ export default Router.prefix("hello").group([
 - Behavior may differ slightly for edge-case cron expressions due to new evaluation model
 
 #### Upgrade [@bejibun/core](https://github.com/Bejibun-Framework/bejibun-core) to v0.3.15
+
 [https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.3.15](https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.3.15)
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 
 **Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
@@ -607,17 +677,21 @@ export default Router.prefix("hello").group([
 ## [v0.3.14](https://github.com/Bejibun-Framework/bejibun/compare/v0.3.12...v0.3.14) - 2026-05-12
 
 ### 🩹 Fixes
+
 - `Router.match()` and `Router.any()` not working - [#20](https://github.com/Bejibun-Framework/bejibun-core/pull/20)
 - Fix route list for multiple method - [#22](https://github.com/Bejibun-Framework/bejibun-core/pull/22)
 
 ### 📖 Changes
+
 - Added `config/route.ts` for route list config
 - Added `bun ace route:list` for list all registered routes
 
 #### Upgrade [@bejibun/core](https://github.com/Bejibun-Framework/bejibun-core) to v0.3.14
+
 [https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.3.14](https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.3.14)
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 
 **Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
@@ -629,12 +703,15 @@ export default Router.prefix("hello").group([
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 - Added `config/performance.ts` to turn features into on/off for better performances
 
 #### Upgrade [@bejibun/core](https://github.com/Bejibun-Framework/bejibun-core) to v0.3.13
+
 [https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.3.13](https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.3.13)
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 
 **Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
@@ -646,10 +723,13 @@ export default Router.prefix("hello").group([
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 #### Upgrade [@bejibun/core](https://github.com/Bejibun-Framework/bejibun-core) to v0.3.12
+
 [https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.3.12](https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.3.12)
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 
 **Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
@@ -661,10 +741,13 @@ export default Router.prefix("hello").group([
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 #### Upgrade [@bejibun/core](https://github.com/Bejibun-Framework/bejibun-core) to v0.3.0
+
 [https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.3.0](https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.3.0)
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 
 **Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
@@ -676,10 +759,13 @@ export default Router.prefix("hello").group([
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 #### Upgrade [@bejibun/core](https://github.com/Bejibun-Framework/bejibun-core) to v0.2.17
+
 [https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.2.17](https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.2.17)
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 
 **Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
@@ -691,10 +777,13 @@ export default Router.prefix("hello").group([
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 #### Upgrade [@bejibun/core](https://github.com/Bejibun-Framework/bejibun-core) to v0.2.16
+
 [https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.2.16](https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.2.16)
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 
 **Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
@@ -706,10 +795,13 @@ export default Router.prefix("hello").group([
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 #### Upgrade [@bejibun/core](https://github.com/Bejibun-Framework/bejibun-core) to v0.2.15
+
 [https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.2.15](https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.2.15)
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 
 **Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
@@ -721,10 +813,13 @@ export default Router.prefix("hello").group([
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 #### Upgrade [@bejibun/core](https://github.com/Bejibun-Framework/bejibun-core) to v0.2.14
+
 [https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.2.14](https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.2.14)
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 
 **Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
@@ -736,10 +831,13 @@ export default Router.prefix("hello").group([
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 #### Upgrade [@bejibun/core](https://github.com/Bejibun-Framework/bejibun-core) to v0.2.13
+
 [https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.2.13](https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.2.13)
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 
 **Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
@@ -751,10 +849,13 @@ export default Router.prefix("hello").group([
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 #### Upgrade [@bejibun/core](https://github.com/Bejibun-Framework/bejibun-core) to v0.2.12
+
 [https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.2.12](https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.2.12)
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 
 **Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
@@ -766,10 +867,13 @@ export default Router.prefix("hello").group([
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 #### Upgrade [@bejibun/core](https://github.com/Bejibun-Framework/bejibun-core) to v0.2.11
+
 [https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.2.11](https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.2.11)
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 
 **Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
@@ -781,10 +885,13 @@ export default Router.prefix("hello").group([
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 #### Upgrade [@bejibun/core](https://github.com/Bejibun-Framework/bejibun-core) to v0.2.1
+
 [https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.2.1](https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.2.1)
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 
 **Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
@@ -796,10 +903,13 @@ export default Router.prefix("hello").group([
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 #### Upgrade [@bejibun/core](https://github.com/Bejibun-Framework/bejibun-core) to v0.2.0
+
 [https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.2.0](https://github.com/Bejibun-Framework/bejibun-core/releases/tag/v0.2.0)
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 
 **Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
@@ -811,10 +921,13 @@ export default Router.prefix("hello").group([
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 #### Upgrade [@bejibun/core](https://github.com/Bejibun-Framework/bejibun-core) to v0.1.73
+
 - Fix infinite nested router
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 
 **Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
@@ -826,10 +939,13 @@ export default Router.prefix("hello").group([
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 #### Upgrade [@bejibun/core](https://github.com/Bejibun-Framework/bejibun-core) to v0.1.70
+
 - Added `S3` storage support
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 
 **Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
@@ -841,12 +957,15 @@ export default Router.prefix("hello").group([
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 #### Upgrade [@bejibun/core](https://github.com/Bejibun-Framework/bejibun-core) to v0.1.66
+
 - Added `Router.resource()`
 
 Single line code that automatically generates a full set of CRUD.
 
 #### How to use?
+
 ```ts
 import Router from "@bejibun/core/facades/Router";
 import YourController from "@/app/controllers/YourController";
@@ -861,6 +980,7 @@ Router.resource("path", YourController, {
 ```
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 
 **Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
@@ -870,13 +990,17 @@ Router.resource("path", YourController, {
 ## [v0.1.57](https://github.com/Bejibun-Framework/bejibun/compare/v0.1.56...v0.1.57) - 2025-12-29
 
 ### 🩹 Fixes
+
 - Router namespace on group - [#6](https://github.com/Bejibun-Framework/bejibun-core/issues/6)
 
 ### 📖 Changes
+
 #### Upgrade [@bejibun/core](https://github.com/Bejibun-Framework/bejibun-core) to v0.1.65
+
 - Fix router namespace on group
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 
 **Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
@@ -888,11 +1012,15 @@ Router.resource("path", YourController, {
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 #### Upgrade [@bejibun/core](https://github.com/Bejibun-Framework/bejibun-core) to v0.1.64
+
 #### Storage
+
 A filesystem facade, with built-in disk management including disks configuration and build disk at runtime.
 
 - Standard Use
+
 ```ts
 import Storage from "@bejibun/core/facades/Storage";
 
@@ -904,6 +1032,7 @@ await Storage.delete("path/to/your/file.ext"); // Delete file
 ```
 
 - With Specified Disk
+
 ```ts
 import Storage from "@bejibun/core/facades/Storage";
 
@@ -915,6 +1044,7 @@ await Storage.disk("public").delete("path/to/your/file.ext");
 ```
 
 - New Disk at Runtime
+
 ```ts
 import Storage from "@bejibun/core/facades/Storage";
 
@@ -941,6 +1071,7 @@ await Storage.build({
 ```
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 
 **Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
@@ -952,10 +1083,13 @@ await Storage.build({
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 #### Upgrade [@bejibun/core](https://github.com/Bejibun-Framework/bejibun-core) to v0.1.60
+
 - Convert `ip` to safe filename for rate limiter.
 
 ### ❤️Contributors
+
 - Ghulje ([@ghulje](https://github.com/ghulje))
 
 **Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
@@ -967,14 +1101,18 @@ await Storage.build({
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 #### Upgrade [@bejibun/utils](https://github.com/Bejibun-Framework/bejibun-utils) to v0.1.25
+
 - `Object.serialize(value: any)` Convert object values into actual value, e.g. `{name: ""}` into `{name: null}`.
 - `Object.parseFormData(value: any)` Convert form data to object and serialized.
 
 #### Upgrade [@bejibun/core](https://github.com/Bejibun-Framework/bejibun-core) to v0.1.58
+
 - Implement `serialize` and `parseFormData` from [@bejibun/utils](https://github.com/Bejibun-Framework/bejibun-utils) to `BaseController` for cleaner data and more actual data validation.
 
 ### ❤️Contributors
+
 - Ghulje ([@ghulje](https://github.com/ghulje))
 
 **Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
@@ -984,24 +1122,30 @@ await Storage.build({
 ## [v0.1.51](https://github.com/Bejibun-Framework/bejibun/compare/v0.1.50...v0.1.51) - 2025-12-05
 
 ### 🩹 Fixes
+
 - Hang, when redis not connected - [#7](https://github.com/Bejibun-Framework/bejibun-core/issues/7)
 - Handling for invalid syntax validation - [#8](https://github.com/Bejibun-Framework/bejibun-core/issues/8)
 - Body serialize for empty form data field - [#9](https://github.com/Bejibun-Framework/bejibun-core/issues/9)
 
 #### [@bejibun/utils](https://github.com/Bejibun-Framework/bejibun-utils)
+
 - Empty validation for file - [#1](https://github.com/Bejibun-Framework/bejibun-utils/issues/1)
 
 ### 📖 Changes
+
 #### Upgrade [@bejibun/utils](https://github.com/Bejibun-Framework/bejibun-utils) to v0.1.23
+
 - Empty validation for file
 
 #### Upgrade [@bejibun/cache](https://github.com/Bejibun-Framework/bejibun-cache) to v0.1.12
+
 - Adding `local` connection for file schema.
 
 Now, [@bejibun/cache](https://github.com/Bejibun-Framework/bejibun-cache) has local and redis for cache system.
 If the connection use local, this will cache data as file on storage/cache.
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 
 **Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
@@ -1011,15 +1155,18 @@ If the connection use local, this will cache data as file on storage/cache.
 ## [v0.1.50](https://github.com/Bejibun-Framework/bejibun/compare/v0.1.49...v0.1.50) - 2025-11-29
 
 ### 🩹 Fixes
+
 - Body parser for multiple keys - [#2](https://github.com/Bejibun-Framework/bejibun-core/issues/2)
 - x402 on nester router - [#3](https://github.com/Bejibun-Framework/bejibun-core/issues/3)
 - Storage directory undefined - [#4](https://github.com/Bejibun-Framework/bejibun-core/issues/4)
 - Unknown actual error on runtime exception - [#5](https://github.com/Bejibun-Framework/bejibun-core/issues/5)
 
 ### 📖 Changes
+
 - Storage adjustment: random string filename.
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 
 **Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
@@ -1031,15 +1178,19 @@ If the connection use local, this will cache data as file on storage/cache.
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 What's New :
+
 - Adding `Rate Limiter` to limit any action in a certain time.
 
 Available `Rate Limiter` functions :
+
 - `.attempt(key, limit, callback, duration)` throw an error if limit reached.
 - `.tooManyAttempts(key, limit, duration)` method to check if limit has reached.
 - `.clear(key)` reset the counter.
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 - Ghulje ([@ghulje](https://github.com/ghulje))
 
@@ -1052,6 +1203,7 @@ Available `Rate Limiter` functions :
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 What's New :
 
 Cache with Redis, currently only redis.
@@ -1064,6 +1216,7 @@ Cache with Redis, currently only redis.
 - `.forget()` Delete cache
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 
 **Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
@@ -1075,6 +1228,7 @@ Cache with Redis, currently only redis.
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 What's New :
 
 Everyone can create their own packages,
@@ -1102,6 +1256,7 @@ When the user runs `bun ace install your-package` it will automatically run the 
 So when user runs `bun ace` your command will appear in the list.
 
 ### ❤️Contributors
+
 - Ghulje ([@ghulje](https://github.com/ghulje))
 
 **Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
@@ -1113,7 +1268,9 @@ So when user runs `bun ace` your command will appear in the list.
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 What's New :
+
 - Adding `make:command <file>` to create a new command file
 - Adding `make:controller <file>` to create a new controller file
 - Adding `make:middleware <file>` to create a new middleware file
@@ -1121,6 +1278,7 @@ What's New :
 - Adding `make:validator <file>` to create a new validator file
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 - Ghulje ([@ghulje](https://github.com/ghulje))
 
@@ -1133,15 +1291,19 @@ What's New :
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 What's New :
+
 - Move exception handler into `@bejibun/core` and extends to it
 - Move `server.ts` into `@bejibun/core`
 - Restructure routes directory
 
 Chore :
+
 - Rename `process.env` to `Bun.env`
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 - Ghulje ([@ghulje](https://github.com/ghulje))
 
@@ -1154,10 +1316,13 @@ Chore :
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 What's New :
+
 - Now, you can add your own commands on `commands` directory
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 - Ghulje ([@ghulje](https://github.com/ghulje))
 
@@ -1170,10 +1335,13 @@ What's New :
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 What's New :
+
 - Move `ace` into `@bejibun/core` package
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 - Ghulje ([@ghulje](https://github.com/ghulje))
 
@@ -1186,11 +1354,14 @@ What's New :
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 What's New :
+
 - Move base class into `@bejibun/core` package
 - Integrate with `@bejibun/core` package
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 - Ghulje ([@ghulje](https://github.com/ghulje))
 
@@ -1203,11 +1374,14 @@ What's New :
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 What's New :
+
 - Move redis into `@bejibun/redis` package
 - Move enum, str, and some utils to `@bejibun/core` package
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 - Ghulje ([@ghulje](https://github.com/ghulje))
 
@@ -1220,10 +1394,13 @@ What's New :
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 What's New :
+
 - Redis
 
 Available Redis :
+
 - `.connection()` Multiple redis services
 - `.get()` Get value stored on redis
 - `.set()` Set value to redis
@@ -1232,12 +1409,13 @@ Available Redis :
 - `subcriber.unsubscribe()` Unsubscribe redis event
 - `.publish()` Publish messages to subscriber
 - `.pipeline()` Redis pipeline
-- `.on()` Subscribe events for `connect` | `disconnect` | `error` 
-- `.off()` Unsubscribe events for `connect` | `disconnect` | `error` 
+- `.on()` Subscribe events for `connect` | `disconnect` | `error`
+- `.off()` Unsubscribe events for `connect` | `disconnect` | `error`
 - `.connect()` Manually connect to redis
 - `.disconnect()` Manually disconnect from redis, will close all connections if not specify connection name
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 - Ghulje ([@ghulje](https://github.com/ghulje))
 
@@ -1250,16 +1428,20 @@ Available Redis :
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 What's New :
+
 - Adding router for http methods, e.g. `Router.get("get", "TestController@get")`
 - Now, router group support object and array
 
 Chore :
+
 - Rename `CorsMethodEnum` to `HttpMethodEnum`
 - Move some types to global
 - Adding `RouterInvalidException` exception
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 - Ghulje ([@ghulje](https://github.com/ghulje))
 
@@ -1272,11 +1454,14 @@ Chore :
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 Refactors :
+
 - Adding builders for some utils
 - Change some utils from new instance based to static calls
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 - Ghulje ([@ghulje](https://github.com/ghulje))
 
@@ -1289,11 +1474,14 @@ Refactors :
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 What's New :
+
 - Adding cors config
 - Handle cors routing for preflight
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 - Ghulje ([@ghulje](https://github.com/ghulje))
 
@@ -1306,6 +1494,7 @@ What's New :
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 First release of Bejibun
 
 A typescript framework that run on [Bun](https://bun.com) runtime.
@@ -1320,6 +1509,7 @@ A typescript framework that run on [Bun](https://bun.com) runtime.
 - Adding routing
 
 ### ❤️Contributors
+
 - Havea Crenata ([@crenata](https://github.com/crenata))
 - Ghulje ([@ghulje](https://github.com/ghulje))
 

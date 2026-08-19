@@ -11,7 +11,7 @@ import {App} from "@/resources/views/App";
 const element: HTMLElement | null = document.getElementById("root")!;
 const app = (
     <StrictMode>
-        <App/>
+        <App />
     </StrictMode>
 );
 

@@ -27,8 +27,8 @@ describe("Async Arithmetic", () => {
         expect(result).toEqual(4);
     });
 
-    test("2 * 2", done => {
-        Promise.resolve(2 * 2).then(result => {
+    test("2 * 2", (done) => {
+        Promise.resolve(2 * 2).then((result) => {
             expect(result).toEqual(4);
             done();
         });

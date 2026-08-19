@@ -3,10 +3,7 @@ import TestMiddleware from "@/app/middlewares/TestMiddleware";
 import LoggerMiddleware from "@/app/middlewares/LoggerMiddleware";
 
 export default Router.prefix("test")
-    .middleware(
-        new TestMiddleware(),
-        new LoggerMiddleware()
-    )
+    .middleware(new TestMiddleware(), new LoggerMiddleware())
     .group([
         Router.get("redis", "TestController@redis"),
         Router.get("cache", "TestController@cache"),
