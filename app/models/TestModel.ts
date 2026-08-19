@@ -5,7 +5,7 @@ export default class TestModel extends BaseModel {
     public static tableName: string = "tests";
     public static idColumn: string = "id";
 
-    declare id: bigint;
+    declare id: number | bigint;
     declare name: string;
     declare created_at: Timestamp;
     declare updated_at: Timestamp;

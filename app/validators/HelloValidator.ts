@@ -1,4 +1,4 @@
-import type {ValidatorType} from "@bejibun/core/types/ValidatorType";
+import type {ValidatorType} from "@bejibun/core/types";
 import BaseValidator from "@bejibun/core/bases/BaseValidator";
 
 export default class HelloValidator extends BaseValidator {

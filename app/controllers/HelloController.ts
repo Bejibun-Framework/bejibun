@@ -7,10 +7,12 @@ export default class HelloController extends BaseController {
         tags: ["Hello"]
     })
     public async hello(request: Bun.BunRequest): Promise<Response> {
-        return super.response.setData({
-            message: "Hello, world!",
-            method: request.method
-        }).send();
+        return super.response
+            .setData({
+                message: "Hello, world!",
+                method: request.method
+            })
+            .send();
     }
 
     @ApiDoc({
@@ -33,8 +35,10 @@ export default class HelloController extends BaseController {
         const body = await super.parse(request);
         await super.validate(HelloValidator.helloName, body);
 
-        return super.response.setData({
-            message: `Hello, ${body.name}!`,
-        }).send();
+        return super.response
+            .setData({
+                message: `Hello, ${body.name}!`
+            })
+            .send();
     }
 }

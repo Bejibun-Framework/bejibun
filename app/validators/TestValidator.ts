@@ -1,4 +1,4 @@
-import type {ValidatorType} from "@bejibun/core/types/ValidatorType";
+import type {ValidatorType} from "@bejibun/core/types";
 import BaseValidator from "@bejibun/core/bases/BaseValidator";
 import TestModel from "@/app/models/TestModel";
 

@@ -4,7 +4,7 @@ import {useRef} from "react";
 export function ApiTester() {
     const responseInputRef = useRef<HTMLTextAreaElement>(null);
 
-    const testEndpoint: Function = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
+    const testEndpoint = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
 
         try {
@@ -36,7 +36,9 @@ export function ApiTester() {
                     className="url-input"
                     placeholder="/api/hello"
                 />
-                <button type="submit" className="send-button">Send</button>
+                <button type="submit" className="send-button">
+                    Send
+                </button>
             </form>
             <textarea
                 ref={responseInputRef}

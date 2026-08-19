@@ -13,7 +13,7 @@ const config: Record<string, any> = {
         public: {
             driver: StorageDiskDriverEnum.Local,
             root: App.Path.storagePath("app/public"),
-            url: `${env(APP_URL)}/storage/public`
+            url: `${env("APP_URL")}/storage/public`
         },
 
         s3: {

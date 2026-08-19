@@ -7,14 +7,16 @@ export function App() {
     return (
         <div className="app">
             <div className="logo-container">
-                <img src={logo} alt="Bun Logo" className="logo bun-logo"/>
-                <img src={react} alt="React Logo" className="logo react-logo"/>
+                <img src={logo} alt="Bun Logo" className="logo bun-logo" />
+                <img src={react} alt="React Logo" className="logo react-logo" />
             </div>
 
             <h1>Bun + React</h1>
-            <p>Edit <code>resources/views/App.tsx</code> and save to test HMR</p>
+            <p>
+                Edit <code>resources/views/App.tsx</code> and save to test HMR
+            </p>
 
-            <ApiTester/>
+            <ApiTester />
         </div>
     );
 }

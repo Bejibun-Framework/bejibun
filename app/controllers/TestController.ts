@@ -12,7 +12,7 @@ export default class TestController extends BaseController {
         description: "Redis",
         tags: ["Test"]
     })
-    public async redis(request: Bun.BunRequest): Promise<Response> {
+    public async redis(): Promise<Response> {
         await Redis.set("redis", {hello: "world"});
         const redis = await Redis.get("redis");
 
@@ -27,9 +27,12 @@ export default class TestController extends BaseController {
             pipe.get("redis-pipeline-2");
         });
 
-        const subscriber = await Redis.subscribe("redis-subscribe", (message: string, channel: string) => {
-            Logger.setContext(channel).debug(message);
-        });
+        const subscriber = await Redis.subscribe(
+            "redis-subscribe",
+            (message: string, channel: string) => {
+                Logger.setContext(channel).debug(message);
+            }
+        );
         await Redis.publish("redis-subscribe", "Hai redis subscriber!");
 
         await Bun.sleep(500);
@@ -43,9 +46,9 @@ export default class TestController extends BaseController {
         description: "Cache",
         tags: ["Test"]
     })
-    public async cache(request: Bun.BunRequest): Promise<Response> {
+    public async cache(): Promise<Response> {
         const remember = await Cache.remember("test", () => {
-            return "Hello world"
+            return "Hello world";
         });
 
         const has = await Cache.has("test");
@@ -61,20 +64,22 @@ export default class TestController extends BaseController {
         await Cache.forget("test");
         const forgetValue = await Cache.get("test");
 
-        return super.response.setData({
-            remember,
-            has,
-            get,
-            add: {
-                status: add,
-                value: addValue
-            },
-            put: {
-                status: put,
-                value: putValue
-            },
-            forget: forgetValue
-        }).send();
+        return super.response
+            .setData({
+                remember,
+                has,
+                get,
+                add: {
+                    status: add,
+                    value: addValue
+                },
+                put: {
+                    status: put,
+                    value: putValue
+                },
+                forget: forgetValue
+            })
+            .send();
     }
 
     @ApiDoc({
@@ -93,7 +98,7 @@ export default class TestController extends BaseController {
         description: "Get test list",
         tags: ["Test"]
     })
-    public async index(request: Bun.BunRequest): Promise<Response> {
+    public async index(): Promise<Response> {
         const tests = await TestModel.all();
 
         return super.response.setData(tests).send();
@@ -179,10 +184,9 @@ export default class TestController extends BaseController {
         const body = await super.parse(request);
         await super.validate(TestValidator.update, body);
 
-        const test = await TestModel.find(body.id as number | string)
-            .update({
-                name: body.name as string
-            });
+        const test = await TestModel.find(body.id as number | string).update({
+            name: body.name as string
+        });
 
         return super.response.setData(test).send();
     }
