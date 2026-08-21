@@ -86,7 +86,7 @@ export default class TestController extends BaseController {
         description: "Queue",
         tags: ["Test"]
     })
-    public async queue(request: BejibunRequest): Promise<Response> {
+    public async queue(request: Bejibun.Request): Promise<Response> {
         const body = await super.parse(request);
 
         await TestJob.dispatch(body.name).send();
@@ -120,7 +120,7 @@ export default class TestController extends BaseController {
             ]
         }
     })
-    public async show(request: BejibunRequest): Promise<Response> {
+    public async show(request: Bejibun.Request): Promise<Response> {
         const body = await super.parse(request);
         await super.validate(TestValidator.show, body);
 
@@ -145,7 +145,7 @@ export default class TestController extends BaseController {
             ]
         }
     })
-    public async store(request: BejibunRequest): Promise<Response> {
+    public async store(request: Bejibun.Request): Promise<Response> {
         const body = await super.parse(request);
         await super.validate(TestValidator.store, body);
 
@@ -180,7 +180,7 @@ export default class TestController extends BaseController {
             ]
         }
     })
-    public async update(request: BejibunRequest): Promise<Response> {
+    public async update(request: Bejibun.Request): Promise<Response> {
         const body = await super.parse(request);
         await super.validate(TestValidator.update, body);
 
@@ -207,7 +207,7 @@ export default class TestController extends BaseController {
             ]
         }
     })
-    public async destroy(request: BejibunRequest): Promise<Response> {
+    public async destroy(request: Bejibun.Request): Promise<Response> {
         const body = await super.parse(request);
         await super.validate(TestValidator.destroy, body);
 
@@ -232,7 +232,7 @@ export default class TestController extends BaseController {
             ]
         }
     })
-    public async restore(request: BejibunRequest): Promise<Response> {
+    public async restore(request: Bejibun.Request): Promise<Response> {
         const body = await super.parse(request);
         await super.validate(TestValidator.restore, body);
 
