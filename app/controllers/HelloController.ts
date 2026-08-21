@@ -6,7 +6,7 @@ export default class HelloController extends BaseController {
         description: "Hello",
         tags: ["Hello"]
     })
-    public async hello(request: Bun.BunRequest): Promise<Response> {
+    public async hello(request: BejibunRequest): Promise<Response> {
         return super.response
             .setData({
                 message: "Hello, world!",
@@ -31,7 +31,7 @@ export default class HelloController extends BaseController {
             ]
         }
     })
-    public async helloName(request: Bun.BunRequest): Promise<Response> {
+    public async helloName(request: BejibunRequest): Promise<Response> {
         const body = await super.parse(request);
         await super.validate(HelloValidator.helloName, body);
 
