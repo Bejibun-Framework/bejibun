@@ -213,7 +213,7 @@ Example :
 import BaseController from "@bejibun/core/bases/BaseController";
 
 export default class HelloController extends BaseController {
-    public async hello(request: Bun.BunRequest): Promise<Response> {
+    public async hello(request: Bejibun.Request): Promise<Response> {
         return super.response
             .setData({
                 message: "Hello, world!",
@@ -253,7 +253,7 @@ import Logger from "@bejibun/logger";
 
 export default class TestMiddleware {
     public handle(handler: HandlerType): HandlerType {
-        return async (request: Bun.BunRequest) => {
+        return async (request: Bejibun.Request) => {
             Logger.setContext("TestMiddleware").debug(request.url);
 
             return handler(request);
@@ -297,37 +297,36 @@ Validate any incoming requests
 Example :
 
 ```ts app/validators/TestValidator.ts
-import type {ValidatorType} from "@bejibun/core/types/ValidatorType";
 import BaseValidator from "@bejibun/core/bases/BaseValidator";
 import TestModel from "@/app/models/TestModel";
 
 export default class TestValidator extends BaseValidator {
-    public static get show(): ValidatorType {
+    public static get show(): Bejibun.Validator {
         return super.validator.create({
             id: super.validator.number().min(1).exists(TestModel, "id")
         });
     }
 
-    public static get store(): ValidatorType {
+    public static get store(): Bejibun.Validator {
         return super.validator.create({
             name: super.validator.string()
         });
     }
 
-    public static get update(): ValidatorType {
+    public static get update(): Bejibun.Validator {
         return super.validator.create({
             id: super.validator.number().min(1).exists(TestModel, "id"),
             name: super.validator.string()
         });
     }
 
-    public static get destroy(): ValidatorType {
+    public static get destroy(): Bejibun.Validator {
         return super.validator.create({
             id: super.validator.number().min(1).exists(TestModel, "id")
         });
     }
 
-    public static get restore(): ValidatorType {
+    public static get restore(): Bejibun.Validator {
         return super.validator.create({
             id: super.validator.number().min(1).exists(TestModel, "id", true)
         });
@@ -359,11 +358,10 @@ export default class TestController extends BaseController {
             ]
         }
     })
-    public async show(request: Bun.BunRequest): Promise<Response> {
-        const body = await super.parse(request);
-        await super.validate(TestValidator.show, body);
+    public async show(request: Bejibun.Request): Promise<Response> {
+        await request.validate(TestValidator.show);
 
-        const test = await TestModel.findOrFail(body.id as number | string);
+        const test = await TestModel.findOrFail(request.integer("id"));
 
         return super.response.setData(test).send();
     }
@@ -405,7 +403,7 @@ export default class TestController extends BaseController {
         description: "Get test list",
         tags: ["Test"]
     })
-    public async index(request: Bun.BunRequest): Promise<Response> {
+    public async index(request: Bejibun.Request): Promise<Response> {
         const tests = await TestModel.all();
 
         return super.response.setData(tests).send();
@@ -439,11 +437,10 @@ export default class TestController extends BaseController {
             ]
         }
     })
-    public async show(request: Bun.BunRequest): Promise<Response> {
-        const body = await super.parse(request);
-        await super.validate(TestValidator.show, body);
+    public async show(request: Bejibun.Request): Promise<Response> {
+        await request.validate(TestValidator.show);
 
-        const test = await TestModel.findOrFail(body.id as number | string);
+        const test = await TestModel.findOrFail(request.integer("id"));
 
         return super.response.setData(test).send();
     }
@@ -476,12 +473,11 @@ export default class TestController extends BaseController {
             ]
         }
     })
-    public async store(request: Bun.BunRequest): Promise<Response> {
-        const body = await super.parse(request);
-        await super.validate(TestValidator.store, body);
+    public async store(request: Bejibun.Request): Promise<Response> {
+        await request.validate(TestValidator.store);
 
         const test = await TestModel.create({
-            name: body.name as string
+            name: request.get("name") as string
         });
 
         return super.response.setData(test).send();
@@ -523,12 +519,11 @@ export default class TestController extends BaseController {
             ]
         }
     })
-    public async update(request: Bun.BunRequest): Promise<Response> {
-        const body = await super.parse(request);
-        await super.validate(TestValidator.update, body);
+    public async update(request: Bejibun.Request): Promise<Response> {
+        await request.validate(TestValidator.update);
 
-        const test = await TestModel.find(body.id as number | string).update({
-            name: body.name as string
+        const test = await TestModel.find(request.integer("id")).update({
+            name: request.get("name") as string
         });
 
         return super.response.setData(test).send();
@@ -562,11 +557,10 @@ export default class TestController extends BaseController {
             ]
         }
     })
-    public async destroy(request: Bun.BunRequest): Promise<Response> {
-        const body = await super.parse(request);
-        await super.validate(TestValidator.destroy, body);
+    public async destroy(request: Bejibun.Request): Promise<Response> {
+        await request.validate(TestValidator.destroy);
 
-        const test = await TestModel.find(body.id as number | string).delete();
+        const test = await TestModel.find(request.integer("id")).delete();
 
         return super.response.setData(test).send();
     }
@@ -599,11 +593,10 @@ export default class TestController extends BaseController {
             ]
         }
     })
-    public async destroy(request: Bun.BunRequest): Promise<Response> {
-        const body = await super.parse(request);
-        await super.validate(TestValidator.destroy, body);
+    public async destroy(request: Bejibun.Request): Promise<Response> {
+        await request.validate(TestValidator.destroy);
 
-        const test = await TestModel.find(body.id as number | string).forceDelete();
+        const test = await TestModel.find(request.integer("id")).forceDelete();
 
         return super.response.setData(test).send();
     }
@@ -623,7 +616,7 @@ export default class TestController extends BaseController {
         description: "Get test list",
         tags: ["Test"]
     })
-    public async indexWithTrashed(request: Bun.BunRequest): Promise<Response> {
+    public async indexWithTrashed(request: Bejibun.Request): Promise<Response> {
         const tests = await TestModel.withTrashed();
 
         return super.response.setData(tests).send();
@@ -644,7 +637,7 @@ export default class TestController extends BaseController {
         description: "Get test list",
         tags: ["Test"]
     })
-    public async indexOnlyTrashed(request: Bun.BunRequest): Promise<Response> {
+    public async indexOnlyTrashed(request: Bejibun.Request): Promise<Response> {
         const tests = await TestModel.onlyTrashed();
 
         return super.response.setData(tests).send();
@@ -677,11 +670,10 @@ export default class TestController extends BaseController {
             ]
         }
     })
-    public async restore(request: Bun.BunRequest): Promise<Response> {
-        const body = await super.parse(request);
-        await super.validate(TestValidator.restore, body);
+    public async restore(request: Bejibun.Request): Promise<Response> {
+        await request.validate(TestValidator.restore);
 
-        const test = await TestModel.find(body.id as number | string).restore();
+        const test = await TestModel.find(request.integer("id")).restore();
 
         return super.response.setData(test).send();
     }
@@ -901,13 +893,14 @@ All available decorators.
         ]
     }
 })
-public async helloName(request: Bun.BunRequest): Promise<Response> {
-    const body = await super.parse(request);
-    await super.validate(HelloValidator.helloName, body);
+public async helloName(request: Bejibun.Request): Promise<Response> {
+    await request.validate(HelloValidator.helloName);
 
-    return super.response.setData({
-        message: `Hello, ${body.name}!`,
-    }).send();
+    return super.response
+        .setData({
+            message: `Hello, ${request.get("name")}!`
+        })
+        .send();
 }
 ```
 
@@ -980,7 +973,7 @@ import Logger from "@bejibun/logger";
 import Redis from "@bejibun/redis";
 
 export default class TestController extends BaseController {
-    public async redis(request: Bun.BunRequest): Promise<Response> {
+    public async redis(request: Bejibun.Request): Promise<Response> {
         await Redis.set("redis", {hello: "world"});
 
         const keys = await Redis.keys("pattern");

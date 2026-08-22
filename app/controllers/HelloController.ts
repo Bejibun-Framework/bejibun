@@ -32,12 +32,11 @@ export default class HelloController extends BaseController {
         }
     })
     public async helloName(request: Bejibun.Request): Promise<Response> {
-        const body = await super.parse(request);
-        await super.validate(HelloValidator.helloName, body);
+        await request.validate(HelloValidator.helloName);
 
         return super.response
             .setData({
-                message: `Hello, ${body.name}!`
+                message: `Hello, ${request.get("name")}!`
             })
             .send();
     }

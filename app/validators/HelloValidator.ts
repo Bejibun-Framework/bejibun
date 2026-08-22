@@ -1,8 +1,7 @@
-import type {ValidatorType} from "@bejibun/core/types";
 import BaseValidator from "@bejibun/core/bases/BaseValidator";
 
 export default class HelloValidator extends BaseValidator {
-    public static get helloName(): ValidatorType {
+    public static get helloName(): Bejibun.Validator {
         return super.validator.create({
             name: super.validator.string()
         });

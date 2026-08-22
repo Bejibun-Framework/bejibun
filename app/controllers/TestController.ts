@@ -87,9 +87,7 @@ export default class TestController extends BaseController {
         tags: ["Test"]
     })
     public async queue(request: Bejibun.Request): Promise<Response> {
-        const body = await super.parse(request);
-
-        await TestJob.dispatch(body.name).send();
+        await TestJob.dispatch(request.get("name")).send();
 
         return super.response.setData().send();
     }
@@ -121,10 +119,9 @@ export default class TestController extends BaseController {
         }
     })
     public async show(request: Bejibun.Request): Promise<Response> {
-        const body = await super.parse(request);
-        await super.validate(TestValidator.show, body);
+        await request.validate(TestValidator.show);
 
-        const test = await TestModel.findOrFail(body.id as number | string);
+        const test = await TestModel.findOrFail(request.integer("id"));
 
         return super.response.setData(test).send();
     }
@@ -146,11 +143,10 @@ export default class TestController extends BaseController {
         }
     })
     public async store(request: Bejibun.Request): Promise<Response> {
-        const body = await super.parse(request);
-        await super.validate(TestValidator.store, body);
+        await request.validate(TestValidator.store);
 
         const test = await TestModel.create({
-            name: body.name as string
+            name: request.get("name") as string
         });
 
         return super.response.setData(test).send();
@@ -181,11 +177,10 @@ export default class TestController extends BaseController {
         }
     })
     public async update(request: Bejibun.Request): Promise<Response> {
-        const body = await super.parse(request);
-        await super.validate(TestValidator.update, body);
+        await request.validate(TestValidator.update);
 
-        const test = await TestModel.find(body.id as number | string).update({
-            name: body.name as string
+        const test = await TestModel.find(request.integer("id")).update({
+            name: request.get("name") as string
         });
 
         return super.response.setData(test).send();
@@ -208,10 +203,9 @@ export default class TestController extends BaseController {
         }
     })
     public async destroy(request: Bejibun.Request): Promise<Response> {
-        const body = await super.parse(request);
-        await super.validate(TestValidator.destroy, body);
+        await request.validate(TestValidator.destroy);
 
-        const test = await TestModel.find(body.id as number | string).delete();
+        const test = await TestModel.find(request.integer("id")).delete();
 
         return super.response.setData(test).send();
     }
@@ -233,10 +227,9 @@ export default class TestController extends BaseController {
         }
     })
     public async restore(request: Bejibun.Request): Promise<Response> {
-        const body = await super.parse(request);
-        await super.validate(TestValidator.restore, body);
+        await request.validate(TestValidator.restore);
 
-        const test = await TestModel.find(body.id as number | string).restore();
+        const test = await TestModel.find(request.integer("id")).restore();
 
         return super.response.setData(test).send();
     }
