@@ -1,7 +1,7 @@
 const config: Record<string, any> = {
     middlewares: {
-        limiter: true,
-        maintenance: true
+        limiter: false,
+        maintenance: false
     }
 };
 

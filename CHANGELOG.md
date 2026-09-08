@@ -4,6 +4,94 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [v0.6.14](https://github.com/Bejibun-Framework/bejibun/compare/v0.6.1...v0.6.14) - 2026-09-08
+
+### 🩹 Fixes
+
+- Fixed the `server.ts` WebSocket config resolver, which fell back to `RouteConfig` instead of the bundled `WebsocketConfig` when the app hasn't published its own `config/websocket.ts` -- WebSocket options (`idleTimeout`, `maxPayloadLength`, `backpressureLimit`, etc.) are now sourced correctly
+- Fixed the `bases`, `middlewares`, and `models` barrel files, which used `export *` and therefore never re-exported their default classes; they now use the `export {default as ...}` pattern already used by `facades`, `exceptions`, and `enums`, so public entry point imports (e.g. `BaseController`, `MaintenanceMiddleware`, `EpochTimestamps`) resolve correctly
+- Fixed `RouterBuilder` importing `EnumItem` from `@bejibun/utils/facades/Enum`, which was removed in `@bejibun/utils@0.1.30`; it now imports the type from `@bejibun/utils/types/enum`
+- Fixed `RequestMiddleware`, which called `request.text()` on every request even after `json()`/`formData()` had already consumed the body, so `payload.plainText` was never populated for JSON/form requests; the raw body is now only read for non-JSON/non-form content types
+
+### 🚀 Features
+
+#### Request Helpers
+
+Replaced the old `BaseController.parse()` / `BaseController.validate()` flow with a new **request-helper system** that attaches parsed payload + fluent accessors directly onto every incoming `Bun.BunRequest`:
+
+- **`RouterBuilder.attachRequestHelpers()`** -- wraps every resolved route handler (built-in + user-defined) in a helper layer that attaches 36 fluent `request.*` methods, so controllers can read/coerce/validate input directly without calling `await super.parse(...)` first
+- **`RequestMiddleware`** -- new global middleware (applied by `server.ts`) that populates a single flat `request.payload` from (in precedence order): JSON body → route params → query string → form data (`multipart/form-data` / `application/x-www-form-urlencoded`, including uploaded `File`s) → raw body text under `payload.plainText`; parse failures are swallowed silently
+- **`validatePayload()`** (`@bejibun/core/utils/validate`) -- shared helper normalizing any Vine validation failure into a `ValidatorException`, used by both `request.validate()` and `BaseController.validate()`
+
+The 36 `request.*` accessors:
+
+| Category               | Methods                                                                           |
+| ---------------------- | --------------------------------------------------------------------------------- |
+| Header / cookie / auth | `header`, `hasHeader`, `bearerToken`, `cookie`, `userAgent`, `ip`                 |
+| URL / protocol         | `path`, `fullUrl`, `is`, `isMethod`, `secure`, `ajax`, `wantsJson`, `expectsJson` |
+| Payload access         | `get`, `set`, `all`, `keys`, `input`, `only`, `except`, `merge`, `replace`        |
+| Presence checks        | `has`, `hasAny`, `filled`, `missing`                                              |
+| Type coercion          | `array`, `boolean`, `float`, `integer`, `object`, `string`, `file`, `hasFile`     |
+| Validation             | `validate`                                                                        |
+
+> ⚠️ **Breaking change**: the legacy `BaseController.parse(request)` and `BaseController.validate(validator, body)` methods have been removed -- migrate to `request.input(...)` / `request.validate(...)`. Controllers receive the populated `Bun.BunRequest` (with `request.payload`) directly as their first argument.
+
+#### `Bejibun.Response` ambient type
+
+`@bejibun/core` now exposes a scoped `Bejibun.Response` type in the global `Bejibun` namespace, alongside the existing `Bejibun.Request` and `Bejibun.Validator`:
+
+- `type Response = globalThis.Response` -- an alias of the standard Web `Response`, so every property (`status`, `headers`, `body`, `json()`, ...) remains available directly
+- `ResponseBuilder.send()` / `ResponseBuilder.stream()` now declare their return type as `Bejibun.Response` instead of `globalThis.Response`
+- `ExceptionHandler.handle()` / `ExceptionHandler.publicRoute()` now declare their return type as `Bejibun.Response` instead of `globalThis.Response`
+
+### 📖 Changes
+
+#### App controllers, validators & handler migrated to the new API
+
+The scaffold sources now follow the v0.6.11 request-helper conventions throughout:
+
+- Controllers accept `Bejibun.Request` and read input via `request.validate()`, `request.get("name")`, and `request.integer("id")` instead of `await super.parse(request)` / `await super.validate(...)`
+- Validators are typed as `Bejibun.Validator` and built with `super.validator.create(...)`, using the built-in `.exists(Model, column?, withTrashed?)` rule (including `withTrashed` for the restore flow)
+- `TestModel` declares its timestamp columns using the `Timestamp` / `NullableTimestamp` types from `@bejibun/core/bases/BaseModel`
+- `app/exceptions/handler.ts` overrides `handle()` with a `Bejibun.Response` return type
+- README exception-handler example updated to match
+
+#### Performance
+
+- Replaced the `@bejibun/utils` `defineValue`/`isEmpty`/`isNotEmpty`/`isModuleExists` calls with native nullish coalescing (`??`), truthiness, and `require.resolve()` checks across the hot paths
+- WebSocket message dispatch (`server.ts`) now resolves the controller + route via a precomputed `Map<path, {controller, route}>` index built once at startup, replacing two per-message linear `find()` scans
+- `RouterBuilder.group()` de-duplicated: the identical `hasRaws`/`hasRaw` route-compilation loops are now a single `compileRawRoute()` helper
+
+#### Documentation
+
+- Added full JSDoc coverage (`@param`/`@returns`/`@throws`) to all public and protected methods across the framework
+
+#### Tooling
+
+- Added `prettier` + `.prettierrc.json` / `.prettierignore` and an `eslint.config.js` (flat config, `typescript-eslint`) for consistent formatting/linting
+- Added `bun run format`, `bun run eslint`, and `bun run lint` scripts
+
+### 📦 Dependencies
+
+- Bumped [`@bejibun/core`](https://github.com/Bejibun-Framework/bejibun-core) from `^0.6.1` to `^0.6.14`
+- Bumped [`@bejibun/x402`](https://github.com/Bejibun-Framework/bejibun-x402) (devDependency) from `^0.2.1` to `^0.2.13`
+- Bumped `@types/bun` (devDependency) from `^1.3.14` to `^1.4.2`
+- Added `@eslint/js` (devDependency) `^10.0.1`
+- Added `eslint` (devDependency) `^10.10.0`
+- Added `eslint-config-prettier` (devDependency) `^10.1.8`
+- Added `globals` (devDependency) `^17.12.0`
+- Added `prettier` (devDependency) `^3.9.6`
+- Added `typescript` (devDependency) `^6.0.3`
+- Added `typescript-eslint` (devDependency) `^8.70.0`
+
+### ❤️Contributors
+
+- Havea Crenata ([@crenata](https://github.com/crenata))
+
+**Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
+
+---
+
 ## [v0.6.1](https://github.com/Bejibun-Framework/bejibun/compare/v0.6.0...v0.6.1) - 2026-08-17
 
 ### 🩹 Fixes

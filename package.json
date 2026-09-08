@@ -1,6 +1,6 @@
 {
     "name": "@bejibun/bejibun",
-    "version": "0.6.1",
+    "version": "0.6.14",
     "private": true,
     "description": "A batteries-included TypeScript framework for building scalable APIs, Web3 platforms, and backend services with confidence.",
     "author": "Havea Crenata <havea.crenata@gmail.com>",
@@ -25,22 +25,22 @@
         "build": "bun run lint"
     },
     "dependencies": {
-        "@bejibun/core": "^0.6.1",
+        "@bejibun/core": "^0.6.14",
         "react": "^19.2.8",
         "react-dom": "^19.2.8"
     },
     "devDependencies": {
-        "@bejibun/x402": "^0.2.1",
+        "@bejibun/x402": "^0.2.13",
         "@coinbase/x402": "^2.1.0",
         "@eslint/js": "^10.0.1",
-        "@types/bun": "latest",
+        "@types/bun": "1.4.2",
         "@types/react": "^19.2.18",
         "@types/react-dom": "^19.2.4",
-        "eslint": "^10.8.1",
+        "eslint": "^10.10.0",
         "eslint-config-prettier": "^10.1.8",
-        "globals": "^17.11.0",
+        "globals": "^17.12.0",
         "prettier": "^3.9.6",
         "typescript": "^5.9.3",
-        "typescript-eslint": "^8.67.0"
+        "typescript-eslint": "^8.70.0"
     }
 }
