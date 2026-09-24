@@ -1,6 +1,8 @@
 const config: Record<string, any> = {
+    /** Name of the connection used when none is specified. */
     default: env("REDIS_CONNECTION", "local"),
 
+    /** Map of named Redis connections to their connection options. */
     connections: {
         local: {
             host: env("REDIS_HOST"),

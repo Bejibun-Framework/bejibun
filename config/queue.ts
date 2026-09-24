@@ -1,14 +1,31 @@
 import QueueDriverEnum from "@bejibun/core/enums/QueueDriverEnum";
 import JobModel from "@bejibun/core/models/JobModel";
 
+/**
+ * Default queue configuration. Defines the active connection (via the
+ * `QUEUE_DRIVER` env var, defaulting to `"database"`) and the settings
+ * for each available connection driver.
+ */
 const config: Record<string, any> = {
+    /** The queue connection used by default, unless overridden per-dispatch. */
     default: env("QUEUE_DRIVER", "database"),
 
+    /** Available queue connections, keyed by name. */
     connections: {
+        /** Database-backed queue: persists jobs as rows via `JobModel`. */
         database: {
             driver: QueueDriverEnum.Database,
+
             table: JobModel.tableName,
-            retry_after: 60
+
+            /** Seconds before a reserved-but-unfinished job is considered abandoned and reclaimed. */
+            retry_after: 60,
+
+            /** Seconds the worker idles between polls when the queue is empty (falls back to `retry_after`). */
+            poll_interval: 3,
+
+            /** Seconds the worker waits before retrying after a failed attempt (falls back to `retry_after`). */
+            retry_delay: 5
         }
     }
 };

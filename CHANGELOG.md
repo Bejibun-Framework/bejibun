@@ -4,22 +4,26 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-## [v0.6.19](https://github.com/Bejibun-Framework/bejibun/compare/v0.6.17...v0.6.19) - 2026-09-24
+## [v0.6.21](https://github.com/Bejibun-Framework/bejibun/compare/v0.6.17...v0.6.21) - 2026-09-24
 
 ### 🩹 Fixes
+
 - `request.array()` now returns an empty array (`[]`) instead of `[undefined]` when the request payload is empty
+- Hardened the command loader in `Kernel.registerCommands()`: each discovered command module is now `require()`d inside a `try/catch`, and only instances exposing both a `$signature` and a `handle()` method are registered. A broken, partially-initialised, or non-command module no longer takes the whole CLI down -- it is silently skipped
+- `queue:work` no longer delays shutdown: the idle/retry sleeps are now interruptible (`clearTimeout`-based), so a signal (`SIGINT`/`SIGTERM`) stops the worker immediately after the in-flight job instead of waiting out the current `retry_after` poll (previously up to ~60s of apparent hang)
 
 ### 📖 Changes
+
 #### Nested array parsing for query/form payloads
 
 `RequestMiddleware` now unwraps square-bracket keys from query strings
 and form data into nested structures instead of flat keys:
 
-| Query param | `request.payload` |
-| --- | --- |
-| `filters[status]=active&filters[sort]=desc` | `filters = { status: "active", sort: "desc" }` |
-| `tags[]=services&tags[]=ecosystem` | `tags = ["services", "ecosystem"]` |
-| `user[address][city]=Jakarta&user[age]=27` | `user = { address: { city: "Jakarta" }, age: "27" }` |
+| Query param                                 | `request.payload`                                    |
+| ------------------------------------------- | ---------------------------------------------------- |
+| `filters[status]=active&filters[sort]=desc` | `filters = { status: "active", sort: "desc" }`       |
+| `tags[]=services&tags[]=ecosystem`          | `tags = ["services", "ecosystem"]`                   |
+| `user[address][city]=Jakarta&user[age]=27`  | `user = { address: { city: "Jakarta" }, age: "27" }` |
 
 Every accessor (`get`, `input`, `all`, `has`, `array`, `integer`, ...)
 resolves deep keys via dot **or** bracket notation, so array/object query
@@ -43,20 +47,29 @@ Bracket keys also resolve verbatim (`request.get("filters[status]")`), and
 numeric values are parsed as strings (`"27"`) — convert with
 `request.integer(key)` or `Number(...)` when needed.
 
+#### Queue
+
+- Split the single `retry_after` knob into three independent connection settings (all in seconds, backward compatible -- `poll_interval`/`retry_delay` fall back to `retry_after` when unset):
+    - `retry_after` -- how long a reserved-but-unfinished job stays claimable only by the worker that reserved it (reservation/visibility timeout)
+    - `poll_interval` -- how long the worker idles between polls when the queue is empty
+    - `retry_delay` -- how long the worker waits before retrying after a failed attempt
+- `queue:retry` signal handling aligned with `queue:work` (synchronous `stop()` + consistent log line)
+
 ### 🛡️ Security
+
 #### Prototype-pollution guard on nested key parsing
 
 Nested unwrapping blocks `__proto__` / `constructor` / `prototype` path
 segments (`BLOCKED_SEGMENTS`), so query keys can never touch the global
 `Object.prototype`. URLs such as `?__proto__[polluted]=1` or
 `?a[constructor][prototype][x]=1` are ignored instead of mutating
-`Object.prototype`. Deep `has` / `hasAny` / `missing` check *own*
+`Object.prototype`. Deep `has` / `hasAny` / `missing` check _own_
 properties only, so `has("constructor")` no longer reports inherited keys as
 present, and `get("__proto__")` returns `undefined`.
 
 ### 📦 Dependencies
 
-- Bumped [`@bejibun/core`](https://github.com/Bejibun-Framework/bejibun-core) from `^0.6.17` to `^0.6.19`
+- Bumped [`@bejibun/core`](https://github.com/Bejibun-Framework/bejibun-core) from `^0.6.17` to `^0.6.21`
 - Bumped `eslint` (devDependency) from `^10.10.0` to `^10.11.0`
 - Bumped `prettier` (devDependency) from `^3.9.6` to `^3.9.9`
 - Bumped `typescript-eslint` (devDependency) from `^8.70.0` to `^8.70.1`
