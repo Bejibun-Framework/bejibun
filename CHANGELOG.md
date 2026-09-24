@@ -4,10 +4,77 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [v0.6.19](https://github.com/Bejibun-Framework/bejibun/compare/v0.6.17...v0.6.19) - 2026-09-24
+
+### 🩹 Fixes
+- `request.array()` now returns an empty array (`[]`) instead of `[undefined]` when the request payload is empty
+
+### 📖 Changes
+#### Nested array parsing for query/form payloads
+
+`RequestMiddleware` now unwraps square-bracket keys from query strings
+and form data into nested structures instead of flat keys:
+
+| Query param | `request.payload` |
+| --- | --- |
+| `filters[status]=active&filters[sort]=desc` | `filters = { status: "active", sort: "desc" }` |
+| `tags[]=services&tags[]=ecosystem` | `tags = ["services", "ecosystem"]` |
+| `user[address][city]=Jakarta&user[age]=27` | `user = { address: { city: "Jakarta" }, age: "27" }` |
+
+Every accessor (`get`, `input`, `all`, `has`, `array`, `integer`, ...)
+resolves deep keys via dot **or** bracket notation, so array/object query
+params just work on GET routes:
+
+```ts
+// GET /api/articles/search
+//   ?q=bejibun&page=2
+//   &filters[status]=published
+//   &tags[]=services&tags[]=ecosystem
+public async search(request: Bejibun.Request): Promise<Response> {
+    const tags      = request.array("tags");                 // ["services", "ecosystem"]
+    const status    = request.get("filters.status");         // "published"
+    const filters   = request.get("filters");                // { status: "published" }
+    const q         = request.get("q");                      // "bejibun"
+    const page      = request.integer("page");               // 2
+}
+```
+
+Bracket keys also resolve verbatim (`request.get("filters[status]")`), and
+numeric values are parsed as strings (`"27"`) — convert with
+`request.integer(key)` or `Number(...)` when needed.
+
+### 🛡️ Security
+#### Prototype-pollution guard on nested key parsing
+
+Nested unwrapping blocks `__proto__` / `constructor` / `prototype` path
+segments (`BLOCKED_SEGMENTS`), so query keys can never touch the global
+`Object.prototype`. URLs such as `?__proto__[polluted]=1` or
+`?a[constructor][prototype][x]=1` are ignored instead of mutating
+`Object.prototype`. Deep `has` / `hasAny` / `missing` check *own*
+properties only, so `has("constructor")` no longer reports inherited keys as
+present, and `get("__proto__")` returns `undefined`.
+
+### 📦 Dependencies
+
+- Bumped [`@bejibun/core`](https://github.com/Bejibun-Framework/bejibun-core) from `^0.6.17` to `^0.6.19`
+- Bumped `eslint` (devDependency) from `^10.10.0` to `^10.11.0`
+- Bumped `prettier` (devDependency) from `^3.9.6` to `^3.9.9`
+- Bumped `typescript-eslint` (devDependency) from `^8.70.0` to `^8.70.1`
+
+### ❤️Contributors
+
+- Havea Crenata ([@crenata](https://github.com/crenata))
+
+**Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
+
+---
+
 ## [v0.6.17](https://github.com/Bejibun-Framework/bejibun/compare/v0.6.16...v0.6.17) - 2026-09-10
 
 ### 🩹 Fixes
+
 #### Queue jobs never retried: missed `await` on `handle()`
+
 `QueueWorkCommand` (and `QueueRetryCommand`) invoked the job handler without awaiting it,
 so an async `handle()` that rejected produced an unhandled rejection instead of hitting the worker's `try/catch`.
 The job was then deleted as if it had succeeded and `attempts` never incremented --
@@ -30,7 +97,9 @@ retries and dead-lettering were unreachable. The handler call is now awaited in 
 ## [v0.6.16](https://github.com/Bejibun-Framework/bejibun/compare/v0.6.15...v0.6.16) - 2026-09-09
 
 ### 🩹 Fixes
+
 #### `group()` drops mixed `raw` routes
+
 `RouterBuilder.group()` issued two separate passes (`hasRaws` then `hasRaw`), each calling `compile()` and overwriting the accumulated `routeGroups`. Mixing already-grouped routes (`prefix(...).group([...])`) with a direct route (`Router.get("benchmark", ...)`) in the same array caused the first pass's result to be replaced by the second -- leaving only the direct route registered. Both passes now fold into a single pass over the flattened list, so `raw` and `raws` entries coexist.
 
 ### 📖 Changes
@@ -52,7 +121,9 @@ retries and dead-lettering were unreachable. The handler call is now awaited in 
 ### 🩹 Fixes
 
 ### 📖 Changes
+
 #### Performance: Request Middleware & Request Helpers
+
 Reduced per-request overhead on read-only endpoints (`GET`/`HEAD`) significantly:
 
 - `RequestMiddleware` now short-circuits **synchronously** for requests with no body, no query string, and no route params, skipping the promise/microtask cost of the async parsing path entirely. Body/query/param parsing only runs when the request actually carries data (see `Message: parseAndContinue`)
