@@ -59,13 +59,11 @@ numeric values are parsed as strings (`"27"`) — convert with
 
 #### Prototype-pollution guard on nested key parsing
 
-Nested unwrapping blocks `__proto__` / `constructor` / `prototype` path
-segments (`BLOCKED_SEGMENTS`), so query keys can never touch the global
-`Object.prototype`. URLs such as `?__proto__[polluted]=1` or
-`?a[constructor][prototype][x]=1` are ignored instead of mutating
-`Object.prototype`. Deep `has` / `hasAny` / `missing` check _own_
-properties only, so `has("constructor")` no longer reports inherited keys as
-present, and `get("__proto__")` returns `undefined`.
+Nested unwrapping blocks `__proto__` / `constructor` / `prototype` path segments (`BLOCKED_SEGMENTS`),
+so query keys can never touch the global `Object.prototype`. URLs such as `?__proto__[polluted]=1` or
+`?a[constructor][prototype][x]=1` are ignored instead of mutating `Object.prototype`.
+Deep `has` / `hasAny` / `missing` check _own_ properties only,
+so `has("constructor")` no longer reports inherited keys as present, and `get("__proto__")` returns `undefined`.
 
 ### 📦 Dependencies
 
