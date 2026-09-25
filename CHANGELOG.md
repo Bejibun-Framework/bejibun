@@ -4,6 +4,29 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [v0.6.26](https://github.com/Bejibun-Framework/bejibun/compare/v0.6.21...v0.6.26) - 2026-09-25
+
+### 🩹 Fixes
+
+- `queue:work`'s heartbeat failures are now logged instead of being silently swallowed -- a heartbeat that can't refresh `reserved_at` (e.g. a connection dropped or recycled mid-job by a transaction-mode connection pooler) is the most likely real-world cause of an in-flight job losing its reservation and being double-claimed by another worker, so it's now visible in the logs instead of invisible
+
+### 📖 Changes
+
+- `queue:work` and `queue:retry` job claiming rewritten to be fully database-agnostic: the new `JobModel.claim()` replaces the previous `SELECT ... FOR UPDATE SKIP LOCKED ... RETURNING *` raw SQL with a portable, optimistic (compare-and-swap) `UPDATE ... WHERE` claim -- the same code now runs unmodified against Postgres, MySQL, SQLite, MSSQL, or any other database Knex/Objection support, with no dependency on any single engine's row-locking syntax. On a lost claim race it retries against the next-oldest eligible job instead of waiting out a full `poll_interval`
+- `--timeout` (introduced in v0.6.24 alongside the heartbeat/reservation mechanism, with independent `retry_after`/`poll_interval`/`retry_delay` knobs from v0.6.21) is now clamped to never exceed `retry_after` instead of only documenting the requirement -- a `--timeout` larger than `retry_after` could let a job's reservation go stale and be reclaimed by another worker while it's still in-flight; an oversized value is now logged as a warning and capped to `retry_after`
+
+### 📦 Dependencies
+
+- Bumped [`@bejibun/core`](https://github.com/Bejibun-Framework/bejibun-core) from `^0.6.21` to `^0.6.26`
+
+### ❤️Contributors
+
+- Havea Crenata ([@crenata](https://github.com/crenata))
+
+**Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
+
+---
+
 ## [v0.6.21](https://github.com/Bejibun-Framework/bejibun/compare/v0.6.17...v0.6.21) - 2026-09-24
 
 ### 🩹 Fixes
