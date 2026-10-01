@@ -32,6 +32,7 @@ Added a naive pluralizer to the Str facade and StrBuilder, inferring an English 
 ### ❤️Contributors
 
 - Havea Crenata ([@crenata](https://github.com/crenata))
+- Gerardo PG ([@gerardp](https://github.com/gerardp))
 
 **Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
 
