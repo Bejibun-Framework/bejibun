@@ -5,7 +5,7 @@
     "": {
       "name": "@bejibun/bejibun",
       "dependencies": {
-        "@bejibun/core": "^0.6.28",
+        "@bejibun/core": "^0.6.29",
         "react": "^19.2.8",
         "react-dom": "^19.2.8",
       },
@@ -32,7 +32,7 @@
 
     "@bejibun/cache": ["@bejibun/cache@0.1.27", "", { "dependencies": { "@bejibun/app": "^0.1.27", "@bejibun/logger": "^0.2.10", "@bejibun/redis": "^0.1.48", "@bejibun/utils": "^0.1.31" } }, "sha512-mCwBlprVD8iix+tOqrWsOU6GQCi2NSb46Y3cZipDb9UXRKs57GN8GcI614RcgMv912h7FPA216k4p1GkxMuOfw=="],
 
-    "@bejibun/core": ["@bejibun/core@0.6.28", "", { "dependencies": { "@bejibun/app": "^0.1.27", "@bejibun/cache": "^0.1.27", "@bejibun/cors": "^0.1.20", "@bejibun/database": "^0.1.25", "@bejibun/limiter": "^0.1.13", "@bejibun/logger": "^0.2.10", "@bejibun/storage": "^0.1.12", "@bejibun/utils": "^0.1.33", "@vinejs/vine": "^4.4.0", "commander": "^15.0.0", "cron-parser": "^5.10.1", "luxon": "^3.7.2", "objection": "^3.1.5", "reflect-metadata": "^0.2.2" } }, "sha512-z51zr7JSxjh+6XlkObz70P2scnvBWvJFSIWPtl6NxOB+HQQ2GotC3Qvz0aqNACDzDEmUmeajLmhlou9+G1Gm+Q=="],
+    "@bejibun/core": ["@bejibun/core@0.6.29", "", { "dependencies": { "@bejibun/app": "^0.1.27", "@bejibun/cache": "^0.1.27", "@bejibun/cors": "^0.1.20", "@bejibun/database": "^0.1.25", "@bejibun/limiter": "^0.1.13", "@bejibun/logger": "^0.2.10", "@bejibun/storage": "^0.1.13", "@bejibun/utils": "^0.1.33", "@vinejs/vine": "^4.4.0", "commander": "^15.0.0", "cron-parser": "^5.10.1", "luxon": "^3.7.2", "objection": "^3.1.5", "reflect-metadata": "^0.2.2" } }, "sha512-211WWf9sR0eCoUO4VitrEVwyzoB6UdiVrh344cfyEk077ELryOo+jaSkRbP3YlMmQxGTVhMttu54b2rapZxRlQ=="],
 
     "@bejibun/cors": ["@bejibun/cors@0.1.20", "", { "dependencies": { "@bejibun/app": "^0.1.27" } }, "sha512-zipTKB+BUQ+mbn5OhbomYQhe61NZCJIieFe877Br3rflM+7QbTxlD4QJVOplhkiBb5bNSBimNSyWWZ4LwMpTDw=="],
 
@@ -44,7 +44,7 @@
 
     "@bejibun/redis": ["@bejibun/redis@0.1.49", "", { "dependencies": { "@bejibun/app": "^0.1.27", "@bejibun/logger": "^0.2.10", "@bejibun/utils": "^0.1.31" } }, "sha512-B6BO8tWQX8en4fa00BNVJMNL/nVJnL3KvoXxcnaAjg4j6/dmykP76dtQTNXsA/ecLvLph/K7EDN0qCPJceyscw=="],
 
-    "@bejibun/storage": ["@bejibun/storage@0.1.12", "", { "dependencies": { "@bejibun/app": "^0.1.27", "@bejibun/logger": "^0.2.10", "@bejibun/utils": "^0.1.31" } }, "sha512-DzGImcdOsMmNPf8IwJnwcQ1qemzLtrtZmk4VbHLKAwQVhEX93j02wh3b/eOcBpX3eS9JDupvIYaC5tOhant0ZQ=="],
+    "@bejibun/storage": ["@bejibun/storage@0.1.13", "", { "dependencies": { "@bejibun/app": "^0.1.27", "@bejibun/logger": "^0.2.10", "@bejibun/utils": "^0.1.33" } }, "sha512-DprTaXhJ5x/O0c1xs6DBG50d9S3ZUALm496oaH+4TqqtEO6ettDFX4Khwsaw5VcyyFYmohq+qaseEGLt7Mgohg=="],
 
     "@bejibun/utils": ["@bejibun/utils@0.1.31", "", { "dependencies": { "@bejibun/logger": "^0.2.10", "luxon": "^3.7.2" } }, "sha512-f0ELrpkppeFVp7P0tn3E3UUKnYV2W+OFBGM6r3NwPp5OZIh8Nlk3CeqzC5o+ry41BTJpDFdBE0dWM7f0/ew6kA=="],
 
@@ -585,6 +585,8 @@
     "zod": ["zod@3.25.76", "", {}, "sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ=="],
 
     "@bejibun/core/@bejibun/utils": ["@bejibun/utils@0.1.33", "", { "dependencies": { "@bejibun/logger": "^0.2.10", "luxon": "^3.7.2" } }, "sha512-ZE3/8af/w3Ozax8ZF+olXnhz2GuACjg4Mas2eHHlVhOhMYUrRtozGDwUw1MStWZJwy7l57d1/Cbywn8PQD2ITQ=="],
+
+    "@bejibun/storage/@bejibun/utils": ["@bejibun/utils@0.1.33", "", { "dependencies": { "@bejibun/logger": "^0.2.10", "luxon": "^3.7.2" } }, "sha512-ZE3/8af/w3Ozax8ZF+olXnhz2GuACjg4Mas2eHHlVhOhMYUrRtozGDwUw1MStWZJwy7l57d1/Cbywn8PQD2ITQ=="],
 
     "@coinbase/x402/@x402/core": ["@x402/core@2.23.0", "", { "dependencies": { "zod": "^3.24.2" } }, "sha512-EFeV0nXbTPPe5FXaD6y9vMgqc+k/ujLXCrUPrQXkmHjHyjC3Ir5tTL1e2FPSkx2+GUGzfpt1wVZb36639ygkWw=="],
 
