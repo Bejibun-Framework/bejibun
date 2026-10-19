@@ -4,6 +4,37 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [v0.6.30](https://github.com/Bejibun-Framework/bejibun/compare/v0.6.29...v0.6.30) - 2026-10-19
+
+### 🩹 Fixes
+
+#### [`@bejibun/core`](https://github.com/Bejibun-Framework/bejibun-core)
+
+- **Router:** Fixed a custom `namespace()` on a route group being overridden by the default namespace (`app/controllers`) when that group is nested inside another `group()`. `RouterBuilder.compileRawRoute()` computed the effective namespace as `defineValue(this.baseNamespace, route.raw.namespace)`, and since `baseNamespace` is never empty, the outer builder's default replaced the inner group's namespace. This made controllers in sub-folders fail at request time with `Invalid router for controller location [/<root>/app/controllers]`. It now uses the same guard as `applyGroup()`: the builder's namespace is only applied when it differs from the default, otherwise the route's own namespace is kept. - [#15](https://github.com/Bejibun-Framework/bejibun-core/issues/15)
+
+### 📖 Changes
+
+#### [`@bejibun/core`](https://github.com/Bejibun-Framework/bejibun-core)
+
+- **Router:** `resolveControllerString()` now includes the controller name and the original handler definition in the "controller not found" error, e.g. `Controller [UserController] not found in [/<root>/app/controllers] (handler: "UserController@index").`, instead of only printing the searched directory.
+
+### 📦 Dependencies
+
+- Bumped [`@bejibun/core`](https://github.com/Bejibun-Framework/bejibun-core) from `^0.6.29` to `^0.6.30`
+- Bumped `@types/bun` (devDependency) from `^1.4.2` to `^1.4.3`
+- Bumped `eslint` (devDependency) from `^10.11.0` to `^10.13.0`
+- Bumped `prettier` (devDependency) from `^3.9.9` to `^3.9.10`
+- Bumped `typescript-eslint` (devDependency) from `^8.71.0` to `^8.71.2`
+
+### ❤️Contributors
+
+- Havea Crenata ([@crenata](https://github.com/crenata))
+- Ghulje ([@ghulje](https://github.com/ghulje))
+
+**Full Changelog**: https://github.com/Bejibun-Framework/bejibun/blob/master/CHANGELOG.md
+
+---
+
 ## [v0.6.29](https://github.com/Bejibun-Framework/bejibun/compare/v0.6.28...v0.6.29) - 2026-10-02
 
 ### 🩹 Fixes
